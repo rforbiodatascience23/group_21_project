@@ -58,6 +58,8 @@ read_tsv("./../data/01_dat_load.tsv") |>
          
          sample_tags = str_extract_all(sample_tags,"HLA\\-[^,]+"),
          
-         gender = str_extract(sample_tags, "[Female]?[Male]?")) |>
+         gender = case_when(str_detect(sample_tags, "Female") ~ "Female",
+                            str_detect(sample_tags, "Male") ~ "Male")
+         ) |>
   write_tsv("./../data/02_dat_clean.tsv")
 ```
