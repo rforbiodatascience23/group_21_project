@@ -3,8 +3,20 @@ title: "Development of T cell receptor repetoires during childhood in health and
 author: "Group 21"
 format: revealjs
 revealjs:
-  title-slide-attributes:
-    data-background-image: background_picture.png
+  theme: "black" # Change the background theme to black
+  css: |
+    body {
+    background-color: #333; /* Dark color code */
+    color: white; /* Text color */
+    font-family: Arial, sans-serif; /* Font family */
+    }
+    h1 {
+    color: #ff9900; /* Heading color */
+    }
+    h2 {
+    color: #00ccff; /* Subheading color */
+    }
+    
 ---
 # Introduction
 
