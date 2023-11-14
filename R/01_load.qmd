@@ -9,7 +9,7 @@ library("tidyverse")
 ```
 
 ```{r}
-`01_dat_load` <- readxl::read_excel("./raw/raw_data.xlsx")
+`01_dat_load` <- readxl::read_excel("./_raw/raw_data.xlsx")
 write_tsv("./data/01_dat_load")
 
 ```
