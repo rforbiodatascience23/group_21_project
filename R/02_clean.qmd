@@ -13,10 +13,7 @@ library("tidyverse")
 ### Clean Data
 
 ```{r}
-data <- read_tsv("./../data/01_dat_load.tsv")
-
-new_data <-
-  data |>
+read_tsv("./../data/01_dat_load.tsv") |>
   select(sample_name, sample_tags) |>
   mutate(case_control = ifelse(str_detect(sample_tags, "Case"),"Case", "Control"),
          
@@ -59,9 +56,6 @@ new_data <-
            str_extract(str_extract(sample_tags,"ZnT8\\s+\\d+[.\\d+]?"),
                        "\\s+\\d+[.\\d+]?")),
          
-         sample_tags = str_extract_all(sample_tags,"HLA\\-[^,]+")
-         )
-
-data |>
+         sample_tags = str_extract_all(sample_tags,"HLA\\-[^,]+")) |>
   write_tsv("./../data/02_dat_clean.tsv")
 ```
