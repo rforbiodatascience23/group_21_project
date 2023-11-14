@@ -13,7 +13,7 @@ library("tidyverse")
 ### Clean Data
 
 ```{r}
-data <- read_tsv("./raw/SampleOverview_11-14-2023_8-18-12_AM.tsv")
+data <- read_tsv("./data/01_dat_load.tsv")
 
 new_data <-
   data |>
@@ -49,5 +49,8 @@ new_data <-
   mutate(sample_tags = str_extract_all(sample_tags,
                                        "HLA\\-[^,]+"))
 
+
+data |>
+  write_tsv("./data/02_dat_clean.tsv")
 
 ```
