@@ -53,5 +53,4 @@ new_data <-
 
 data |>
   write_tsv("./../data/02_dat_clean.tsv")
-
 ```
