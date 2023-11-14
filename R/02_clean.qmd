@@ -13,7 +13,7 @@ library("tidyverse")
 ### Clean Data
 
 ```{r}
-data <- read_tsv("./data/01_dat_load.tsv")
+data <- read_tsv("./../data/01_dat_load.tsv")
 
 new_data <-
   data |>
@@ -51,6 +51,6 @@ new_data <-
 
 
 data |>
-  write_tsv("./data/02_dat_clean.tsv")
+  write_tsv("./../data/02_dat_clean.tsv")
 
 ```
