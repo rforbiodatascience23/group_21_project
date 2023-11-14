@@ -9,7 +9,7 @@ library("tidyverse")
 
 ```{r}
 read_tsv("./../data/02_dat_clean.tsv") |>
-  select(-ethnicity) |>
-  select(-race) |>
+  filter(!str_detect(sample_name, "Denver")) |> 
+  arrange(case_control, id, timepoint) |> 
   write_tsv("./../data/04_aug_clean.tsv")
 ```
