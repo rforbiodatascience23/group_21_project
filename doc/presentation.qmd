@@ -3,18 +3,81 @@ title: "Development of T cell receptor repetoires during childhood in health and
 author: "Group 21"
 format: revealjs
 revealjs:
-  theme: "black" # Change the background theme (e.g., black, white, default)
-  css:
-    "body": "font-family: Arial, sans-serif; color: white;" # Change text color and font
-    "h1": "color: #ff9900;" # Change heading color
-    "h2": "color: #00ccff;" # Change subheading color
-editor: visual
+  theme: "black" # Change the background theme to black
+  css: |
+    body {
+      background-color: #333; /* Dark color code */
+      color: white; /* Text color */
+      font-family: Arial, sans-serif; /* Font family */
+    }
+    h1 {
+      color: #ff9900; /* Heading color */
+    }
+    h2 {
+      color: #00ccff; /* Subheading color */
+    }
 ---
 
-## Group 21 presentation
+# Introduction
 
-## Slide Title
-::: incremental
-- Bullet 1
-- Bullet 2
-:::
+Welcome to our presentation on [Your Topic]. This slide introduces the topic, its importance, and outlines the structure of our presentation.
+
+---
+
+## Background
+
+Provide some background information related to your topic. You can discuss previous research, motivations, or any relevant context.
+
+---
+
+## Objectives
+
+Outline the specific objectives or aims of your study or presentation.
+
+---
+
+## Methods
+
+Explain the methodology or approach used in your study. You can describe experiments, data collection, or analysis methods.
+
+---
+
+## Data Collection
+
+Discuss how data was collected or generated for your study. Include any relevant details or procedures.
+
+---
+
+## Results (1)
+
+Present one of your key findings here. You can include a plot or image to illustrate the result.
+
+![Plot 1](path/to/your/plot1.png)
+
+---
+
+## Results (2)
+
+Present another significant finding or result. Use a plot or image to visualize the data.
+
+![Plot 2](path/to/your/plot2.png)
+
+---
+
+## Discussion
+
+Discuss the implications of your findings. Interpret the results and relate them to your objectives.
+
+---
+
+## Conclusion
+
+Summarize the main points discussed in the presentation. Emphasize the significance of your work and any future directions.
+
+---
+
+## Thank You
+
+Thank the audience for their attention and invite questions.
+
+---
