@@ -42,3 +42,8 @@ read_tsv("./../data/04_aug_clean.tsv") |>
        subtitle = "Boxplot",
        x = "Age of diagnosis")
 ```
+
+```{r}
+read_tsv("./../data/04_aug_clean.tsv") |>
+  head(20)
+```
