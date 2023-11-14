@@ -10,8 +10,23 @@ editor: visual
 library("tidyverse")
 ```
 
-### Loading the data
+### Distribution of the age of recieving a diagnosis
+
+Type 1 diabetes is an autoimmune disease that has an onset in early life. ......
+
+For this analysis, only the patients with type 1 diabetes are included.
 
 ```{r}
-data <- read_tsv("./../data/04_aug_clean.tsv")
+read_tsv("./../data/04_aug_clean.tsv") |>
+  filter(case_control == "Case") |>
+  distinct(id, .keep_all = TRUE) |>
+  ggplot() +
+  geom_boxplot(aes(x = age_diagnosis),
+               size = 0.5, fill = "darkred") +
+  labs(title = "Age of diagnosis with type 1 diabetes",
+       subtitle = "Boxplot",
+       x = "Age of diagnosis")
+?distinct
 ```
+
+As it can be observed, more than 75% of the patients got the diagnosis between the ages of 10 and 15. This is interesting since the patients in the experiment were tested from an early age and until some of them were in their 20's. The size of the data used was only 29 observations, which means that the result of the analysis might be different from the actual pattern.
