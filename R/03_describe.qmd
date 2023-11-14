@@ -4,20 +4,20 @@ format: html
 editor: visual
 ---
 
-### Loading packages
+### Load Libraries
 
 ```{r}
 library("tidyverse")
 ```
 
-### Loading the data
+### Load Data
 
 ```{r}
 #|message: false
 data <- read_tsv("./../data/02_dat_clean.tsv")
 ```
 
-### The data set
+### Data
 
 ```{r}
 data |>

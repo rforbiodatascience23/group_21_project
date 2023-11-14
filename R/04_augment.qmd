@@ -4,6 +4,10 @@ format: html
 ---
 
 ```{r}
+library("tidyverse")
+```
+
+```{r}
 read_tsv("./../data/02_dat_clean.tsv") |>
   filter(!str_detect(sample_name, "Denver")) |> 
   arrange(case_control, id, timepoint) |> 
