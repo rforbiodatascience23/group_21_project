@@ -28,7 +28,7 @@ read_tsv("./../data/01_dat_load.tsv") |>
                         str_detect(sample_tags, "Control") ~ as.double(str_extract(str_extract(sample_tags,"Control[^,]+"), "\\s\\d+")),
                         TRUE ~ NA),
          
-        timepoint = as.double(str_extract(str_extract(sample_tags,"Timepoint\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
+         timepoint = as.double(str_extract(str_extract(sample_tags,"Timepoint\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
          
          gender = case_when(str_detect(sample_tags, "Female") ~ "Female",
                             str_detect(sample_tags, "Male") ~ "Male"),
@@ -53,10 +53,20 @@ read_tsv("./../data/01_dat_load.tsv") |>
          IAA = as.double(str_extract(str_extract(sample_tags,"IAA\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
          
          
-         ZnT8 = as.double(str_extract(str_extract(sample_tags,"ZnT8\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
+         ZnT8 = as.double(str_extract(str_extract(sample_tags,"ZnT8\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?"))
+        ) |> 
          
-         
-         HLA = str_extract_all(sample_tags,"HLA\\-[^,]+")) |>
+  
+    mutate(HLA_A = str_extract(str_extract(sample_tags, pattern = "HLA\\-{1}A\\*{1}\\d{4}"), "\\d{4}"),
+           
+         HLA_B =str_extract(str_extract(sample_tags, pattern = "HLA\\-{1}B\\*{1}\\d{4}"), "\\d{4}"),
+         HLA_C = str_extract(str_extract(sample_tags, pattern = "HLA\\-{1}C\\*{1}\\d{4}"), "\\d{4}"),
+         HLA_DPA1 = str_extract(str_extract(sample_tags, pattern = "HLA\\-{1}DPA1\\*{1}\\d{4}"), "\\d{4}"),
+         HLA_DPB1 = str_extract(str_extract(sample_tags, pattern = "HLA\\-{1}DPB1\\*{1}\\d{4}"), "\\d{4}"),
+         HLA_DQA1 = str_extract(str_extract(sample_tags, pattern = "HLA\\-{1}DQA1\\*{1}\\d{4}"), "\\d{4}"),
+         HLA_DQB1 = str_extract(str_extract(sample_tags, pattern = "HLA\\-{1}DQB1\\*{1}\\d{4}"), "\\d{4}"),
+         HLA_DRB1 = str_extract(str_extract(sample_tags, pattern = "HLA\\-{1}DRB1\\*{1}\\d{4}"), "\\d{4}")
+         ) |> 
          
   select(!sample_tags) |>
   
