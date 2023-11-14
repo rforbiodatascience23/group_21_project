@@ -28,7 +28,7 @@ read_tsv("./../data/01_dat_load.tsv") |>
                                                   "\\s\\d+")), NA)
                      ),
 
-        gender = case_when(
+         gender = case_when(
               str_detect(sample_tags, "Female") ~ "Female",
               str_detect(sample_tags, "Male") ~ "Male"),
       
