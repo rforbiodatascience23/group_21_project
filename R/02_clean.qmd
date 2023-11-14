@@ -2,7 +2,6 @@
 title: "02_clean"
 format: html
 editor: visual
-output-file: "./../results/02_clean.html"
 ---
 
 ### Load Tidyverse
