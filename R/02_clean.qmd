@@ -7,6 +7,8 @@ editor: visual
 ### Load Tidyverse
 
 ```{r}
+#| output: false
+#| warning: false
 library("tidyverse")
 ```
 
@@ -14,6 +16,7 @@ library("tidyverse")
 
 ```{r}
 #| message: false
+#| warning: false
 
 read_tsv("./../data/01_dat_load.tsv") |>
   select(sample_name, sample_tags) |>
@@ -52,7 +55,12 @@ read_tsv("./../data/01_dat_load.tsv") |>
          ZnT8 = as.double(str_extract(str_extract(sample_tags,"ZnT8\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
          
          
-         sample_tags = str_extract_all(sample_tags,"HLA\\-[^,]+")) |>
+         HLA = str_extract_all(sample_tags,"HLA\\-[^,]+"),
+         
+         
+         ethnicity = str_extract(sample_tags, "[^,]{0,4}Hispanic\\sor\\sLatino")) |>
+  
+  select(!sample_tags) |>
   
   write_tsv("./../data/02_dat_clean.tsv")
 ```
