@@ -22,11 +22,9 @@ new_data <-
          
          # ifelse func
          id = ifelse(str_detect(sample_tags, "Subject"),
-                     
                      # yes condition
                      as.double(str_extract(str_extract(sample_tags,"Subject[^,]+"),"\\s\\d+")
                                ),
-                     
                      # no condition
                      ifelse(str_detect(sample_tags, "Control"),
                             as.double(str_extract(str_extract(sample_tags,"Control[^,]+"),
@@ -66,5 +64,4 @@ new_data <-
 
 data |>
   write_tsv("./../data/02_dat_clean.tsv")
-
 ```
