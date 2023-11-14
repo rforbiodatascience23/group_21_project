@@ -15,52 +15,42 @@ library("tidyverse")
 ```{r}
 read_tsv("./../data/01_dat_load.tsv") |>
   select(sample_name, sample_tags) |>
-  mutate(case_control = ifelse(str_detect(sample_tags, "Case"),"Case", "Control"),
+  mutate(case_control = case_when(str_detect(sample_tags,"Case") ~ "Case",
+                                  str_detect(sample_tags, "Subject") ~ "Subject",
+                                  TRUE ~ NA),
          
-         # ifelse func
-         id = ifelse(str_detect(sample_tags, "Subject"),
-                     # yes condition
-                     as.double(str_extract(str_extract(sample_tags,"Subject[^,]+"),"\\s\\d+")
-                               ),
-                     # no condition
-                     ifelse(str_detect(sample_tags, "Control"),
-                            as.double(str_extract(str_extract(sample_tags,"Control[^,]+"),
-                                                  "\\s\\d+")), NA)
-                     ),
-
-         gender = case_when(
-              str_detect(sample_tags, "Female") ~ "Female",
-              str_detect(sample_tags, "Male") ~ "Male"),
-      
-         age = as.double(
-           str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{0}"),
-                       "\\d{0,3}.?\\d{0,3}")),
          
-         age_diagnosis = as.double(
-           str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{1}at\\sdiagnosis"),
-                       "\\d{0,3}.?\\d{0,3}")),
+         id = case_when(str_detect(sample_tags, "Subject") ~ as.double(str_extract(str_extract(sample_tags,"Subject[^,]+"),"\\s\\d+")),
+                        str_detect(sample_tags, "Control") ~ as.double(str_extract(str_extract(sample_tags,"Control[^,]+"), "\\s\\d+")),
+                        TRUE ~ NA),
          
-         age_visit = as.double(
-           str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{1}at\\svisit"),
-                       "\\d{0,3}.?\\d{0,3}")),
          
-         GAD65 = as.double(
-           str_extract(str_extract(sample_tags,"GAD65\\s+\\d+"),
-                       "\\s+\\d+")),
+         gender = case_when(str_detect(sample_tags, "Female") ~ "Female",
+                            str_detect(sample_tags, "Male") ~ "Male"),
          
-         IA_2 = as.double(
-           str_extract(str_extract(sample_tags,"IA\\-{1}2{1}\\s+\\d+"),
-                       "\\s+\\d+")),
          
-         IAA = as.double(
-           str_extract(str_extract(sample_tags,"IAA\\s+\\d+[.\\d+]?"),
-                       "\\s+\\d+[.\\d+]?")),
+         age = as.double(str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{0}"), "\\d{0,3}.?\\d{0,3}")),
          
-         ZnT8 = as.double(
-           str_extract(str_extract(sample_tags,"ZnT8\\s+\\d+[.\\d+]?"),
-                       "\\s+\\d+[.\\d+]?")),
+         
+         age_diagnosis = as.double(str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{1}at\\sdiagnosis"), "\\d{0,3}.?\\d{0,3}")),
+         
+         
+         age_visit = as.double(str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{1}at\\svisit"), "\\d{0,3}.?\\d{0,3}")),
+         
+         
+         GAD65 = as.double(str_extract(str_extract(sample_tags,"GAD65\\s+\\d+"), "\\s+\\d+")),
+         
+         
+         IA_2 = as.double(str_extract(str_extract(sample_tags,"IA\\-{1}2{1}\\s+\\d+"), "\\s+\\d+")),
+         
+         
+         IAA = as.double(str_extract(str_extract(sample_tags,"IAA\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
+         
+         
+         ZnT8 = as.double(str_extract(str_extract(sample_tags,"ZnT8\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
+         
          
          sample_tags = str_extract_all(sample_tags,"HLA\\-[^,]+")) |>
-    
+  
   write_tsv("./../data/02_dat_clean.tsv")
 ```
