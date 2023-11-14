@@ -29,6 +29,7 @@ read_tsv("./../data/01_dat_load.tsv") |>
                         str_detect(sample_tags, "Control") ~ as.double(str_extract(str_extract(sample_tags,"Control[^,]+"), "\\s\\d+")),
                         TRUE ~ NA),
          
+        timepoint = as.double(str_extract(str_extract(sample_tags,"Timepoint\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
          
          gender = case_when(str_detect(sample_tags, "Female") ~ "Female",
                             str_detect(sample_tags, "Male") ~ "Male"),
@@ -43,10 +44,6 @@ read_tsv("./../data/01_dat_load.tsv") |>
          
          
          age_visit = as.double(str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{1}at\\svisit"), "\\d{0,3}.?\\d{0,3}")),
-                  
-         timepoint = as.double(str_extract(str_extract(sample_tags,"Timepoint\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
-         
-         
          
          GAD65 = as.double(str_extract(str_extract(sample_tags,"GAD65\\s+\\d+"), "\\s+\\d+")),
          
