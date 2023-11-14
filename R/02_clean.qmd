@@ -33,6 +33,8 @@ read_tsv("./../data/01_dat_load.tsv") |>
          gender = case_when(str_detect(sample_tags, "Female") ~ "Female",
                             str_detect(sample_tags, "Male") ~ "Male"),
          
+         ethnicity = str_extract(sample_tags, "[^,]{0,4}Hispanic\\sor\\sLatino"),
+
          
          age = as.double(str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{0}"), "\\d{0,3}.?\\d{0,3}")),
          
@@ -41,6 +43,9 @@ read_tsv("./../data/01_dat_load.tsv") |>
          
          
          age_visit = as.double(str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{1}at\\svisit"), "\\d{0,3}.?\\d{0,3}")),
+                  
+         timepoint = as.double(str_extract(str_extract(sample_tags,"Timepoint\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
+         
          
          
          GAD65 = as.double(str_extract(str_extract(sample_tags,"GAD65\\s+\\d+"), "\\s+\\d+")),
@@ -55,11 +60,8 @@ read_tsv("./../data/01_dat_load.tsv") |>
          ZnT8 = as.double(str_extract(str_extract(sample_tags,"ZnT8\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
          
          
-         HLA = str_extract_all(sample_tags,"HLA\\-[^,]+"),
+         HLA = str_extract_all(sample_tags,"HLA\\-[^,]+")) |>
          
-         
-         ethnicity = str_extract(sample_tags, "[^,]{0,4}Hispanic\\sor\\sLatino")) |>
-  
   select(!sample_tags) |>
   
   write_tsv("./../data/02_dat_clean.tsv")
