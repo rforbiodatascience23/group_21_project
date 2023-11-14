@@ -5,5 +5,9 @@ editor: visual
 ---
 
 ```{r}
+library("tidyverse")
+```
 
+```{r}
+write_tsv()
 ```
