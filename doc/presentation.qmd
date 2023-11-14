@@ -1,8 +1,20 @@
 ---
-title: "Presentation"
+title: "Development of T cell receptor repetoires during childhood in health and disease"
 author: "Group 21"
 format: revealjs
+revealjs:
+  theme: "black" # Change the background theme (e.g., black, white, default)
+  css:
+    "body": "font-family: Arial, sans-serif; color: white;" # Change text color and font
+    "h1": "color: #ff9900;" # Change heading color
+    "h2": "color: #00ccff;" # Change subheading color
 editor: visual
 ---
 
 ## Group 21 presentation
+
+## Slide Title
+::: incremental
+- Bullet 1
+- Bullet 2
+:::
