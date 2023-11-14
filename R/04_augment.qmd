@@ -2,3 +2,10 @@
 title: "04_augment.qmd"
 format: html
 ---
+
+```{r}
+read_tsv("./../data/02_dat_clean.tsv") |>
+  select(-ethnicity) |>
+  select(-race) |>
+  write_tsv("./../data/04_aug_clean.tsv")
+```
