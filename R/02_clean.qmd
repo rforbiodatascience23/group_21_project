@@ -78,3 +78,11 @@ read_tsv("./../data/01_dat_load.tsv") |>
   
   write_tsv("./../data/02_dat_clean.tsv")
 ```
+
+PCA analysis
+
+Barplot: Expression across the four visits stratified by case/control
+
+Boxplot: Diagnostics age
+
+Heatmap: Alleles
