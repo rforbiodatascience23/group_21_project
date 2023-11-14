@@ -11,9 +11,9 @@ revealjs:
 editor: visual
 ---
 
-## Group 21 presentation
+## Group 21 presentation {background-color="aquamarine"}
 
-## Slide Title
+## Slide Title {background-color="blue"}
 ::: incremental
 - Bullet 1
 - Bullet 2
