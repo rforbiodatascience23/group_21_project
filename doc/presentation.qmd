@@ -17,7 +17,6 @@ revealjs:
       color: #00ccff; /* Subheading color */
     }
 ---
-
 # Introduction
 
 Welcome to our presentation on [Your Topic]. This slide introduces the topic, its importance, and outlines the structure of our presentation.
@@ -81,3 +80,11 @@ Summarize the main points discussed in the presentation. Emphasize the significa
 Thank the audience for their attention and invite questions.
 
 ---
+=======
+## Group 21 presentation {background-color="aquamarine"}
+
+## Slide Title {background-color="blue"}
+::: incremental
+- Bullet 1
+- Bullet 2
+:::

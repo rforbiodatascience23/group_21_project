@@ -27,7 +27,11 @@ read_tsv("./../data/01_dat_load.tsv") |>
                             as.double(str_extract(str_extract(sample_tags,"Control[^,]+"),
                                                   "\\s\\d+")), NA)
                      ),
-         
+
+        gender = case_when(
+              str_detect(sample_tags, "Female") ~ "Female",
+              str_detect(sample_tags, "Male") ~ "Male"),
+      
          age = as.double(
            str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{0}"),
                        "\\d{0,3}.?\\d{0,3}")),
@@ -56,8 +60,7 @@ read_tsv("./../data/01_dat_load.tsv") |>
            str_extract(str_extract(sample_tags,"ZnT8\\s+\\d+[.\\d+]?"),
                        "\\s+\\d+[.\\d+]?")),
          
-         sample_tags = str_extract_all(sample_tags,"HLA\\-[^,]+"),
-         
-         gender = str_extract(sample_tags, "[Female]?[Male]?")) |>
+         sample_tags = str_extract_all(sample_tags,"HLA\\-[^,]+")) |>
+    
   write_tsv("./../data/02_dat_clean.tsv")
 ```
