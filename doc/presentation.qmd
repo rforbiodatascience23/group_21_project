@@ -80,7 +80,7 @@ Summarize the main points discussed in the presentation. Emphasize the significa
 Thank the audience for their attention and invite questions.
 
 ---
-=======
+
 ## Group 21 presentation {background-color="aquamarine"}
 
 ## Slide Title {background-color="blue"}
@@ -88,3 +88,5 @@ Thank the audience for their attention and invite questions.
 - Bullet 1
 - Bullet 2
 :::
+
+=======
