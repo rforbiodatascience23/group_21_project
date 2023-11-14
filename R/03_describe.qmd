@@ -3,3 +3,25 @@ title: "03_describe.qmd"
 format: html
 editor: visual
 ---
+
+### Loading packages
+
+```{r}
+library("tidyverse")
+```
+
+### Loading the data
+
+```{r}
+#|message: false
+data <- read_tsv("./../data/02_dat_clean.tsv")
+```
+
+### The data set
+
+```{r}
+data |>
+  head(10)
+```
+
+### Variables
