@@ -1,0 +1,16 @@
+---
+title: "05_analysis_1.qmd"
+format: html
+editor: visual
+---
+
+```{r}
+library("tidyverse")
+```
+
+```{r}
+read_tsv("../../03_aug_clean.tsv") |>
+  select(where(is.numeric)) |> # retain only numeric columns
+   scale() |> # scale data
+  prcomp(scale = TRUE) # do PCA on scaled data
+```

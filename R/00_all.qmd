@@ -1,14 +1,38 @@
 ---
-title: "01_load.qmd"
+title: "00_all.qmd"
 format: html
 editor: visual
 ---
 
-```{r}
-library("tidyverse")
-```
+## Load Data
 
 ```{r}
+library("tidyverse")
+
 readxl::read_excel("./../data/_raw/raw_data.xlsx") |>
   write_tsv("../data/01_dat_load.tsv")
+```
+
+## Clean Data
+
+```{r}
+
+```
+
+## Describe Data
+
+```{r}
+
+```
+
+## Augment Data
+
+```{r}
+
+```
+
+## PCA Analysis
+
+```{r}
+
 ```
