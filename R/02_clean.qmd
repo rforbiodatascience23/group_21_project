@@ -3,3 +3,51 @@ title: "02_clean"
 format: html
 editor: visual
 ---
+
+### Loading tidyverse
+
+```{r}
+library("tidyverse")
+```
+
+### Cleaning the data
+
+```{r}
+data <- read_tsv("./raw/SampleOverview_11-14-2023_8-18-12_AM.tsv")
+
+new_data <-
+  data |>
+  select(sample_name, sample_tags) |>
+  mutate(case_control = ifelse(str_detect(sample_tags, "Case"),
+                               "Case", "Control")) |>
+  mutate(id = ifelse(str_detect(sample_tags, "Subject"),
+                          as.double(str_extract(str_extract(sample_tags, "Subject[^,]+"), "\\s\\d+")),
+                          ifelse(str_detect(sample_tags, "Control"),
+                                 as.double(str_extract(str_extract(sample_tags, "Control[^,]+"),
+                                                       "\\s\\d+")), NA))) |>
+  mutate(age = as.double(str_extract(str_extract(sample_tags,
+                                                 "\\d{0,3}.?\\d+\\s+Years\\s{0}"),
+                                     "\\d{0,3}.?\\d{0,3}"))) |>
+  mutate(age_diagnosis = as.double(str_extract(str_extract(sample_tags,
+                                                           "\\d{0,3}.?\\d+\\s+Years\\s{1}at\\sdiagnosis"),
+                                               "\\d{0,3}.?\\d{0,3}"))) |>
+  mutate(age_visit = as.double(str_extract(str_extract(sample_tags,
+                                                       "\\d{0,3}.?\\d+\\s+Years\\s{1}at\\svisit"),
+                                           "\\d{0,3}.?\\d{0,3}"))) |>
+  mutate(GAD65 = as.double(str_extract(str_extract(sample_tags,
+                                                       "GAD65\\s+\\d+"),
+                                           "\\s+\\d+"))) |>
+  mutate(IA_2 = as.double(str_extract(str_extract(sample_tags,
+                                                  "IA\\-{1}2{1}\\s+\\d+"),
+                                      "\\s+\\d+"))) |>
+  mutate(IAA = as.double(str_extract(str_extract(sample_tags,
+                                                "IAA\\s+\\d+[.\\d+]?"),
+                                    "\\s+\\d+[.\\d+]?"))) |>
+  mutate(ZnT8 = as.double(str_extract(str_extract(sample_tags,
+                                                  "ZnT8\\s+\\d+[.\\d+]?"),
+                                      "\\s+\\d+[.\\d+]?"))) |>
+  mutate(sample_tags = str_extract_all(sample_tags,
+                                       "HLA\\-[^,]+"))
+
+
+```
