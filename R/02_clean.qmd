@@ -12,7 +12,7 @@ editor: visual
 library("tidyverse")
 ```
 
-### Clean Data 
+### Clean Data
 
 ```{r}
 #| message: false
@@ -22,6 +22,7 @@ read_tsv("./../data/01_dat_load.tsv") |>
   mutate(case_control = case_when(str_detect(sample_tags,"Case") ~ "Case",
                                   str_detect(sample_tags, "Control") ~ "Control",
                                   TRUE ~ NA),
+         
          
          id = case_when(str_detect(sample_tags, "Subject") ~ as.double(str_extract(str_extract(sample_tags,"Subject[^,]+"),"\\s\\d+")),
                         str_detect(sample_tags, "Control") ~ as.double(str_extract(str_extract(sample_tags,"Control[^,]+"), "\\s\\d+")),
