@@ -4,13 +4,13 @@ format: html
 editor: visual
 ---
 
-### Loading tidyverse
+### Load Tidyverse
 
 ```{r}
 library("tidyverse")
 ```
 
-### Cleaning the data
+### Clean Data
 
 ```{r}
 data <- read_tsv("./raw/SampleOverview_11-14-2023_8-18-12_AM.tsv")
