@@ -5,5 +5,28 @@ editor: visual
 ---
 
 ```{r}
+library("tidyverse")
+```
+
+```{r}
+#| warning: false
+data <- read_tsv("./../data/04_aug_clean.tsv")
+
+TCR_heatmap <- data |> 
+  select(timepoint,
+         starts_with('age'),
+         starts_with('HLA')) |>
+  arrange(desc(desc(timepoint))) |> 
+  pivot_longer(starts_with('HLA'), 
+               names_to = "allele",
+               values_to = "subtype") |> 
+  group_by(timepoint, subtype) |> 
+  mutate(allele_count = n(), .groups = NULL)
+
+row.names(TCR_heatmap) <- c(paste(TCR_heatmap$allele, TCR_heatmap$subtype, sep = "*"))
+  
+ggplot(data = TCR_heatmap) +
+  geom_tile(mapping = aes(x = timepoint,
+                          y = subtype))
 
 ```
