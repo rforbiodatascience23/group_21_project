@@ -33,8 +33,15 @@ read_tsv("./../data/01_dat_load.tsv") |>
          gender = case_when(str_detect(sample_tags, "Female") ~ "Female",
                             str_detect(sample_tags, "Male") ~ "Male"),
          
-         ethnicity = str_extract(sample_tags, "[^,]{0,4}Hispanic\\sor\\sLatino"),
-
+         ethnicity = case_when(
+          str_detect(sample_tags, "Non-Hispanic") ~ "Non-Hispanic",
+          str_detect(sample_tags, "Hispanic") ~ "Hispanic",
+          TRUE ~ as.character(sample_tags)),
+          
+         race = case_when(
+          str_detect(sample_tags, "Caucasian") ~ "Caucasian",
+          str_detect(sample_tags, "Asian") ~ "Asian",
+          TRUE ~ as.character(sample_tags)),
          
          age = as.double(str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{0}"), "\\d{0,3}.?\\d{0,3}")),
          
