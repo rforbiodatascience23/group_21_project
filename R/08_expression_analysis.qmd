@@ -8,13 +8,50 @@ editor: visual
 
 ```{r}
 library(tidyverse)
+library(patchwork)
 ```
 
 ## Load Data
 
 ```{r}
-read_tsv("./../data/04_aug_clean.tsv") |>
-  ggplot() +
-  geom_boxplot(aes()) +
-  labs()
+#| warning: false
+data <- read_tsv("./../data/04_aug_clean.tsv", show_col_types = FALSE)
+```
+
+```{r}
+#| warning: false
+# Gather the data for plotting
+data_long <- data |>
+  pivot_longer(cols = c(GAD65, ZnT8, IA_2, IAA),
+               names_to = "Antibody", 
+               values_to = "Expression") |>
+  group_by(Antibody, timepoint, case_control) |>
+  summarise(mean_expression = mean(Expression, na.rm = TRUE))
+
+# Plotting for each antibody separately
+plots <- data_long |>
+  ggplot(aes(x = factor(timepoint), y = mean_expression, fill = case_control)) +
+  geom_bar(stat = "identity",
+           position = "dodge",
+           alpha = 0.8,
+           color = 'black') +
+  facet_wrap(~Antibody, scales = "free_y", nrow = 2) +
+  labs(x = "Visit", y = "Mean Expression", fill = "Case/Control", title = "Antibody expression across the four visits stratified by case/control") +
+  theme_minimal()
+
+# Displaying the plots
+plots
+```
+
+```{r}
+#| warning: false
+scatter_plots <- data_long %>%
+  ggplot(aes(x = factor(timepoint), y = mean_expression, color = case_control)) +
+  geom_point(position = position_jitter(width = 0.2), size = 2.5) +  # Adjust jitter and size as needed
+  facet_wrap(~Antibody, scales = "free_y", nrow = 2) +
+  labs(x = "Visit", y = "Mean Expression", color = "Case/Control", title = "Antibody expression comparison between case and control across visits") +
+  theme_minimal()
+
+# Displaying the scatterplots
+scatter_plots
 ```

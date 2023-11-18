@@ -56,10 +56,10 @@ read_tsv("./../data/01_dat_load.tsv") |>
          IA_2 = as.double(str_extract(str_extract(sample_tags,"IA\\-{1}2{1}\\s+\\d+"), "\\s+\\d+")),
          
          
-         IAA = as.double(str_extract(str_extract(sample_tags,"IAA\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
+         IAA = as.double(str_extract(sample_tags, "(?<=IAA )[-+]?[0-9]*\\.?[0-9]+")),
          
          
-         ZnT8 = as.double(str_extract(str_extract(sample_tags,"ZnT8\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?"))
+         ZnT8 = as.double(str_extract(sample_tags, "(?<=ZnT8\\s)\\d+\\.\\d+"))
         ) |> 
          
   
