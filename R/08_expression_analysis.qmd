@@ -23,10 +23,10 @@ data <- read_tsv("./../data/04_aug_clean.tsv", show_col_types = FALSE)
 # Gather the data for plotting
 data_long <- data |>
   pivot_longer(cols = c(GAD65, ZnT8, IA_2, IAA),
-               names_to = "Antibody", 
-               values_to = "Expression") |>
-  group_by(Antibody, timepoint, case_control) |>
-  summarise(mean_expression = mean(Expression, na.rm = TRUE))
+               names_to = "antibody", 
+               values_to = "expression") |>
+  group_by(antibody, timepoint, case_control) |>
+  summarise(mean_expression = mean(expression, na.rm = TRUE))
 
 # Plotting for each antibody separately
 plots <- data_long |>
