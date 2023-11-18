@@ -48,22 +48,3 @@ data |>
 ```
 
 As it can be observed, more than half of the patients got the diagnosis between the ages of 10 and 15. This is interesting since the patients in the experiment were tested from an early age and until some of them were in their 20's. The size of the data used was only 29 observations, which means that the result of the analysis might be different from the actual pattern.
-
-```{r}
-p2 <-
-  read_tsv("./../data/04_aug_clean.tsv") |>
-  filter(case_control == "Case") |>
-  distinct(id, .keep_all = TRUE) |>
-  ggplot() +
-  geom_histogram(aes(x = age_diagnosis),
-               size = 0.5, fill = "darkred",
-               bins = 15) +
-  labs(title = "Age of diagnosis with type 1 diabetes",
-       subtitle = "Boxplot",
-       x = "Age of diagnosis")
-```
-
-```{r}
-read_tsv("./../data/04_aug_clean.tsv") |>
-  head(20)
-```
