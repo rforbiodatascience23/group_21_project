@@ -47,4 +47,4 @@ data |>
        x = "Age of diagnosis")
 ```
 
-As it can be observed, more than half of the patients got the diagnosis between the ages of 10 and 15. This is interesting since the patients in the experiment were tested from an early age and until some of them were in their 20's. The size of the data used was only 29 observations, which means that the result of the analysis might be different from the actual pattern.
+As it can be observed, more than half of the patients got the diagnosis between the ages of 10 and 15. This is interesting since the patients in the experiment were tested from an early age and until some of them were in their 20's. Only 5 people among the 29 included got a diagnosis when their age were above 15. In the data it can be observed that the time between visits vary greatly.The size of the data used was only 29 observations, which means that the result of the analysis might be different from the actual pattern.
