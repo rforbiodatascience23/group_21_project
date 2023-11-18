@@ -14,7 +14,7 @@ library("tidyverse")
 
 Type 1 diabetes is an autoimmune disease that has an onset in early life. We will now look at the distribution of the patients' ages when receiving their diagnosis.
 
-For this analysis, only the patients with type 1 diabetes are included. Furthermore, only observations where the age is given as a specific number are included.
+For this analysis, only the patients with type 1 diabetes are included. The data is also filtered, so only one observation per person will be included.
 
 ```{r}
 
