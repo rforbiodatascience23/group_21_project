@@ -9,6 +9,11 @@ library("tidyverse")
 ```
 
 ```{r}
+
+data <- read_tsv("./../data/04_aug_clean.tsv")|>
+  mutate(across(everything(), 
+                ~replace_na(., 0))) 
+
 data_pca <- read_tsv("./../data/04_aug_clean.tsv")|>
   mutate(across(everything(), 
                 ~replace_na(., 0))) |>
