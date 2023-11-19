@@ -46,18 +46,21 @@ read_tsv("./../data/01_dat_load.tsv") |>
            str_detect(sample_tags, "Asian") ~ "Asian",
            TRUE ~ as.character(sample_tags)),
          
-         age = as.double(str_extract(sample_tags,"\\d+(?=\\s+Years\\s+at\\s+visit)")),
+         age = round(ifelse(
+           is.na(as.double(str_extract(sample_tags,"\\d+(?=\\s+(Years)\\,)"))),
+           (1/12)*as.double(str_extract(sample_tags,"\\d+(?=\\s+(Months)\\,)")),
+           as.double(str_extract(sample_tags,"\\d+(?=\\s+(Years)\\,)"))),2),
          
          
-         age_diagnosis = as.double(str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{1}at\\sdiagnosis"), "\\d{0,3}.?\\d{0,3}")),
+         age_diagnosis = as.double(str_extract(sample_tags,"\\d*\\.\\d+(?=\\sYears\\sat\\sdiagnosis)")),
          
          
-         age_visit = as.double(str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{1}at\\svisit"), "\\d{0,3}.?\\d{0,3}")),
+         age_visit = as.double(str_extract(sample_tags,"\\d+(?=\\sYears\\sat\\svisit)")),
          
-         GAD65 = as.double(str_extract(str_extract(sample_tags,"GAD65\\s+\\d+"), "\\s+\\d+")),
+         GAD65 = as.double(str_extract(sample_tags,"(?<=GAD65\\s)\\d+")),
          
          
-         IA_2 = as.double(str_extract(str_extract(sample_tags,"IA\\-{1}2{1}\\s+\\d+"), "\\s+\\d+")),
+         IA_2 = as.double(str_extract(sample_tags,"(?<=IA\\-2\\s)\\d+")),
          
          
          IAA = as.double(str_extract(sample_tags, "(?<=IAA )[-+]?[0-9]*\\.?[0-9]+")),
@@ -104,6 +107,8 @@ read_tsv("./../data/01_dat_load.tsv") |>
          
   unnest_wider(col=starts_with("HLA_"),names_sep=",") |>
   write_tsv("./../data/02_dat_clean.tsv")
+
+
 
 ```
 
