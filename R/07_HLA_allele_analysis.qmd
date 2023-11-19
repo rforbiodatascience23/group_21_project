@@ -8,6 +8,7 @@ editor: visual
 #| message: false
 library("tidyverse")
 library("patchwork")
+library("viridis")
 ```
 
 ```{r, fig.height=10, fig.width=6}
@@ -97,7 +98,6 @@ ggplot(data = TCR_tidy) +
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         panel.background = element_rect(fill = "#002b36", colour = "#002b36")) +
-  scale_fill_gradient(low = "#006AFF",
-                      high = "#FF6633")
+  scale_fill_viridis(option = "E")
 
 ```
