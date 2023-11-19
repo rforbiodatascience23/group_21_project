@@ -30,7 +30,8 @@ data <-
 data |>
   ggplot() +
   geom_boxplot(aes(x = age_diagnosis),
-               size = 0.5, fill = "darkred") +
+               size = 0.5, fill = "darkred",
+               color = "black") +
   labs(title = "Age of diagnosis, type 1 diabetes",
        subtitle = "Boxplot",
        x = "Age of diagnosis")
@@ -41,7 +42,7 @@ data |>
   ggplot() +
   geom_histogram(aes(x = age_diagnosis),
                size = 0.5, fill = "darkred",
-               bins = 15) +
+               bins = 15, color = "black") +
   labs(title = "Age of diagnosis, type 1 diabetes",
        subtitle = "Histogram",
        x = "Age of diagnosis")
