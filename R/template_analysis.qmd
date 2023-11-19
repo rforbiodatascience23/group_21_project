@@ -18,30 +18,38 @@ library("viridis")
 data <- read_tsv("./../data/04_aug_clean.tsv")
 
 data |>
-  filter(case_control=="Case",id=="17")
-
-data |>
   group_by(case_control,age_visit,timepoint)|>
-  summarize(total_temp_mu=mean(total_templates)) |>
+  summarize(total_temp_mu=mean(total_rearrangements)) |>
   ggplot(data=_,
          mapping=aes(x=age_visit,y=total_temp_mu))+
   geom_point(aes(color=timepoint))+
-  labs(title="mean of total templates pr. timepoint")+
+  labs(title="mean of total rearrangements pr. timepoint")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
   facet_grid(~case_control)
 
 data |>
   group_by(case_control,age_visit,timepoint)|>
-  summarize(prod_temp_mu=mean(productive_templates)) |>
+  summarize(prod_temp_mu=mean(productive_rearrangements)) |>
   ggplot(data=_,
          mapping=aes(x=age_visit,y=prod_temp_mu))+
   geom_point(aes(color=timepoint))+
-  labs(title="mean of productive templates pr. timepoint")+
+  labs(title="mean of productive rearrangements pr. timepoint")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
   facet_grid(~case_control)
 
+
+data |>
+  group_by(case_control,age_visit,timepoint)|>
+  summarize(frac_prod=mean(productive_rearrangements)/mean(total_rearrangements)) |>
+  ggplot(data=_,
+         mapping=aes(x=age_visit,y=frac_prod))+
+  geom_point(aes(color=timepoint))+
+  labs(title="fraction of productive rearrangements pr. timepoint")+
+  scale_color_viridis()+
+  geom_smooth(method="lm",color="black")+
+  facet_grid(~case_control)
 ```
 
 ```{r}
@@ -51,7 +59,7 @@ data |>
   ggplot(data=_,
          mapping=aes(x=age_visit,y=log(productive_simpson_clonality)))+
   geom_point(aes(color=timepoint))+
-  labs(title="mean of total templates pr. timepoint")+
+  labs(title="mean of total rearrangements pr. timepoint")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
   facet_grid(~case_control)
