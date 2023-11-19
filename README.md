@@ -15,13 +15,9 @@ Angela M. Mitchell, Erin E. Baschal,1 Kristen A. McDaniel, Kimber M. Simmons, La
 
 # Data
 
-## Data Retrival
+### Data Retrival
 The data link is accessible within the 'data and materials availability' section. To obtain the sample overview file, navigate to 'Open in Analyses', select the 'analysis' option, and proceed to click the 'export' button. Once downloaded, rename the file as 'raw.tsv' and proceed to upload it into the '_raw' folder. 
 
-## Data descripton
-The data set contains x
-Cohort such as race, ethnicity, geneder, age
-
-bla bla
-
+### Data descripton
+This dataset comprises a detailed record of immunological and demographic attributes across 216 observations and 32 variables. It encompasses data from 54 patients undergoing testing across four distinct visits. The information includes demographic specifics such as gender, ethnicity, race, and age at both diagnosis and visit. Additionally, it covers immunological markers like antibody expression (GAD65, IA_2, IAA, ZnT8) and comprehensive HLA allele information (HLA_A, HLA_B, HLA_C, HLA_DPA1, HLA_DPB1, HLA_DQA1, HLA_DQB1, HLA_DRB1). This dataset serves to elucidate the interplay between demographic factors and immunological profiles across multiple patient visits, offering insights crucial for in-depth analysis and understanding.
  
