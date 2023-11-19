@@ -49,7 +49,7 @@ data |>
   labs(title="fraction of productive rearrangements pr. timepoint")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
-  facet_grid(varscase_control)
+  facet_grid(vars(case_control))
 ```
 
 ```{r}
