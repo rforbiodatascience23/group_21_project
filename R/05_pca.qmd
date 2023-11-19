@@ -9,12 +9,43 @@ library("tidyverse")
 library("broom")
 library("cowplot")
 library("ggplot2")
+library("corrr")
+library("ggcorrplot")
+library("FactoMineR")
+library("factoextra")
 ```
 
 ```{r}
-read_tsv("./../data/04_aug_clean.tsv") |>
+data_tsv <- read_tsv("./../data/04_aug_clean.tsv") 
+
+data <- data_tsv |>
   mutate(across(everything(), ~replace_na(., 0))) |>
-  select(GAD65,IA_2,IAA,ZnT8) |>
-  prcomp() 
+  select(GAD65,IA_2,IAA,ZnT8) 
+
+# Normalizing the data
+data_normalized <- scale(data)
+
+# Correlation matrix
+corr_matrix <- cor(data_normalized)
+ggcorrplot(corr_matrix)
+## Are there supposed to be more values? The correlation plot looks a little weak. 
+
+# Principal Component Analysis
+data.pca <- prcomp(data)
+## should the data be transposed or something?
+
+# Scree plot to show the importance of each variable
+fviz_eig(data.pca, addlabels = TRUE)
+
+# Biplot of the attributes
+fviz_pca_var(data.pca, col.var = "black", repel = TRUE)
+
+# Graph of individuals
+fviz_pca_ind(data.pca,
+             col.ind = "cos2", # Color by the quality of representation
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE     # Avoid text overlapping
+             )
 ## does it make sense to concatenate case_control and id?
+## how does one interpret these results? What does it all mean?
 ```
