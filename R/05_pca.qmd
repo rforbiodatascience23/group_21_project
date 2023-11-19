@@ -39,4 +39,8 @@ fviz_pca_var(data.pca, col.var = "black", repel = TRUE)
 
 ## does it make sense to concatenate case_control and id?
 ## how does one interpret these results? What does it all mean?
+
+# Change title and axis labels
+fviz_pca_ind(data.pca, geom="point") +
+  labs(title ="Principal Component Analaysis", x = "PC1", y = "PC2")
 ```
