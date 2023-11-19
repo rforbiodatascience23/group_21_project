@@ -1,0 +1,58 @@
+---
+title: "et_eller_andet"
+format: html
+editor: visual
+---
+
+## display data
+
+```{r}
+#| message: false
+library("tidyverse")
+library("viridis")
+```
+
+```{r}
+#| warning: false
+#| message: false
+data <- read_tsv("./../data/04_aug_clean.tsv")
+
+data |>
+  filter(case_control=="Case",id=="17")
+
+data |>
+  group_by(case_control,age_visit,timepoint)|>
+  summarize(total_temp_mu=mean(total_templates)) |>
+  ggplot(data=_,
+         mapping=aes(x=age_visit,y=total_temp_mu))+
+  geom_point(aes(color=timepoint))+
+  labs(title="mean of total templates pr. timepoint")+
+  scale_color_viridis()+
+  geom_smooth(method="lm",color="black")+
+  facet_grid(~case_control)
+
+data |>
+  group_by(case_control,age_visit,timepoint)|>
+  summarize(prod_temp_mu=mean(productive_templates)) |>
+  ggplot(data=_,
+         mapping=aes(x=age_visit,y=prod_temp_mu))+
+  geom_point(aes(color=timepoint))+
+  labs(title="mean of productive templates pr. timepoint")+
+  scale_color_viridis()+
+  geom_smooth(method="lm",color="black")+
+  facet_grid(~case_control)
+
+```
+
+```{r}
+#simpson clonality plot
+
+data |> 
+  ggplot(data=_,
+         mapping=aes(x=age_visit,y=log(productive_simpson_clonality)))+
+  geom_point(aes(color=timepoint))+
+  labs(title="mean of total templates pr. timepoint")+
+  scale_color_viridis()+
+  geom_smooth(method="lm",color="black")+
+  facet_grid(~case_control)
+```
