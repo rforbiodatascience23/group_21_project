@@ -8,15 +8,15 @@ editor: visual
 
 ```{r}
 library(tidyverse)
-library(patchwork)
 ```
 
 ## Load Data
 
 ```{r}
-#| warning: false
 data <- read_tsv("./../data/04_aug_clean.tsv", show_col_types = FALSE)
 ```
+
+## Data Analysis
 
 ```{r}
 #| warning: false
@@ -35,7 +35,7 @@ plots <- data_long |>
            position = "dodge",
            alpha = 0.8,
            color = 'black') +
-  facet_wrap(~Antibody, scales = "free_y", nrow = 2) +
+  facet_wrap(vars(antibody), scales = "free_y", nrow = 2) +
   labs(x = "Visit", y = "Mean Expression", fill = "Case/Control", title = "Antibody expression across the four visits stratified by case/control") +
   theme_minimal()
 
