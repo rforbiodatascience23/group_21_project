@@ -40,32 +40,6 @@ ggplot(data = TCR_tidy) +
 
 ```
 
-```{r, fig.width=10}
-#| warning: false
-data <- read_tsv("./../data/04_aug_clean.tsv")
-
-TCR_tidy <- data |> 
-  select(timepoint, age_visit,
-         starts_with('HLA')) |>
-  arrange(desc(desc(timepoint))) |> 
-  pivot_longer(starts_with('HLA'), 
-               names_to = "allele",
-               values_to = "subtype") |> 
-  mutate(allele = paste(allele, subtype, sep = "*")) |>
-  select(!subtype) |> 
-  group_by(timepoint, allele) |> 
-  mutate(allele_count = n(), .groups = NULL)
-  
-ggplot(data = TCR_tidy) +
-  geom_tile(mapping = aes(x = timepoint,
-                          y = allele_count),
-            fill = TCR_tidy$timepoint
-            ) + 
-  scale_fill_gradient(low = "#FF9966",
-                    high = "#FF3300")
-  theme(axis.text.y = element_text(size = 4))
-```
-
 ```{r, fig.height=9, fig.width=4}
 #| warning: false
 data <- read_tsv("./../data/04_aug_clean.tsv")
