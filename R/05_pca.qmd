@@ -10,16 +10,16 @@ library("broom")
 ```
 
 ```{r}
-data <- read_tsv("./../data/04_aug_clean.tsv")|>
-  mutate(across(everything(), 
-                ~replace_na(., 0))) |>
-  select(case_control, GAD65, IA_2, IAA, ZnT8) 
-
 # converting case_control to representative numeric valus
 conversion_table <- data.frame(
   case_control = c("Case","Control"),
   num_case_control = c(1, 0))
-data <- data |>
+
+# loading the dataset and selecting the desired variables
+data <- read_tsv("./../data/04_aug_clean.tsv")|>
+  mutate(across(everything(), 
+                ~replace_na(., 0))) |>
+  select(case_control, GAD65, IA_2, IAA, ZnT8) |> # appending the conversion values
   left_join(conversion_table, by ="case_control") 
 
 # principal component analysis
@@ -68,14 +68,14 @@ arrow_style <- arrow(length = unit(0.2, "cm"),
 
 # appending num_case_control to the pca results
 data_pca <- data_pca |>
-  bind_cols(num_case_control = data$num_case_control)
+  bind_cols(case_control = data$num_case_control)
 
 # calculating the correlation between the num_case_control and pc's
 num_case_control_coord <- as.data.frame(
   cor(data$num_case_control, data_pca$x)) |>
   mutate(Variable = "case_control")
 
-# Plotting the rotation matrix
+# plotting the rotation matrix
 data_pca |>
   tidy(matrix = "rotation") |>
   pivot_wider(names_from = "PC", 
