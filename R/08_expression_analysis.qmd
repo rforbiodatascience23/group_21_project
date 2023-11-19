@@ -48,7 +48,7 @@ plots
 scatter_plots <- data_long %>%
   ggplot(aes(x = factor(timepoint), y = mean_expression, color = case_control)) +
   geom_point(position = position_jitter(width = 0.2), size = 2.5) +  # Adjust jitter and size as needed
-  facet_wrap(~Antibody, scales = "free_y", nrow = 2) +
+  facet_wrap(~antibody, scales = "free_y", nrow = 2) +
   labs(x = "Visit", y = "Mean Expression", color = "Case/Control", title = "Antibody expression comparison between case and control across visits") +
   theme_minimal()
 
