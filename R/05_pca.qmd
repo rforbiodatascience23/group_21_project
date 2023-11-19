@@ -72,8 +72,7 @@ data_pca <- data_pca |>
 
 # calculating the correlation between the num_case_control and pc's
 num_case_control_coord <- as.data.frame(
-  cor(data$num_case_control, data_pca$x)) |>
-  mutate(Variable = "case_control")
+  cor(data$num_case_control, data_pca$x)) 
 
 # plotting the rotation matrix, pc1 and pc2
 data_pca |>
@@ -97,7 +96,7 @@ data_pca |>
     color = "red") +
   geom_text_repel(
     data = as.data.frame(num_case_control_coord),
-    aes(label = Variable),
+    aes(label = "case_control"),
     color = "red") +
   geom_text(aes(label = column), 
     hjust = 1.5, 
