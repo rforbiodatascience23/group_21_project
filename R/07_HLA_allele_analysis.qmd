@@ -23,7 +23,7 @@ TCR_tidy <- data |>
                values_to = "subtype") |>
   mutate(allele = str_remove(allele, "(\\,1)|(\\,2)")) |>
   group_by(allele, subtype) |> 
-    mutate(allele_count = n(), .groups = NULL) |>
+  mutate(allele_count = n(), .groups = NULL) |>
   filter(subtype != "NA")
 
 
