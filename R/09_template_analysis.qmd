@@ -26,7 +26,7 @@ data |>
   labs(title="mean of total rearrangements pr. timepoint")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
-  facet_grid(~case_control)
+  facet_grid(vars(case_control))
 
 data |>
   group_by(case_control,age_visit,timepoint)|>
@@ -37,7 +37,7 @@ data |>
   labs(title="mean of productive rearrangements pr. timepoint")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
-  facet_grid(~case_control)
+  facet_grid(vars(case_control))
 
 
 data |>
@@ -49,7 +49,7 @@ data |>
   labs(title="fraction of productive rearrangements pr. timepoint")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
-  facet_grid(~case_control)
+  facet_grid(vars(case_control))
 ```
 
 We see a slight rise in total and productive rearrangements for case patients and a slight decrease for control patients, when comparing the values against age at visit.
@@ -66,6 +66,9 @@ data |>
   labs(title="mean of total rearrangements pr. timepoint")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
+<<<<<<< HEAD:R/09_template_analysis.qmd
+  facet_grid(vars(case_control))
+=======
   facet_grid(~case_control)
 
 data|>
@@ -76,6 +79,7 @@ data|>
   filter(case_control=="Control")|>
   lm(productive_simpson_clonality~age_visit, data=_)
 
+>>>>>>> 4d5781ccc60e6cfb12b793e60835de7cfbd46583:R/template_analysis.qmd
 ```
 
 Both case and control show a direct proportionality between productive simpson clonality and age, which shows the decrease of polyclonality in the individuals.
