@@ -23,24 +23,28 @@ read_tsv("./../data/01_dat_load.tsv") |>
                                   TRUE ~ NA),
          
          
-         id = case_when(str_detect(sample_tags, "Subject") ~ as.double(str_extract(str_extract(sample_tags,"Subject[^,]+"),"\\s\\d+")),
-                        str_detect(sample_tags, "Control") ~ as.double(str_extract(str_extract(sample_tags,"Control[^,]+"), "\\s\\d+")),
+         id = case_when(str_detect(sample_tags, 
+                                   "Subject") ~ as.double(
+                                     str_extract(sample_tags,"(?<=Subject[^,])\\d+")),
+                        str_detect(sample_tags, 
+                                   "Control") ~ as.double(
+                                     str_extract(sample_tags,"(?<=Control[^,])\\d+")),
                         TRUE ~ NA),
          
-         timepoint = as.double(str_extract(str_extract(sample_tags,"Timepoint\\s+\\d+[.\\d+]?"), "\\s+\\d+[.\\d+]?")),
+         timepoint = as.double(str_extract(sample_tags,"(?<=Timepoint)\\s+\\d+[.\\d+]?")),
          
          gender = case_when(str_detect(sample_tags, "Female") ~ "Female",
                             str_detect(sample_tags, "Male") ~ "Male"),
          
          ethnicity = case_when(
-          str_detect(sample_tags, "Non-Hispanic") ~ "Non-Hispanic",
-          str_detect(sample_tags, "Hispanic") ~ "Hispanic",
-          TRUE ~ as.character(sample_tags)),
+           str_detect(sample_tags, "Non-Hispanic") ~ "Non-Hispanic",
+           str_detect(sample_tags, "Hispanic") ~ "Hispanic",
+           TRUE ~ as.character(sample_tags)),
           
          race = case_when(
-          str_detect(sample_tags, "Caucasian") ~ "Caucasian",
-          str_detect(sample_tags, "Asian") ~ "Asian",
-          TRUE ~ as.character(sample_tags)),
+           str_detect(sample_tags, "Caucasian") ~ "Caucasian",
+           str_detect(sample_tags, "Asian") ~ "Asian",
+           TRUE ~ as.character(sample_tags)),
          
          age = as.double(str_extract(str_extract(sample_tags,"\\d{0,3}.?\\d+\\s+Years\\s{0}"), "\\d{0,3}.?\\d{0,3}")),
          
@@ -96,10 +100,10 @@ read_tsv("./../data/01_dat_load.tsv") |>
       #HLA-DRB1
       HLA_DRB1 = str_extract_all(sample_tags,
               pattern = "(?<=HLA\\-{1}A\\*{1})\\d{4}")
-         ) |> 
+         )  
          
-  unnest_wider(col=starts_with("HLA_"),names_sep=",") |>
-  filter(case_control=="Control",id==17)
+  #unnest_wider(col=starts_with("HLA_"),names_sep=",") |>
+  #filter(case_control=="Control",id==17) |>
   
   #separate(HLA_A,
    #        c("HLA_A1", "HLA_A2"),
