@@ -65,7 +65,7 @@ ggplot(data = TCR_tidy) +
   theme(axis.text.y = element_text(size = 4))
 ```
 
-```{r, fig.height=8, fig.width=4}
+```{r, fig.height=9, fig.width=4}
 #| warning: false
 data <- read_tsv("./../data/04_aug_clean.tsv")
 
@@ -79,22 +79,25 @@ TCR_tidy <- data |>
   mutate(allele = str_remove(allele, "(\\,1)|(\\,2)")) |>
   group_by(allele, subtype) |> 
   mutate(allele_count = n(), .groups = NULL) |>
-  filter(allele_count >= 5) |>
+  filter(allele_count >= 8) |>
   filter(timepoint == 4) |>
-  filter(subtype != "NA")
+  filter(subtype != "NA") |>
+  mutate(case_control = case_when(case_control == "Case" ~ 1,
+                                  case_control == "Control" ~ 0))
 
 
 ggplot(data = TCR_tidy) +
   geom_tile(mapping = aes(x = allele,
                           y = subtype,
-                          fill = log2(GAD65))
+                          fill = case_control)
             ) + 
   theme_minimal()+
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(angle = 90, size = 10),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +
-  scale_fill_gradient(low = "gray",
-                    high = "#FF3300")
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill = "#002b36", colour = "#002b36")) +
+  scale_fill_gradient(low = "#006AFF",
+                      high = "#FF6633")
 
 ```
