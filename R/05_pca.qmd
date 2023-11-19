@@ -6,12 +6,9 @@ editor: visual
 
 ```{r}
 library("tidyverse")
-library("broom")
-library("cowplot")
 library("ggplot2")
 library("corrr")
 library("ggcorrplot")
-library("FactoMineR")
 library("factoextra")
 ```
 
