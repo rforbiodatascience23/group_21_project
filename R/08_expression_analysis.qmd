@@ -1,4 +1,6 @@
 ---
+project: 
+  output-dir: /results
 title: "08_expression_analysis"
 format: html
 editor: visual
@@ -37,10 +39,9 @@ data_long |>
            position = "dodge",
            alpha = 0.8,
            color = 'black') +
+  
   facet_wrap(vars(antibody), scales = "free_y", nrow = 2) +
   labs(x = "Visit", y = "Mean Expression", fill = "Case/Control", title = "Antibody expression across the four visits stratified by case/control") +
   theme_minimal() + 
   theme(legend.position = "bottom")
-
-
 ```

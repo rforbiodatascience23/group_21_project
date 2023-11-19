@@ -6,59 +6,69 @@ format:
     theme: moon
 ---
 
-# Introduction {background-color="#033E3E"}
+# Introduction 
 
 ![](background_picture.png){width="500"}
 
 Welcome to our presentation on \[Your Topic\]. This slide introduces the topic, its importance, and outlines the structure of our presentation.
 
+beige
+blood
+dark
+default
+league
+moon
+night
+serif
+simple
+sky
+solarized
+
 ------------------------------------------------------------------------
 
-## Background {background-color="#033E3E"}
+## Background 
 
 Provide some background information related to your topic. You can discuss previous research, motivations, or any relevant context.
 
 ------------------------------------------------------------------------
 
-## Objectives {background-color="#033E3E"}
+## Objectives
 
 Outline the specific objectives or aims of your study or presentation.
 
 ------------------------------------------------------------------------
 
-## Methods {background-color="#033E3E"}
+## Methods 
 
 Explain the methodology or approach used in your study. You can describe experiments, data collection, or analysis methods.
 
 ------------------------------------------------------------------------
 
-## Data Collection {background-color="#033E3E"}
+## Data Collection
 
 Discuss how data was collected or generated for your study. Include any relevant details or procedures.
 
 ------------------------------------------------------------------------
 
-## Results {background-color="#033E3E"}
-
+## Results 
 Present another significant finding or result. Use a plot or image to visualize the data.
 
 ![](background_picture.png){width="500"}
 
 ------------------------------------------------------------------------
 
-## Discussion {background-color="#033E3E"}
+## Discussion
 
 Discuss the implications of your findings. Interpret the results and relate them to your objectives.
 
 ------------------------------------------------------------------------
 
-## Conclusion {background-color="#033E3E"}
+## Conclusion
 
 Summarize the main points discussed in the presentation. Emphasize the significance of your work and any future directions.
 
 ------------------------------------------------------------------------
 
-## Thank You {background-color="#033E3E"}
+## Thank You For Listening
 
 Thank the audience for their attention and invite questions.
-
