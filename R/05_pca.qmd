@@ -66,10 +66,6 @@ data_pca |>
 arrow_style <- arrow(length = unit(0.2, "cm"), 
                      ends = "first")
 
-# appending num_case_control to the pca results
-data_pca <- data_pca |>
-  bind_cols(case_control = data$num_case_control)
-
 # calculating the correlation between the num_case_control and pc's
 num_case_control_coord <- as.data.frame(
   cor(data$num_case_control, data_pca$x)) 
