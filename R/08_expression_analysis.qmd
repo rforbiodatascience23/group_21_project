@@ -42,6 +42,7 @@ plots <- data_long |>
 # Displaying the plots
 plots
 ```
+<<<<<<< HEAD
 
 ```{r}
 #| warning: false
@@ -55,3 +56,5 @@ scatter_plots <- data_long %>%
 # Displaying the scatterplots
 scatter_plots
 ```
+=======
+>>>>>>> 815cf9ee2aa6c99f1ea61a2b8932c083e0c18bc2
