@@ -10,7 +10,7 @@ editor: visual
 library("tidyverse")
 ```
 
-### Distribution of the age of recieving a diagnosis
+### Distribution of age when receiving a diagnosis
 
 Type 1 diabetes is an autoimmune disease that has an onset in early life. We will now look at the distribution of the patients' ages when receiving their diagnosis.
 
