@@ -7,30 +7,38 @@ editor: visual
 ```{r}
 #| message: false
 library("tidyverse")
+library("patchwork")
 ```
 
-```{r}
+```{r, fig.height=20, fig.width=10}
 #| warning: false
 data <- read_tsv("./../data/04_aug_clean.tsv")
 
 TCR_tidy <- data |> 
   select(timepoint, age_visit,
-         starts_with('HLA')) |>
+         starts_with('HLA'), GAD65) |>
   arrange(desc(desc(timepoint))) |> 
-  pivot_longer(starts_with('HLA'), 
+  pivot_longer(starts_with('HLA_'), 
                names_to = "allele",
-               values_to = "subtype") |> 
-  mutate(allele = paste(allele, subtype, sep = "*")) |>
-  select(!subtype) |> 
-  group_by(timepoint, allele) |> 
-  mutate(allele_count = n(), .groups = NULL)
+               values_to = "subtype") |>
+  mutate(allele = str_remove(allele, "(\\,1)|(\\,2)"))
   
+#mutate(allele = paste(allele, subtype, sep = "*")) |>
+#select(!subtype) |> 
+#group_by(timepoint, allele) |> 
+#mutate(allele_count = n(), .groups = NULL) |>
+#filter(allele_count >= 3)
+
+
 ggplot(data = TCR_tidy) +
   geom_tile(mapping = aes(x = allele,
-                          y = timepoint,
-                          colour = allele_count)
+                          y = subtype,
+                          fill = GAD65)
             ) + 
-  theme(axis.text.y = element_text(size = 4))
+  theme(axis.text.y = element_text(size = 4),
+        axis.text.x = element_text(angle = 90)) +
+  scale_fill_gradient(low = "#3333FF",
+                    high = "#FF3300")
 
 ```
 
@@ -60,212 +68,36 @@ ggplot(data = TCR_tidy) +
   theme(axis.text.y = element_text(size = 4))
 ```
 
-```{r, fig.width=10, fig.height=8}
+```{r, fig.height=8, fig.width=4}
 #| warning: false
 data <- read_tsv("./../data/04_aug_clean.tsv")
 
-
-#HLA-A
-p1 <-
-  data |>
+TCR_tidy <- data |> 
+  select(timepoint, age_visit,
+         starts_with('HLA'), GAD65, case_control) |>
+  arrange(desc(desc(timepoint))) |> 
+  pivot_longer(starts_with('HLA_'), 
+               names_to = "allele",
+               values_to = "subtype") |>
+  mutate(allele = str_remove(allele, "(\\,1)|(\\,2)")) |>
+  group_by(allele, subtype) |> 
+  mutate(allele_count = n(), .groups = NULL) |>
+  filter(allele_count >= 5) |>
   filter(timepoint == 4) |>
-  select(`HLA_A,1`, `HLA_A,2`, `GAD65`) |>
-  drop_na() |>
-  ggplot() +
-  geom_tile(mapping = aes(x = `HLA_A,1`,
-                          y = `HLA_A,2`,
-                          fill = `GAD65`)
+  filter(subtype != "NA")
+
+
+ggplot(data = TCR_tidy) +
+  geom_tile(mapping = aes(x = allele,
+                          y = subtype,
+                          fill = log2(GAD65))
             ) + 
-  scale_fill_gradient(low = "#3333FF",
-                    high = "#FF3300") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(size = 14, angle = 45),
-        axis.text.y = element_text(size = 14),
+  theme_minimal()+
+  theme(axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(angle = 90, size = 10),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank()) +
-  labs(fill = "GAD65 concentration",
-       x = "HLA-A 1",
-       y = "HLA-A 2",
-       title = "HLA-A")
+  scale_fill_gradient(low = "gray",
+                    high = "#FF3300")
 
-
-#HLA-B
-p2 <-
-  data |>
-  filter(timepoint == 4) |>
-  select(`HLA_B,1`, `HLA_B,2`, `GAD65`) |>
-  drop_na() |>
-  ggplot() +
-  geom_tile(mapping = aes(x = `HLA_B,1`,
-                          y = `HLA_B,2`,
-                          fill = `GAD65`)
-            ) + 
-  scale_fill_gradient(low = "#3333FF",
-                    high = "#FF3300") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(size = 14, angle = 45),
-        axis.text.y = element_text(size = 14),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +
-  labs(fill = "GAD65 concentration",
-       x = "HLA-B 1",
-       y = "HLA-B 2",
-       title = "HLA-B")
-
-
-
-#HLA-C
-p3 <-
-  data |>
-  filter(timepoint == 4) |>
-  select(`HLA_C,1`, `HLA_C,2`, `GAD65`) |>
-  drop_na() |>
-  ggplot() +
-  geom_tile(mapping = aes(x = `HLA_C,1`,
-                          y = `HLA_C,2`,
-                          fill = `GAD65`)
-            ) + 
-  scale_fill_gradient(low = "#3333FF",
-                    high = "#FF3300") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(size = 14, angle = 45),
-        axis.text.y = element_text(size = 14),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +
-  labs(fill = "GAD65 concentration",
-       x = "HLA-C 1",
-       y = "HLA-C 2",
-       title = "HLA-C")
-
-
-
-#HLA-DPA1
-p4 <-
-  data |>
-  filter(timepoint == 4) |>
-  select(`HLA_DPA1,1`, `HLA_DPA1,2`, `GAD65`) |>
-  drop_na() |>
-  ggplot() +
-  geom_tile(mapping = aes(x = `HLA_DPA1,1`,
-                          y = `HLA_DPA1,2`,
-                          fill = `GAD65`)
-            ) + 
-  scale_fill_gradient(low = "#3333FF",
-                    high = "#FF3300") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(size = 14, angle = 45),
-        axis.text.y = element_text(size = 14),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +
-  labs(fill = "GAD65 concentration",
-       x = "HLA-DPA1 1",
-       y = "HLA-DPA1 2",
-       title = "HLA-DPA1")
-
-
-
-#HLA-DPB1
-p5 <-
-  data |>
-  filter(timepoint == 4) |>
-  select(`HLA_DPB1,1`, `HLA_DPB1,2`, `GAD65`) |>
-  drop_na() |>
-  ggplot() +
-  geom_tile(mapping = aes(x = `HLA_DPB1,1`,
-                          y = `HLA_DPB1,2`,
-                          fill = `GAD65`)
-            ) + 
-  scale_fill_gradient(low = "#3333FF",
-                    high = "#FF3300") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(size = 14, angle = 45),
-        axis.text.y = element_text(size = 14),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +
-  labs(fill = "GAD65 concentration",
-       x = "HLA-DPB1 1",
-       y = "HLA-DPB1 2",
-       title = "HLA-DPB1")
-
-
-
-#HLA-DQA1
-p6 <-
-  data |>
-  filter(timepoint == 4) |>
-  select(`HLA_DQA1,1`, `HLA_DQA1,2`, `GAD65`) |>
-  drop_na() |>
-  ggplot() +
-  geom_tile(mapping = aes(x = `HLA_DQA1,1`,
-                          y = `HLA_DQA1,2`,
-                          fill = `GAD65`)
-            ) + 
-  scale_fill_gradient(low = "#3333FF",
-                    high = "#FF3300") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(size = 14, angle = 45),
-        axis.text.y = element_text(size = 14),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +
-  labs(fill = "GAD65 concentration",
-       x = "HLA-DQA1 1",
-       y = "HLA-DQA1 2",
-       title = "HLA-DQA1")
-
-
-
-#HLA-DQB1
-p7 <-
-  data |>
-  filter(timepoint == 4) |>
-  select(`HLA_DQB1,1`, `HLA_DQB1,2`, `GAD65`) |>
-  drop_na() |>
-  ggplot() +
-  geom_tile(mapping = aes(x = `HLA_DQB1,1`,
-                          y = `HLA_DQB1,2`,
-                          fill = `GAD65`)
-            ) + 
-  scale_fill_gradient(low = "#3333FF",
-                    high = "#FF3300") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(size = 14, angle = 45),
-        axis.text.y = element_text(size = 14),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +
-  labs(fill = "GAD65 concentration",
-       x = "HLA-DQB1 1",
-       y = "HLA-DQB1 2",
-       title = "HLA-DQB1")
-
-
-
-#HLA-DRB1
-p8 <-
-  data |>
-  filter(timepoint == 4) |>
-  select(`HLA_DRB1,1`, `HLA_DRB1,2`, `GAD65`) |>
-  drop_na() |>
-  ggplot() +
-  geom_tile(mapping = aes(x = `HLA_DRB1,1`,
-                          y = `HLA_DRB1,2`,
-                          fill = `GAD65`)
-            ) + 
-  scale_fill_gradient(low = "#3333FF",
-                    high = "#FF3300") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(size = 14, angle = 45),
-        axis.text.y = element_text(size = 14),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +
-  labs(fill = "GAD65 concentration",
-       x = "HLA-DRB1 1",
-       y = "HLA-DRB1 2",
-       title = "HLA-DRB1")
-
-
-
-
-p1
-p2
-p3
 ```
