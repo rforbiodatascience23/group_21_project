@@ -61,14 +61,11 @@ read_tsv("./../data/01_dat_load.tsv") |>
          
          ZnT8 = as.double(str_extract(sample_tags, "(?<=ZnT8\\s)\\d+\\.\\d+"))
         ) |> 
-         
-  
+    mutate(id_time=str_c(id,timepoint,sep="_"))|>
     mutate(
       #HLA-A
-      HLA_A = str_flatten(
-        str_extract_all(sample_tags,
-                        pattern = "(?<=HLA\\-{1}A\\*{1})\\d{4}")[[1]],
-        collapse = ","),
+      HLA_A = str_extract_all(sample_tags,
+                        pattern = "(?<=HLA\\-{1}A\\*{1})\\d{4}"),
 
       
       #HLA-B
@@ -93,29 +90,38 @@ read_tsv("./../data/01_dat_load.tsv") |>
               pattern = "(?<=HLA\\-{1}DQA1\\*{1})\\d{4}"),
       
       #HLA-DQB1
-      HLA_DQB1 = str_c(str_extract_all(sample_tags,
-              pattern = "(?<=HLA\\-{1}DQB1\\*{1})\\d{4}"), sep = ","),
+      HLA_DQB1 = str_extract_all(sample_tags,
+              pattern = "(?<=HLA\\-{1}DQB1\\*{1})\\d{4}"),
       
       #HLA-DRB1
       HLA_DRB1 = str_extract_all(sample_tags,
               pattern = "(?<=HLA\\-{1}A\\*{1})\\d{4}")
          ) |> 
          
-  select(!sample_tags) |>
+  unnest_wider(col=starts_with("HLA_"),names_sep=",") |>
+  filter(case_control=="Control",id==17)
   
-  separate("HLA_A",
-           c("HLA_A1", "HLA_A2"),
-           sep = "\\,") |>
+  #separate(HLA_A,
+   #        c("HLA_A1", "HLA_A2"),
+      #     sep=",") |>
 #pivot_longer(cols = starts_with("HLA_"),
 #names_to = "HLA",
 #values_to = "allele") |>
   head(100)
 #write_tsv("./../data/02_dat_clean.tsv")
 ?str_extract_all
+?unnest
+?as.vector
 
+str(str_extract_all("c(test1, test2)", "\\,{0}test\\d?"))
+?separate()
 
+str_c(str_extract_all("c(test1, test2)", "\\,{0}test\\d?")[[1]],collapse=",")
+
+?split
 str_flatten(str_extract_all("c(test1, test2)", "\\,{0}test\\d?")[[1]],
             collapse = ",")
+?as_vector()
 ```
 
 PCA analysis
