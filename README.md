@@ -20,7 +20,7 @@ The data link is accessible within the 'data and materials availability' section
 
 ## Data descripton
 The data set contains x
-Cohort such as race, ethnicity, geneder, age
+Cohort such as race, ethnicity, gender, age
 
 bla bla
 
