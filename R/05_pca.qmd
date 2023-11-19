@@ -6,12 +6,9 @@ editor: visual
 
 ```{r}
 library("tidyverse")
-library("broom")
-library("cowplot")
 library("ggplot2")
 library("corrr")
 library("ggcorrplot")
-library("FactoMineR")
 library("factoextra")
 ```
 
@@ -40,12 +37,6 @@ fviz_eig(data.pca, addlabels = TRUE)
 # Biplot of the attributes
 fviz_pca_var(data.pca, col.var = "black", repel = TRUE)
 
-# Graph of individuals
-fviz_pca_ind(data.pca,
-             col.ind = "cos2", # Color by the quality of representation
-             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
-             repel = TRUE     # Avoid text overlapping
-             )
 ## does it make sense to concatenate case_control and id?
 ## how does one interpret these results? What does it all mean?
 ```
