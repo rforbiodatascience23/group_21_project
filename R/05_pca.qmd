@@ -42,7 +42,8 @@ data_pca |>
   scale_y_continuous(
     labels = scales::percent_format(),
     expand = expansion(mult = c(0, 0.01))) +
-  geom_line(color = "red") +
+  geom_line(aes(PC),
+            color = "red") +
   theme_minimal_hgrid(12) +
   background_grid() +
 
@@ -53,7 +54,7 @@ data_pca |>
 arrow_style <- arrow(length = unit(0.2, "cm"), 
                      ends = "first")
 
-data_pca %>%
+data_pca |>
   tidy(matrix = "rotation") |>
   pivot_wider(names_from = "PC", 
               names_prefix = "PC", 
