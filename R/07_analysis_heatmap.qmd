@@ -59,3 +59,213 @@ ggplot(data = TCR_tidy) +
                     high = "#FF3300")
   theme(axis.text.y = element_text(size = 4))
 ```
+
+```{r, fig.width=10, fig.height=8}
+#| warning: false
+data <- read_tsv("./../data/04_aug_clean.tsv")
+
+
+#HLA-A
+p1 <-
+  data |>
+  filter(timepoint == 4) |>
+  select(`HLA_A,1`, `HLA_A,2`, `GAD65`) |>
+  drop_na() |>
+  ggplot() +
+  geom_tile(mapping = aes(x = `HLA_A,1`,
+                          y = `HLA_A,2`,
+                          fill = `GAD65`)
+            ) + 
+  scale_fill_gradient(low = "#3333FF",
+                    high = "#FF3300") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 14, angle = 45),
+        axis.text.y = element_text(size = 14),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  labs(fill = "GAD65 concentration",
+       x = "HLA-A 1",
+       y = "HLA-A 2",
+       title = "HLA-A")
+
+
+#HLA-B
+p2 <-
+  data |>
+  filter(timepoint == 4) |>
+  select(`HLA_B,1`, `HLA_B,2`, `GAD65`) |>
+  drop_na() |>
+  ggplot() +
+  geom_tile(mapping = aes(x = `HLA_B,1`,
+                          y = `HLA_B,2`,
+                          fill = `GAD65`)
+            ) + 
+  scale_fill_gradient(low = "#3333FF",
+                    high = "#FF3300") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 14, angle = 45),
+        axis.text.y = element_text(size = 14),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  labs(fill = "GAD65 concentration",
+       x = "HLA-B 1",
+       y = "HLA-B 2",
+       title = "HLA-B")
+
+
+
+#HLA-C
+p3 <-
+  data |>
+  filter(timepoint == 4) |>
+  select(`HLA_C,1`, `HLA_C,2`, `GAD65`) |>
+  drop_na() |>
+  ggplot() +
+  geom_tile(mapping = aes(x = `HLA_C,1`,
+                          y = `HLA_C,2`,
+                          fill = `GAD65`)
+            ) + 
+  scale_fill_gradient(low = "#3333FF",
+                    high = "#FF3300") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 14, angle = 45),
+        axis.text.y = element_text(size = 14),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  labs(fill = "GAD65 concentration",
+       x = "HLA-C 1",
+       y = "HLA-C 2",
+       title = "HLA-C")
+
+
+
+#HLA-DPA1
+p4 <-
+  data |>
+  filter(timepoint == 4) |>
+  select(`HLA_DPA1,1`, `HLA_DPA1,2`, `GAD65`) |>
+  drop_na() |>
+  ggplot() +
+  geom_tile(mapping = aes(x = `HLA_DPA1,1`,
+                          y = `HLA_DPA1,2`,
+                          fill = `GAD65`)
+            ) + 
+  scale_fill_gradient(low = "#3333FF",
+                    high = "#FF3300") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 14, angle = 45),
+        axis.text.y = element_text(size = 14),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  labs(fill = "GAD65 concentration",
+       x = "HLA-DPA1 1",
+       y = "HLA-DPA1 2",
+       title = "HLA-DPA1")
+
+
+
+#HLA-DPB1
+p5 <-
+  data |>
+  filter(timepoint == 4) |>
+  select(`HLA_DPB1,1`, `HLA_DPB1,2`, `GAD65`) |>
+  drop_na() |>
+  ggplot() +
+  geom_tile(mapping = aes(x = `HLA_DPB1,1`,
+                          y = `HLA_DPB1,2`,
+                          fill = `GAD65`)
+            ) + 
+  scale_fill_gradient(low = "#3333FF",
+                    high = "#FF3300") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 14, angle = 45),
+        axis.text.y = element_text(size = 14),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  labs(fill = "GAD65 concentration",
+       x = "HLA-DPB1 1",
+       y = "HLA-DPB1 2",
+       title = "HLA-DPB1")
+
+
+
+#HLA-DQA1
+p6 <-
+  data |>
+  filter(timepoint == 4) |>
+  select(`HLA_DQA1,1`, `HLA_DQA1,2`, `GAD65`) |>
+  drop_na() |>
+  ggplot() +
+  geom_tile(mapping = aes(x = `HLA_DQA1,1`,
+                          y = `HLA_DQA1,2`,
+                          fill = `GAD65`)
+            ) + 
+  scale_fill_gradient(low = "#3333FF",
+                    high = "#FF3300") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 14, angle = 45),
+        axis.text.y = element_text(size = 14),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  labs(fill = "GAD65 concentration",
+       x = "HLA-DQA1 1",
+       y = "HLA-DQA1 2",
+       title = "HLA-DQA1")
+
+
+
+#HLA-DQB1
+p7 <-
+  data |>
+  filter(timepoint == 4) |>
+  select(`HLA_DQB1,1`, `HLA_DQB1,2`, `GAD65`) |>
+  drop_na() |>
+  ggplot() +
+  geom_tile(mapping = aes(x = `HLA_DQB1,1`,
+                          y = `HLA_DQB1,2`,
+                          fill = `GAD65`)
+            ) + 
+  scale_fill_gradient(low = "#3333FF",
+                    high = "#FF3300") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 14, angle = 45),
+        axis.text.y = element_text(size = 14),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  labs(fill = "GAD65 concentration",
+       x = "HLA-DQB1 1",
+       y = "HLA-DQB1 2",
+       title = "HLA-DQB1")
+
+
+
+#HLA-DRB1
+p8 <-
+  data |>
+  filter(timepoint == 4) |>
+  select(`HLA_DRB1,1`, `HLA_DRB1,2`, `GAD65`) |>
+  drop_na() |>
+  ggplot() +
+  geom_tile(mapping = aes(x = `HLA_DRB1,1`,
+                          y = `HLA_DRB1,2`,
+                          fill = `GAD65`)
+            ) + 
+  scale_fill_gradient(low = "#3333FF",
+                    high = "#FF3300") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(size = 14, angle = 45),
+        axis.text.y = element_text(size = 14),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank()) +
+  labs(fill = "GAD65 concentration",
+       x = "HLA-DRB1 1",
+       y = "HLA-DRB1 2",
+       title = "HLA-DRB1")
+
+
+
+
+p1
+p2
+p3
+```
