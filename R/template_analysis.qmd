@@ -52,6 +52,10 @@ data |>
   facet_grid(~case_control)
 ```
 
+We see a slight rise in total and productive rearrangements for case patients and a slight decrease for control patients, when comparing the values against age at visit.
+
+We see a steep rise in the fraction of productive rearrangement with age, which must mean that the differences in values between productive rearrangement and total rearrangement become smaller with age.
+
 ```{r}
 #simpson clonality plot
 
@@ -64,3 +68,5 @@ data |>
   geom_smooth(method="lm",color="black")+
   facet_grid(~case_control)
 ```
+
+Both case and control show a rise in productive simpson clonality, which shows the decrease of polyclonality in the individuals.
