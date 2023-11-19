@@ -65,9 +65,10 @@ read_tsv("./../data/01_dat_load.tsv") |>
   
     mutate(
       #HLA-A
-      HLA_A = str_flatten(str_extract_all(sample_tags,
-                                          pattern = "(?<=HLA\\-{1}A\\*{1})\\d{4}"),
-                          collapse = ","),
+      HLA_A = str_flatten(
+        str_extract_all(sample_tags,
+                        pattern = "(?<=HLA\\-{1}A\\*{1})\\d{4}")[[1]],
+        collapse = ","),
 
       
       #HLA-B
@@ -104,11 +105,11 @@ read_tsv("./../data/01_dat_load.tsv") |>
   
   separate("HLA_A",
            c("HLA_A1", "HLA_A2"),
-           sep = ",") |>
+           sep = "\\,") |>
 #pivot_longer(cols = starts_with("HLA_"),
 #names_to = "HLA",
 #values_to = "allele") |>
-  head(20)
+  head(100)
 #write_tsv("./../data/02_dat_clean.tsv")
 ?str_extract_all
 
