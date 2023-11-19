@@ -61,12 +61,21 @@ We see a steep rise in the fraction of productive rearrangement with age, which 
 
 data |> 
   ggplot(data=_,
-         mapping=aes(x=age_visit,y=log(productive_simpson_clonality)))+
+         mapping=aes(x=age_visit,y=productive_simpson_clonality))+
   geom_point(aes(color=timepoint))+
   labs(title="mean of total rearrangements pr. timepoint")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
   facet_grid(~case_control)
+
+data|>
+  filter(case_control=="Case")|>
+  lm(productive_simpson_clonality~age_visit, data=_)
+
+data|>
+  filter(case_control=="Control")|>
+  lm(productive_simpson_clonality~age_visit, data=_)
+
 ```
 
-Both case and control show a rise in productive simpson clonality, which shows the decrease of polyclonality in the individuals.
+Both case and control show a direct proportionality between productive simpson clonality and age, which shows the decrease of polyclonality in the individuals.
