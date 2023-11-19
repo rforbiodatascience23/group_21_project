@@ -10,31 +10,6 @@ format:
 
 ![](background_picture.png){width="500"}
 
-Welcome to our presentation on \[Your Topic\]. This slide introduces the topic, its importance, and outlines the structure of our presentation.
-
-beige
-blood
-dark
-default
-league
-moon
-night
-serif
-simple
-sky
-solarized
-
-------------------------------------------------------------------------
-
-## Background 
-
-Provide some background information related to your topic. You can discuss previous research, motivations, or any relevant context.
-
-------------------------------------------------------------------------
-
-## Objectives
-
-Outline the specific objectives or aims of your study or presentation.
 
 ------------------------------------------------------------------------
 
@@ -51,7 +26,15 @@ Discuss how data was collected or generated for your study. Include any relevant
 ------------------------------------------------------------------------
 
 ## Results 
-Present another significant finding or result. Use a plot or image to visualize the data.
+::: {.incremental}
+
+- age at diagnosis
+- pca analysis
+- antibody expression
+- HLA allele
+- Simpson clonality of TCR
+
+:::
 
 ![](background_picture.png){width="500"}
 
@@ -71,4 +54,3 @@ Summarize the main points discussed in the presentation. Emphasize the significa
 
 ## Thank You For Listening
 
-Thank the audience for their attention and invite questions.
