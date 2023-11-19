@@ -96,8 +96,7 @@ ggplot(data = TCR_tidy) +
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(angle = 90, size = 10),
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.background = element_rect(fill = "#002b36", colour = "#002b36")) +
+        panel.grid.minor = element_blank()) +
   scale_fill_viridis(option = "E")
 
 ```
