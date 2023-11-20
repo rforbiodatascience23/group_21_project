@@ -119,7 +119,10 @@ read_tsv("./../data/01_dat_load.tsv") |>
 ## Augment Data
 
 ```{r}
-
+read_tsv("./../data/02_dat_clean.tsv") |>
+  filter(!str_detect(sample_name, "Denver")) |> 
+  arrange(case_control, id, timepoint) |> 
+  write_tsv("./../data/04_aug_clean.tsv")
 ```
 
 ## PCA Analysis

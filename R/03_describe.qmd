@@ -25,3 +25,9 @@ data |>
 ```
 
 ### Variables
+
+```{r}
+# All the variables in our data.
+data |>  
+  ls()
+```

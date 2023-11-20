@@ -7,11 +7,7 @@ format:
     theme: moon
 ---
 
-::: {.callout-note}
-A note
-:::
-
-# Introduction {.title background-image="background_picture.png" background-size="750px" background-position=left}
+# Introduction {background-image="background_picture.png" background-size="750px" background-position=left}
 
 ![](background_picture.png){width="500"}
 
