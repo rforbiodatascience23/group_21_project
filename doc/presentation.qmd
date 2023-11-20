@@ -1,19 +1,23 @@
 ---
 title: "Development of T cell receptor repertoires during childhood in health and disease"
+subtitle: "By Emma A., Bunia A., Othilia FS., Tobias C. & Joanna R."
 author: "Group 21"
 format:
   revealjs: 
     theme: moon
 ---
 
-# Introduction 
+::: {.callout-note}
+A note
+:::
+
+# Introduction {.title background-image="background_picture.png" background-size="750px" background-position=left}
 
 ![](background_picture.png){width="500"}
 
-
 ------------------------------------------------------------------------
 
-## Methods 
+## Methods
 
 Explain the methodology or approach used in your study. You can describe experiments, data collection, or analysis methods.
 
@@ -25,18 +29,15 @@ Discuss how data was collected or generated for your study. Include any relevant
 
 ------------------------------------------------------------------------
 
-## Results 
-::: {.incremental}
+## Results
 
-- age at diagnosis
-- pca analysis
-- antibody expression
-- HLA allele
-- Simpson clonality of TCR
-
+::: incremental
+-   age at diagnosis
+-   pca analysis
+-   antibody expression
+-   HLA allele
+-   Simpson clonality of TCR
 :::
-
-![](background_picture.png){width="500"}
 
 ------------------------------------------------------------------------
 
@@ -53,4 +54,3 @@ Summarize the main points discussed in the presentation. Emphasize the significa
 ------------------------------------------------------------------------
 
 ## Thank You For Listening
-
