@@ -1,20 +1,22 @@
 ---
-title: "07_analysis_heatmap"
+title: "07_HLA_allele_analysis"
 format: html
 editor: visual
+toc: true
+embed-resources: true
 ---
 
 ```{r}
 #| include: false
 library("tidyverse")
 library("patchwork")
-library(viridis)
 ```
 
-### Heatmap
+### Analysis
 
 ```{r, fig.height=10, fig.width=8}
 #| warning: false
+#| message: false
 data <- read_tsv("./../data/03_dat_aug.tsv")
 
 TCR_tidy <- data |> 
@@ -34,24 +36,28 @@ TCR_tidy <- data |>
                                   case_control == "Control" ~ 0))
 
 
-ggplot(data = TCR_tidy) +
-  geom_tile(mapping = aes(x = allele,
-                          y = subtype,
-                          fill = case_control)
-            ) + 
+ggplot(data = TCR_tidy,
+       mapping = aes(x = allele,
+                     y = subtype)) +
+  geom_tile(aes(fill = case_control),
+            color="#481567") + 
   theme_bw()+
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(angle = 90, size = 10),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()) +
+        panel.grid.major.y = element_blank())+
+        #panel.grid.minor = element_blank()) +
   scale_fill_gradient(low = "#20A387",
                        high = "#481567") + 
   labs(title = "Presence of HLA subtypes in case and control patients",
+       x = "Allele",
+       y = "Subtype",
        fill = "Case or Control")
 
+ggsave(width = 5,
+       height = 8,
+       filename = "07_plot_1.png",
+       path = "./../results/")
 ```
-
-
 
 ```{r, fig.height=10, fig.width=8}
 #| warning: false
@@ -81,20 +87,25 @@ HLA_tidy <- data |>
   pivot_wider(names_from=case_control,
               values_from=allele_n) |>
   na.omit(Control,Case) |>
-  mutate(ratio = round(Case/Control, digits = 2)) |> 
+  mutate(ratio = round(Case/Control, digits = 2)) |>
   select(allele_subtype, ratio)
 
 ggplot(data = HLA_tidy,
        mapping = aes(x = reorder(allele_subtype, +ratio),
                      y = ratio)) + 
-  geom_bar(stat = "identity", color = "#20A387", fill = "#20A387", alpha = 0.9) + 
+  geom_bar(stat = "identity", color = "#20A387", fill = "#20A387", alpha = 0.8) + 
+  #scale_x_binned(n.breaks=2)+
   coord_flip() + 
   labs(title = "Ratio of HLA subtype occurence for case and control patients",
        x = "Allele subtype",
        y = "Ratio (Case/Control)") + 
   theme_bw() + 
-  theme(panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank())
+  theme(panel.grid.major.y = element_blank(),
+        axis.text.x= element_text(size=10),
+        axis.text.y= element_text(size=7))
 
+ggsave(width = 5,
+       height = 8,
+       filename = "07_plot_2.png",
+       path = "./../results/")
 ```
-
