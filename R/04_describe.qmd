@@ -8,26 +8,76 @@ editor: visual
 
 ```{r}
 library("tidyverse")
+library("table1")
+library("viridis")
 ```
 
 ### Load Data
 
 ```{r}
 #|message: false
-data <- read_tsv("./../data/02_dat_clean.tsv")
+data <- read_tsv("./../data/03_dat_aug.tsv")
 ```
 
-### Data
+### Data Description
 
 ```{r}
 data |>
-  head(10)
+  dim()
 ```
+
+This dataset comprises a comprehensive registry detailing immunological and demographic characteristics, encompassing 216 observations across 41 variables. It captures data from 54 (29 case and 25 control) patients across four distinct visits, including demographic details like gender, ethnicity, race, and age at diagnosis and visit. It encompasses key immunological markers such as GAD65, IA_2, IAA, ZnT8 antibodies, along with extensive HLA allele information (HLA_A, HLA_B, HLA_C, HLA_DPA1, HLA_DPB1, HLA_DQA1, HLA_DQB1, HLA_DRB1). Additionally, it contains metrics (e.g., total_templates, total_rearrangements, productive_templates) pertaining to the T-cell receptor β region, crucial for diversifying T-cell receptors and recognizing antigens. This dataset elucidates the intricate relationship between demographic factors and immunological profiles across multiple patient visits, providing invaluable insights for in-depth analysis and comprehension. Refer to the complete list of variables provided below.
 
 ### Variables
 
 ```{r}
-# All the variables in our data.
 data |>  
   ls()
 ```
+
+## Table1
+
+A table1 has been constructed to quickly get an overview of case/control statistics.
+
+```{r}
+data |>
+  mutate(gender = factor(gender),
+         case_control = factor(case_control)) |>
+  table1(x = formula(~ gender + age + age_diagnosis + race + ethnicity| case_control),
+         data = _)
+```
+
+```{r}
+data |>
+  drop_na(gender, age, case_control) |>
+  mutate(age = cut(age,
+                 breaks = seq(0, 20, by = 5))) |>
+  ggplot(mapping = aes(x = age,
+                       fill = case_control)) +
+    geom_bar(alpha = 0.4,
+             position = position_dodge(preserve = "single"),
+             color = "black") +
+    theme_minimal() +
+    labs(y = "n", x = "Age", fill = "case/control", 
+         title = "Age group stratified by case/control") +
+    scale_fill_viridis(option = 'E', discrete = TRUE) +
+    theme(axis.text.x = element_text(angle = 10, hjust = 1),
+          panel.grid.major = element_blank()) +
+    theme_minimal() +
+    theme(legend.position = "bottom")
+```
+
+```{r}
+#Boxplot
+data |>
+  drop_na(age_diagnosis) |>
+  ggplot() +
+  geom_boxplot(aes(x = age_diagnosis),
+               size = 0.5) +
+  scale_fill_viridis(option = 'E', discrete = TRUE) +
+  theme_minimal() +
+  labs(title = "Age of diagnosis, type 1 diabetes",
+       x = "Age of diagnosis")
+```
+
+We see that most of the patients belongs to the age group 0-5.
