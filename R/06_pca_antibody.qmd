@@ -5,58 +5,61 @@ editor: visual
 ---
 
 ```{r}
+#| include: false
 library("tidyverse")
 library("broom")
+library("ggrepel")
 ```
+
+### PCA handling and plotting
 
 ```{r}
 conversion_table <- data.frame(
   case_control = c("Case","Control"),
   num_case_control = c(1, 0))
 
-data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE) |>
+data <- read_tsv("./../data/03_dat_aug.tsv",
+                 show_col_types = FALSE) |>
   select(case_control, GAD65, IA_2, IAA, ZnT8) |>
-  mutate_all(~replace_na(.,0)) |>
-  left_join(conversion_table, by ="case_control") 
+  mutate_all(~ replace_na(.,0)) |>
+  left_join(conversion_table,
+            by ="case_control") 
 
-# principal component analysis
 data_pca <- data |>
- select(-case_control)|>
-  select(-num_case_control)|>
+  select(!case_control)|>
+  select(!num_case_control)|>
   scale() |>
   prcomp()
 
-# plotting PC coordinates for individuals
+
 data_pca |>
   augment(data) |>
-  ggplot(aes(.fittedPC1, .fittedPC2, 
-             color = case_control)) + 
+  ggplot(mapping = aes(.fittedPC1, 
+                       .fittedPC2,
+                       color = case_control)) + 
   geom_point(size = 1.5) +
-  scale_color_manual(
-    values = c(Case = "#D55E00", 
-               Control = "#0072B2")
-  ) +
+  scale_color_manual(values = c(Case = "#D55E00",
+                                Control = "#0072B2")) +
   theme_minimal() +
-    labs(title = "Plot of individuals",
-         color = "Case vs Control")
+  labs(title = "Plot of individuals",
+       color = "Case vs Control")
 
-# plotting scree plot for varialbe variation
+
 data_pca |>
   tidy(matrix = "eigenvalues") |>
-  ggplot(aes(PC, 
-             percent)) +
+  ggplot(mapping = aes(x = PC,
+                       y = percent)) +
   geom_col(fill = "#0072B2", 
            alpha = 0.8) + 
   scale_x_continuous(breaks = 1:9) +
-  scale_y_continuous(
-    labels = scales::percent_format(),
-    expand = expansion(mult = c(0, 0.01))) +
-  geom_line(aes(PC),
+  scale_y_continuous(labels = scales::percent_format(),
+                     expand = expansion(mult = c(0, 0.01))) +
+  geom_line(mapping = aes(x = PC),
             color = "red") +
+  
   theme_minimal() +
   labs(title = "Scree Plot",
        y = "percentage contribution")
-## it seemns that ZnT8 contributes the most to both PC1 and PC4, out of all four variables. This might indicate a correlation between this variable and the other variables.
 
 arrow_style <- arrow(length = unit(0.2, "cm"), 
                      ends = "first")
@@ -65,32 +68,32 @@ num_case_control_coord <- as.data.frame(
   cor(data$num_case_control, data_pca$x)) |>
   mutate(Variable = "num_case_control")
 
-# plotting the rotation matrix, pc1 and pc2
+
 data_pca |>
   tidy(matrix = "rotation") |>
   pivot_wider(names_from = "PC", 
               names_prefix = "PC", 
               values_from = "value") |>
-  ggplot(aes(x = PC2, y = PC1)) +
+  ggplot(mapping = aes(x = PC2,
+                       y = PC1)) +
   geom_point(alpha = 0) + 
   coord_flip() +
   theme_minimal() +
   labs(title = "Rotation Matrix") +
-  geom_segment(aes(xend = 0, yend = 0), 
-   arrow = arrow_style, 
-   color = "#0072B2") +
-  geom_segment(
-    data = num_case_control_coord,
-    aes(xend = 0, yend = 0),
-    arrow = arrow_style,
-    color = "red") +
-  geom_text_repel(
-    data = as.data.frame(num_case_control_coord),
-    aes(label = "case_control"),
-    color = "red") +
-  geom_text(aes(label = column), 
-    hjust = 1.5, 
-    nudge_x = 0, 
-    color = "#0072B2") 
-## case_control seems most strongly correlated with ZnT8, whereas ZnT8 and IA_2 seem most strongly correlated with each other, while IAA and GAD65 seem most correlated with each other. Ie. these are most likely to affect the results of the other.
+  geom_segment(mapping = aes(xend = 0,
+                             yend = 0),
+               arrow = arrow_style,
+               color = "#0072B2") +
+  geom_segment(data = num_case_control_coord,
+               mapping = aes(xend = 0,
+                             yend = 0),
+               arrow = arrow_style,
+               color = "red") +
+  geom_text_repel(data = as.data.frame(num_case_control_coord),
+                  mapping = aes(label = "case_control"),
+                  color = "red") +
+  geom_text(mapping = aes(label = column),
+            hjust = 1.5,
+            nudge_x = 0,
+            color = "#0072B2") 
 ```
