@@ -36,7 +36,7 @@ data_pca |>
     values = c(Case = "#D55E00", 
                Control = "#0072B2")
   ) +
-  theme_half_open(12) + 
+  theme_minimal_hgrid(12) +
   background_grid() +
     labs(title = "Plot of individuals",
          color = "Case vs Control")
