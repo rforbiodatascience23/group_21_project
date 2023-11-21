@@ -2,6 +2,8 @@
 title: "08_pca_HLA"
 format: html
 editor: visual
+toc: true
+embed-resources: true
 ---
 
 ```{r}

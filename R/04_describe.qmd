@@ -1,7 +1,9 @@
 ---
-title: "04_describe.qmd"
+title: "04_describe"
 format: html
 editor: visual
+toc: true
+embed-resources: true
 ---
 
 ### Load Libraries
