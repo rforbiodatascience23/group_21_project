@@ -9,7 +9,6 @@ editor: visual
 ```{r}
 #| message: false
 library("tidyverse")
-library("viridis")
 library("broom")
 library("cowplot")
 ```
