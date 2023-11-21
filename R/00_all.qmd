@@ -13,7 +13,10 @@ quarto_render("01_load.qmd")
 quarto_render("02_clean.qmd")
 quarto_render("03_augment.qmd")
 quarto_render("04_describe.qmd")
+<<<<<<< HEAD
 quarto_render("05_pca.qmd")
+=======
+>>>>>>> d8634305a47aacd025cd5885a25436ff3ee37982
 quarto_render("06_age_of_diagnosis.qmd")
 quarto_render("07_HLA_allele_analysis.qmd")
 quarto_render("08_antibody_expression_analysis.qmd")
