@@ -10,6 +10,7 @@ editor: visual
 library("tidyverse")
 library("table1")
 library("viridis")
+library("patchwork")
 ```
 
 ### Load Data
@@ -48,7 +49,7 @@ data |>
 ```
 
 ```{r}
-data |>
+p1 <-data |>
   drop_na(gender, age, case_control) |>
   mutate(age = cut(age,
                  breaks = seq(0, 20, by = 5))) |>
@@ -65,19 +66,18 @@ data |>
           panel.grid.major = element_blank()) +
     theme_minimal() +
     theme(legend.position = "bottom")
-```
 
-```{r}
-#Boxplot
-data |>
+p2 <- data |>
   drop_na(age_diagnosis) |>
   ggplot() +
   geom_boxplot(aes(x = age_diagnosis),
                size = 0.5) +
-  scale_fill_viridis(option = 'E', discrete = TRUE) +
+  scale_color_viridis(option = 'E', discrete = TRUE) +
   theme_minimal() +
-  labs(title = "Age of diagnosis, type 1 diabetes",
+  labs(title = "Age of diagnosis",
        x = "Age of diagnosis")
+
+p1 / p2
 ```
 
-We see that most of the patients belongs to the age group 0-5.
+The age distribution of patients predominantly falls within the 0-5 age group. Notably, more than half were diagnosed between ages 10 and 15. The participants underwent testing from early childhood into their twenties. Among the 29 individuals, only 5 received diagnoses after age 15, while 24 were diagnosed before reaching that age. Given the dataset's limited size of 29 observations, the analysis results might diverge from the actual pattern.
