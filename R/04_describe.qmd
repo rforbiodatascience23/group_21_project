@@ -44,7 +44,7 @@ A table1 has been constructed to quickly get an overview of case/control statist
 data |>
   mutate(gender = factor(gender),
          case_control = factor(case_control)) |>
-  table1(x = formula(~ gender + age + age_diagnosis + race + ethnicity| case_control),
+  table1(x = formula(~ gender + age + age_diagnosis + race + ethnicity | case_control),
          data = _)
 ```
 
@@ -56,35 +56,40 @@ p1 <- data |>
           age,
           case_control) |>
   mutate(age = cut(age,
-                   breaks = seq(0, 20, by = 5))) |>
+                   breaks = seq(from = 0,
+                                to = 20,
+                                by = 5))) |>
   ggplot(mapping = aes(x = age,
                        fill = case_control)) +
     geom_bar(alpha = 0.4,
              position = position_dodge(preserve = "single"),
              color = "black") +
     theme_minimal() +
-    labs(y = "n",
+    labs(title = "Age group stratified by case/control",
          x = "Age",
-         fill = "case/control", 
-         title = "Age group stratified by case/control") +
-    scale_fill_viridis(option = 'E',
-                       discrete = TRUE) +
-    theme(axis.text.x = element_text(angle = 10, hjust = 1),
+         y = "n",
+         fill = "case/control") +
+    scale_fill_viridis(discrete = TRUE) +
+    theme(axis.text.x = element_text(angle = 10,
+                                     hjust = 1),
           panel.grid.major = element_blank()) +
     theme_minimal() +
     theme(legend.position = "bottom")
 
 p2 <- data |>
   drop_na(age_diagnosis) |>
-  ggplot() +
-  geom_boxplot(aes(x = age_diagnosis),
+  ggplot(data = _,
+         mapping = aes(x = age_diagnosis)) +
+  geom_boxplot(color = "#481567",
+               fill = "#FDE725",
+               alpha = 0.4,
                size = 0.5) +
-  scale_color_viridis(option = 'E',
-                      discrete = TRUE) +
+  scale_color_viridis(discrete = TRUE) +
   theme_minimal() +
   labs(x = "Age of diagnosis")
 
 p1 / p2
+
 ```
 
 The age distribution of patients predominantly falls within the 0-5 age group. Notably, more than half were diagnosed between ages 10 and 15. The participants underwent testing from early childhood into their twenties. Among the 29 individuals, only 5 received diagnoses after age 15, while 24 were diagnosed before reaching that age. Given the dataset's limited size of 29 observations, the analysis results might diverge from the actual pattern.
@@ -100,9 +105,9 @@ data |>
   group_by(case_control,
            age_visit,
            timepoint) |>
-  summarize(total_temp_mu = log( mean( total_rearrangements))) |>
+  summarize(total_temp_mu = log(mean(total_rearrangements))) |>
   ggplot(data = _,
-         mapping=aes(x = age_visit,
+         mapping = aes(x = age_visit,
                      y = total_temp_mu)) +
   geom_point(aes(color = timepoint)) +
   labs(title = "Mean of Total Rearrangements vs. Age at visit",
@@ -126,7 +131,7 @@ data |>
   group_by(case_control,
            age_visit,
            timepoint) |>
-  summarize(prod_temp_mu = log( mean( productive_rearrangements))) |>
+  summarize(prod_temp_mu = log(mean(productive_rearrangements))) |>
   ggplot(data = _,
          mapping = aes(x = age_visit,
                        y = prod_temp_mu)) +

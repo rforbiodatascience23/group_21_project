@@ -59,13 +59,13 @@ pca_fit <- HLA_tidy |>
 pca_fit |>
   tidy(matrix = "eigenvalues") |>
   ggplot(aes(PC, percent)) +
-  geom_col(fill = "#482677", alpha = 0.8) +
+  geom_col(fill = "#481567", alpha = 0.8) +
   scale_x_continuous(breaks = 1:54) +
   scale_y_continuous(labels = scales::percent_format(),
                      expand = expansion(mult = c(0, 0.01))) +
   labs(title = "Variance Explained by Each PC",
-       x="PC",
-       y="Percentage") +
+       x = "PC",
+       y = "Percentage") +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90),
         panel.grid.minor = element_blank())
