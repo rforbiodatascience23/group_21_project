@@ -18,7 +18,7 @@ Angela M. Mitchell, Erin E. Baschal,1 Kristen A. McDaniel, Kimber M. Simmons, La
 
 ### Data Retrieval
 
-The data link is accessible within the 'data and materials availability' section (NOTE: you may have to create an account for accessibility). To obtain the sample overview file, navigate to 'Open in Analyses', select the 'analysis' option, and proceed to click the 'export' button. Once downloaded, rename the file as 'raw.tsv' and proceed to upload it into the '\_raw' folder.
+Access to the data link is available in the Methods section, specifically within the 'Data and Materials Availability' subsection (NOTE: you may have to create an account for accessibility). To obtain the sample overview file, navigate to 'Open in Analyses', select the 'analysis' option, and proceed to click the 'export' button. Once downloaded, rename the file as 'raw.tsv' and proceed to upload it into the '\_raw' folder.
 
 ### Data description
 
@@ -31,7 +31,5 @@ This project aims to analyse the data provided by Mitchell et al. (2022) in a fu
 The project proceeds to clean, augment, and analyze the data with the intention of reducing the dimensionality of the dataset through PCA, and then identifying and proposing conditions connected to outcome for patients.
 
 The results are naturally a product of our own logical interpretations of the experiment and data.
-
-# Usage
 
 For usage, run the 00_all.qmd file. This contains all the individual analyses run, and will output the results.
