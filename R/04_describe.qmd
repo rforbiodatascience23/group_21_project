@@ -17,7 +17,7 @@ library("patchwork")
 
 ```{r}
 #|message: false
-data <- read_tsv("./../data/03_dat_aug.tsv")
+data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE)
 ```
 
 ### Data Description
@@ -44,7 +44,7 @@ A table1 has been constructed to quickly get an overview of case/control statist
 data |>
   mutate(gender = factor(gender),
          case_control = factor(case_control)) |>
-  table1(x = formula(~ gender + age + age_diagnosis + race + ethnicity | case_control),
+ table1(x = formula(~ gender + age + age_diagnosis + race + ethnicity | case_control),
          data = _)
 ```
 
@@ -59,22 +59,19 @@ data |>
                    breaks = seq(from = 0,
                                 to = 20,
                                 by = 5))) |>
+  filter(!is.na(age))|>
   ggplot(mapping = aes(x = age,
                        fill = case_control)) +
-    geom_bar(alpha = 0.4,
-             position = position_dodge(preserve = "single"),
-             color = "black") +
-    theme_minimal() +
-    labs(title = "Age group stratified by case/control",
-         x = "Age",
-         y = "n",
-         fill = "case/control") +
-    scale_fill_viridis(discrete = TRUE) +
-    theme(axis.text.x = element_text(angle = 10,
-                                     hjust = 1),
-          panel.grid.major = element_blank()) +
-    theme_minimal() +
-    theme(legend.position = "bottom")
+  geom_bar(alpha = 0.4,
+           position = position_dodge(preserve = "single"),
+           color = "black") +
+  theme_minimal() +
+  labs(title = "Age group stratified by case/control",
+       x = "Age",
+       y = "n",
+       fill = "case/control") +
+  scale_fill_viridis(discrete = TRUE) +
+  theme(legend.position = "bottom")
 
 ggsave(width = 8,
        height = 3,

@@ -6,43 +6,53 @@ format: html
 editor: visual
 ---
 
-## Load Libraries
-
 ```{r}
+#| include: false
 library(tidyverse)
 library(viridis)
 ```
 
-## Load Data
+### Load Data
 
 ```{r}
-data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE)
+data <- read_tsv("./../data/03_dat_aug.tsv",
+                 show_col_types = FALSE)
 ```
 
-## Data Analysis
+### Data Analysis
 
 ```{r}
 #| warning: false
-# Transform data to long format and calculate statistics
 data_long <- data |>
-  # Make data longer
   pivot_longer(cols = c(GAD65, ZnT8, IA_2, IAA),
                names_to = "antibody", 
                values_to = "expression") |>
   group_by(antibody, timepoint, case_control) |>
-  # Calculate mean of antibody expression
-  summarise(mean_expression = mean(expression, na.rm = TRUE))
+  summarise(mean_expression = mean(expression,
+                                   na.rm = TRUE))
 
-# Plotting for each antibody separately
 data_long |>
-  ggplot(aes(x = factor(timepoint), y = mean_expression, fill = case_control)) +
+  ggplot(mapping = aes(x = factor(timepoint),
+                       y = mean_expression,
+                       fill = case_control)) +
+  
   geom_bar(stat = "identity",
            position = "dodge",
            alpha = 0.8,
            color = 'black') +
-  facet_wrap(vars(antibody), scales = "free_y", nrow = 2) +
-  labs(x = "Visit", y = "Mean Expression", fill = "Case/Control", title = "Antibody expression across the four visits stratified by case/control") +
-  scale_fill_viridis(option = 'E', discrete = TRUE) +
+  
+  facet_wrap(vars(antibody),
+             scales = "free_y",
+             nrow = 2) +
+  
+  labs(x = "Visit",
+       y = "Mean Expression",
+       fill = "Case/Control",
+       title = "Antibody expression across the four visits stratified by case/control") +
+  
+  scale_fill_viridis(option = 'E',
+                     discrete = TRUE) +
+  
   theme_minimal() + 
   theme(legend.position = "bottom")
 ```

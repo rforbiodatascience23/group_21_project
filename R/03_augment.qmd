@@ -5,12 +5,17 @@ editor: visual
 ---
 
 ```{r}
+#| include: false
 library("tidyverse")
 ```
 
+### Select data
+
 ```{r}
-read_tsv("./../data/02_dat_clean.tsv") |>
-  filter(!str_detect(sample_name, "Denver")) |> 
+read_tsv("./../data/02_dat_clean.tsv",
+         show_col_types = FALSE) |>
+  filter(!str_detect(string = sample_name,
+                     pattern = "Denver")) |> 
   arrange(case_control, id, timepoint) |> 
   write_tsv("./../data/03_dat_aug.tsv")
 ```
