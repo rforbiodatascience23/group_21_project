@@ -20,7 +20,7 @@ For this analysis, only the patients with type 1 diabetes are included. The data
 
 #Loading the data and filtering it
 data <- 
-  read_tsv("./../data/04_aug_clean.tsv") |>
+  read_tsv("./../data/03_dat_aug.tsv") |>
   filter(case_control == "Case") |>
   distinct(id, .keep_all = TRUE) |>
   select(age_diagnosis)

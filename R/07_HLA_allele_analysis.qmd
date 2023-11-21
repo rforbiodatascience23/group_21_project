@@ -13,7 +13,7 @@ library("viridis")
 
 ```{r, fig.height=10, fig.width=8}
 #| warning: false
-data <- read_tsv("./../data/04_dat_aug.tsv")
+data <- read_tsv("./../data/03_dat_aug.tsv")
 
 TCR_tidy <- data |> 
   select(timepoint, age_visit,
@@ -47,7 +47,7 @@ ggplot(data = TCR_tidy) +
 
 ```{r, fig.height=9, fig.width=4}
 #| warning: false
-data <- read_tsv("./../data/04_dat_aug.tsv")
+data <- read_tsv("./../data/03_dat_aug.tsv")
 
 TCR_tidy <- data |> 
   select(timepoint, age_visit,

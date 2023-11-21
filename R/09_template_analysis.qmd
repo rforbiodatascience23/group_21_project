@@ -15,7 +15,7 @@ library("viridis")
 ```{r}
 #| warning: false
 #| message: false
-data <- read_tsv("./../data/04_aug_clean.tsv")
+data <- read_tsv("./../data/03_dat_aug.tsv")
 
 data |>
   group_by(case_control,age_visit,timepoint)|>
@@ -146,7 +146,7 @@ HLA_tidy <- data |>
 library("broom")
 library("cowplot")
 
-data <- read_tsv("./../data/04_aug_clean.tsv",na="N/A")
+data <- read_tsv("./../data/03_dat_aug.tsv",na="N/A")
 #biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
 
 pca_data <- data|>
@@ -184,11 +184,11 @@ pca_fit <- data %>%
 
 
 
-data <- read_tsv("./../data/04_aug_clean.tsv")|>
+data <- read_tsv("./../data/03_dat_aug.tsv")|>
   mutate(across(everything(), 
                 ~replace_na(., 0))) 
 
-data_pca <- read_tsv("./../data/04_aug_clean.tsv")|>
+data_pca <- read_tsv("./../data/03_dat_aug.tsv")|>
   mutate(across(everything(), 
                 ~replace_na(., 0))) |>
   select(case_control, starts_with("HLA")) |>
