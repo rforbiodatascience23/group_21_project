@@ -9,15 +9,35 @@ format:
 
 # Introduction {background-image="background_picture.png" background-size="750px" background-position=right}
 
+<<<<<<< HEAD
 ```{r}
 #![](background_picture.png){width="500"}
 ```
 
+=======
+![](background_picture.png){width="500"}
+------------------------------------------------------------------------
+# Data Description
+
+![](./../results/04_plot_1.png){width="500"}
+![](./../results/04_plot_2.png){width="500"}
+![](./../results/04_plot_3.png){width="500"}
+![](./../results/04_plot_4.png){width="500"}
+![](./../results/04_plot_5.png){width="500"}
+![](./../results/04_plot_6.png){width="500"}
+![](./../results/05_plot_1.png){width="500"}
+![](./../results/06_plot_1.png){width="500"}
+![](./../results/06_plot_2.png){width="500"}
+![](./../results/06_plot_3.png){width="500"}
+![](./../results/07_plot_1.png){width="500"}
+![](./../results/08_plot_1.png){width="500"}
+>>>>>>> 8c1baee22b0e5a056c946f1590e8451574d11b50
 ------------------------------------------------------------------------
 
-## Methods
+## Materials and methods
 
-Explain the methodology or approach used in your study. You can describe experiments, data collection, or analysis methods.
+Materials: What data did you use and where did you get it from?
+Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results => Flow chart?
 
 ------------------------------------------------------------------------
 
