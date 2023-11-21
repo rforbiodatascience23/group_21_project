@@ -122,7 +122,9 @@ patient_data <- patient_data |>
               pattern = "(?<=HLA\\-{1}A\\*{1})\\d{4}")
          )  |>
          
-  unnest_wider(col=starts_with("HLA_"),names_sep=",")
+  unnest_wider(col=starts_with("HLA_"),names_sep=",") |> 
+  
+  select(!sample_tags)
 ```
 
 ### Joining the data
