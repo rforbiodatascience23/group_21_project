@@ -43,28 +43,54 @@ A table1 has been constructed to quickly get an overview of case/control statist
 ```{r}
 data |>
   mutate(gender = factor(gender),
+<<<<<<< HEAD
          case_control = factor(case_control)
          ) |>
+=======
+         case_control = factor(case_control)) |>
+>>>>>>> 098565794253c269f2a15ca2017a958a6be80427
   table1(x = formula(~ gender + age + age_diagnosis + race + ethnicity | case_control),
          data = _)
 ```
 
+## Age
+
 ```{r}
+<<<<<<< HEAD
 p1 <-data |>
   drop_na(gender, age, case_control) |>
   mutate(age = cut(age, breaks = seq(0, 20, by = 5))) |>
   
+=======
+p1 <- data |>
+  drop_na(gender,
+          age,
+          case_control) |>
+  mutate(age = cut(age,
+                   breaks = seq(from = 0,
+                                to = 20,
+                                by = 5))) |>
+>>>>>>> 098565794253c269f2a15ca2017a958a6be80427
   ggplot(mapping = aes(x = age,
                        fill = case_control)) +
     geom_bar(alpha = 0.4,
              position = position_dodge(preserve = "single"),
              color = "black") +
+<<<<<<< HEAD
     theme_minimal() + 
     labs(y = "n",
          x = "Age",
          fill = "case/control", 
          title = "Age group stratified by case/control") +
     scale_fill_viridis(option = 'E', discrete = TRUE) +
+=======
+    theme_minimal() +
+    labs(title = "Age group stratified by case/control",
+         x = "Age",
+         y = "n",
+         fill = "case/control") +
+    scale_fill_viridis(discrete = TRUE) +
+>>>>>>> 098565794253c269f2a15ca2017a958a6be80427
     theme(axis.text.x = element_text(angle = 10,
                                      hjust = 1),
           panel.grid.major = element_blank()) +
@@ -73,14 +99,125 @@ p1 <-data |>
 
 p2 <- data |>
   drop_na(age_diagnosis) |>
-  ggplot() +
-  geom_boxplot(aes(x = age_diagnosis),
+  ggplot(data = _,
+         mapping = aes(x = age_diagnosis)) +
+  geom_boxplot(color = "#481567",
+               fill = "#FDE725",
+               alpha = 0.4,
                size = 0.5) +
-  scale_color_viridis(option = 'E', discrete = TRUE) +
+  scale_color_viridis(discrete = TRUE) +
   theme_minimal() +
   labs(x = "Age of diagnosis")
 
 p1 / p2
+
 ```
 
 The age distribution of patients predominantly falls within the 0-5 age group. Notably, more than half were diagnosed between ages 10 and 15. The participants underwent testing from early childhood into their twenties. Among the 29 individuals, only 5 received diagnoses after age 15, while 24 were diagnosed before reaching that age. Given the dataset's limited size of 29 observations, the analysis results might diverge from the actual pattern.
+
+## TCR-Beta diversity
+
+### Total rearrangement
+
+```{r}
+#| message: false
+
+data |>
+  group_by(case_control,
+           age_visit,
+           timepoint) |>
+  summarize(total_temp_mu = log(mean(total_rearrangements))) |>
+  ggplot(data = _,
+         mapping = aes(x = age_visit,
+                     y = total_temp_mu)) +
+  geom_point(aes(color = timepoint)) +
+  labs(title = "Mean of Total Rearrangements vs. Age at visit",
+       subtitle = "Faceted by outcome and stratified by timepoint",
+       x = "Age",
+       y = "log( Total Rearrangement )",
+       color = "Timepoint") +
+  scale_color_viridis() +
+  geom_smooth(method = "lm",
+              color = "black") +
+  facet_grid(vars(case_control)) +
+  theme_bw()
+```
+
+### Productive rearrangement
+
+```{r}
+#| message: false
+
+data |>
+  group_by(case_control,
+           age_visit,
+           timepoint) |>
+  summarize(prod_temp_mu = log(mean(productive_rearrangements))) |>
+  ggplot(data = _,
+         mapping = aes(x = age_visit,
+                       y = prod_temp_mu)) +
+  geom_point(aes(color = timepoint)) +
+  labs(title = "Mean of Productive Rearrangements vs. Age at visit",
+       subtitle = "Faceted by outcome and stratified by timepoint",
+       x = "Age",
+       y = "log( Productive Rearrangement )",
+       color = "Timepoint") +
+  scale_color_viridis() +
+  geom_smooth(method = "lm",
+              color = "black") +
+  facet_grid(vars(case_control)) +
+  theme_bw()
+```
+
+We see a slight rise in total and productive rearrangements for case patients and a decrease for control patients, when comparing the values against age at visit. So the number of rearrangements seems to be stable in case patients during aging, however there is decreasing rearrangement for the control patients.
+
+### Fraction productive rearrangement
+
+```{r}
+#| message: false
+data |>
+  group_by(case_control,
+           age_visit,
+           timepoint) |>
+  summarize(frac_prod = mean(productive_rearrangements) / mean(total_rearrangements)) |>
+  ggplot(data = _,
+         mapping = aes(x = age_visit,
+                       y = frac_prod)) +
+  geom_point(aes(color = timepoint)) +
+  labs(title = "Fraction of Productive Rearrangements vs. Age at visit",
+       subtitle = "Faceted by outcome and stratified by timepoint",
+       x = "Age",
+       y = "Fraction of Productive Rearrangements",
+       color = "Timepoint") +
+  scale_color_viridis() +
+  geom_smooth(method = "lm",
+              color = "black") +
+  facet_grid(vars(case_control)) +
+  theme_bw()
+```
+
+We see a steep rise in the fraction of productive rearrangement with age (regardless of outcome for patients), which must mean that the differences in values between productive rearrangement and total rearrangement become smaller with age.
+
+### Productive Simpson Clonality
+
+```{r}
+#| message: false
+
+data |> 
+  ggplot(data = _,
+         mapping = aes(x = age_visit,
+                       y = log(productive_simpson_clonality))) +
+  geom_point(aes(color = timepoint)) +
+  labs(title = "Productive Simpson Clonality vs. Age",
+       subtitle = "Faceted by outcome and stratified by timepoint",
+       x = "Age",
+       y = "log( Productive Simpson Clonality )") +
+  scale_color_viridis() +
+  geom_smooth(method = "lm",
+              color = "black") +
+  facet_grid(vars(case_control)) +
+  theme_bw()
+
+```
+
+Both case and control show a direct proportionality between productive simpson clonality and age, which shows the decrease of polyclonality with age.
