@@ -3,6 +3,7 @@ title: "00_all.qmd"
 format: html
 editor: visual
 toc: true
+embed-resources: true
 ---
 
 ```{r}
@@ -80,4 +81,5 @@ title: "00_all.qmd"
 format: html
 editor: visual
 toc: true
+embed-resources: true
 ---

@@ -1,7 +1,9 @@
 ---
-title: "01_load.qmd"
+title: "01_load"
 format: html
 editor: visual
+toc: true
+embed-resources: true
 ---
 
 ```{r}

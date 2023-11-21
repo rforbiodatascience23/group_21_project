@@ -1,7 +1,9 @@
 ---
-title: "03_describe.qmd"
+title: "04_describe"
 format: html
 editor: visual
+toc: true
+embed-resources: true
 ---
 
 ### Load Libraries
@@ -22,11 +24,6 @@ data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE)
 
 ### Data Description
 
-```{r}
-data |>
-  dim()
-```
-
 This dataset comprises a comprehensive registry detailing immunological and demographic characteristics, encompassing 216 observations across 41 variables. It captures data from 54 (29 case and 25 control) patients across four distinct visits, including demographic details like gender, ethnicity, race, and age at diagnosis and visit. It encompasses key immunological markers such as GAD65, IA_2, IAA, ZnT8 antibodies, along with extensive HLA allele information (HLA_A, HLA_B, HLA_C, HLA_DPA1, HLA_DPB1, HLA_DQA1, HLA_DQB1, HLA_DRB1). Additionally, it contains metrics (e.g., total_templates, total_rearrangements, productive_templates) pertaining to the T-cell receptor β region, crucial for diversifying T-cell receptors and recognizing antigens. This dataset elucidates the intricate relationship between demographic factors and immunological profiles across multiple patient visits, providing invaluable insights for in-depth analysis and comprehension. Refer to the complete list of variables provided below.
 
 ### Variables
@@ -36,33 +33,10 @@ data |>
   ls()
 ```
 
-## Table1
-
-A table1 has been constructed to quickly get an overview of case/control statistics.
+### Age
 
 ```{r}
 data |>
-  mutate(gender = factor(gender),
-<<<<<<< HEAD
-         case_control = factor(case_control)
-         ) |>
-=======
-         case_control = factor(case_control)) |>
->>>>>>> 098565794253c269f2a15ca2017a958a6be80427
-  table1(x = formula(~ gender + age + age_diagnosis + race + ethnicity | case_control),
-         data = _)
-```
-
-## Age
-
-```{r}
-<<<<<<< HEAD
-p1 <-data |>
-  drop_na(gender, age, case_control) |>
-  mutate(age = cut(age, breaks = seq(0, 20, by = 5))) |>
-  
-=======
-p1 <- data |>
   drop_na(gender,
           age,
           case_control) |>
@@ -70,54 +44,51 @@ p1 <- data |>
                    breaks = seq(from = 0,
                                 to = 20,
                                 by = 5))) |>
->>>>>>> 098565794253c269f2a15ca2017a958a6be80427
+  filter(!is.na(age))|>
   ggplot(mapping = aes(x = age,
                        fill = case_control)) +
-    geom_bar(alpha = 0.4,
-             position = position_dodge(preserve = "single"),
-             color = "black") +
-<<<<<<< HEAD
-    theme_minimal() + 
-    labs(y = "n",
-         x = "Age",
-         fill = "case/control", 
-         title = "Age group stratified by case/control") +
-    scale_fill_viridis(option = 'E', discrete = TRUE) +
-=======
-    theme_minimal() +
-    labs(title = "Age group stratified by case/control",
-         x = "Age",
-         y = "n",
-         fill = "case/control") +
-    scale_fill_viridis(discrete = TRUE) +
->>>>>>> 098565794253c269f2a15ca2017a958a6be80427
-    theme(axis.text.x = element_text(angle = 10,
-                                     hjust = 1),
-          panel.grid.major = element_blank()) +
-    theme_minimal() +
-    theme(legend.position = "bottom")
+  geom_bar(alpha = 0.8,
+           position = position_dodge(preserve = "single"),
+           color = "black") +
+  theme_bw() +
+  labs(title = "Age group stratified by case/control",
+       x = "Age",
+       y = "n",
+       fill = "case/control") +
+  scale_fill_manual(values = c(Case = "#481567",
+                               Control = "#20A387")) +
+  theme(legend.position = "bottom")
 
-p2 <- data |>
+ggsave(width = 8,
+       height = 3,
+       filename = "04_plot_1.png",
+       path = "./../results/")
+
+
+data |>
   drop_na(age_diagnosis) |>
   ggplot(data = _,
          mapping = aes(x = age_diagnosis)) +
   geom_boxplot(color = "#481567",
-               fill = "#FDE725",
+               fill = "#20A387",
                alpha = 0.4,
                size = 0.5) +
   scale_color_viridis(discrete = TRUE) +
-  theme_minimal() +
+  theme_bw() +
   labs(x = "Age of diagnosis")
 
-p1 / p2
+ggsave(width = 8,
+       height = 3,
+       filename = "04_plot_2.png",
+       path = "./../results/")
 
 ```
 
 The age distribution of patients predominantly falls within the 0-5 age group. Notably, more than half were diagnosed between ages 10 and 15. The participants underwent testing from early childhood into their twenties. Among the 29 individuals, only 5 received diagnoses after age 15, while 24 were diagnosed before reaching that age. Given the dataset's limited size of 29 observations, the analysis results might diverge from the actual pattern.
 
-## TCR-Beta diversity
+### TCR-Beta diversity
 
-### Total rearrangement
+#### Total rearrangement
 
 ```{r}
 #| message: false
@@ -141,9 +112,14 @@ data |>
               color = "black") +
   facet_grid(vars(case_control)) +
   theme_bw()
+
+ggsave(width = 8,
+       height = 6,
+       filename = "04_plot_3.png",
+       path = "./../results/")
 ```
 
-### Productive rearrangement
+#### Productive rearrangement
 
 ```{r}
 #| message: false
@@ -167,11 +143,16 @@ data |>
               color = "black") +
   facet_grid(vars(case_control)) +
   theme_bw()
+
+ggsave(width = 8,
+       height = 6,
+       filename = "04_plot_4.png",
+       path = "./../results/")
 ```
 
 We see a slight rise in total and productive rearrangements for case patients and a decrease for control patients, when comparing the values against age at visit. So the number of rearrangements seems to be stable in case patients during aging, however there is decreasing rearrangement for the control patients.
 
-### Fraction productive rearrangement
+#### Fraction productive rearrangement
 
 ```{r}
 #| message: false
@@ -194,11 +175,16 @@ data |>
               color = "black") +
   facet_grid(vars(case_control)) +
   theme_bw()
+
+ggsave(width = 8,
+       height = 6,
+       filename = "04_plot_5.png",
+       path = "./../results/")
 ```
 
 We see a steep rise in the fraction of productive rearrangement with age (regardless of outcome for patients), which must mean that the differences in values between productive rearrangement and total rearrangement become smaller with age.
 
-### Productive Simpson Clonality
+#### Productive Simpson Clonality
 
 ```{r}
 #| message: false
@@ -218,6 +204,10 @@ data |>
   facet_grid(vars(case_control)) +
   theme_bw()
 
+ggsave(width = 8,
+       height = 6,
+       filename = "04_plot_6.png",
+       path = "./../results/")
 ```
 
 Both case and control show a direct proportionality between productive simpson clonality and age, which shows the decrease of polyclonality with age.

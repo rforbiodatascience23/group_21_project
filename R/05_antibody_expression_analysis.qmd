@@ -1,9 +1,9 @@
 ---
-project: 
-  output-dir: /results
-title: "08_expression_analysis"
+title: "05_antibody_expression_analysis"
 format: html
 editor: visual
+toc: true
+embed-resources: true
 ---
 
 ```{r}
@@ -29,30 +29,32 @@ data_long <- data |>
                values_to = "expression") |>
   group_by(antibody, timepoint, case_control) |>
   summarise(mean_expression = mean(expression,
-                                   na.rm = TRUE))
+                                   na.rm = TRUE),
+            .groups = "drop")
 
 data_long |>
   ggplot(mapping = aes(x = factor(timepoint),
                        y = mean_expression,
                        fill = case_control)) +
-  
   geom_bar(stat = "identity",
            position = "dodge",
            alpha = 0.8,
            color = 'black') +
-  
   facet_wrap(vars(antibody),
              scales = "free_y",
              nrow = 2) +
-  
-  labs(x = "Visit",
+  labs(title = "Antibody expression across visits stratified by case/control",
+       x = "Visit",
        y = "Mean Expression",
-       fill = "Case/Control",
-       title = "Antibody expression across the four visits stratified by case/control") +
+       fill = "Case/Control") +
+  scale_fill_manual(values = c(Case = "#481567",
+                               Control = "#20A387")) +
   
-  scale_fill_viridis(option = 'E',
-                     discrete = TRUE) +
-  
-  theme_minimal() + 
+  theme_bw() + 
   theme(legend.position = "bottom")
+
+ggsave(width = 8,
+       height = 6,
+       filename = "05_plot_1.png",
+       path = "./../results/")
 ```
