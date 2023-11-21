@@ -46,15 +46,19 @@ patient_data <- patient_data |>
     
     id = case_when(
       str_detect(string = sample_tags,
-                 pattern = "Subject") ~ as.double(str_extract(string = sample_tags,
-                                                              pattern = "(?<=Subject[^,])\\d+")),
+                 pattern = "Subject") ~ as.double(
+                   str_extract(string = sample_tags,
+                               pattern = "(?<=Subject[^,])\\d+")),
+      
       str_detect(string = sample_tags,
-                 pattern = "Control") ~ as.double(str_extract(string = sample_tags,
-                                                              pattern = "(?<=Control[^,])\\d+")),
+                 pattern = "Control") ~ as.double(
+                   str_extract(string = sample_tags,
+                               pattern = "(?<=Control[^,])\\d+")),
       TRUE ~ NA),
     
-    timepoint = as.double(str_extract(string = sample_tags,
-                                      pattern = "(?<=Timepoint)\\s+\\d+[.\\d+]?")),
+    timepoint = as.double(
+      str_extract(string = sample_tags,
+                  pattern = "(?<=Timepoint)\\s+\\d+[.\\d+]?")),
     
     gender = case_when(str_detect(string = sample_tags,
                                   pattern = "Female") ~ "Female",
