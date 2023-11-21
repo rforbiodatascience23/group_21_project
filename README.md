@@ -34,4 +34,4 @@ The results are naturally a product of our own logical interpretations of the ex
 
 # Usage
 
-For usage, run the 00_all.qmd file. This contains all the individual analyses run, and will output the expected result.
+For usage, run the 00_all.qmd file. This contains all the individual analyses run, and will output the results.
