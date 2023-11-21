@@ -1,5 +1,0 @@
----
-title: "05_analysis_pca.qmd"
-format: html
-editor: visual
----
