@@ -16,7 +16,7 @@ library("cowplot")
 
 ```{r}
 #| message: false
-data <- read_tsv("./../data/03_dat_aug.tsv")
+data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE)
 ```
 
 ## Analysis
