@@ -1,5 +1,5 @@
 ---
-title: "et_eller_andet"
+title: "08_pca_HLA"
 format: html
 editor: visual
 ---
@@ -68,6 +68,11 @@ pca_fit |>
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90),
         panel.grid.minor = element_blank())
+
+ggsave(width = 8,
+       height = 5,
+       filename = "08_plot_1.png",
+       path = "./../results/")
 ```
 
 None of the variables describe the variance in data, therefore no indication of allele subtype can conclude difference between case or control.
