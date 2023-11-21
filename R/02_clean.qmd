@@ -12,7 +12,7 @@ editor: visual
 library("tidyverse")
 ```
 
-### Reading the data
+### Read Data
 
 ```{r}
 #| message: false
@@ -20,7 +20,9 @@ library("tidyverse")
 full_data <- read_tsv("./../data/01_dat_load.tsv")
 ```
 
-### Splitting the data
+### Split Data
+
+We have extracted one column (sample_tags) that contains comma-separated values into its own dataframe. This allows us to perform separate cleaning operations on it while showcasing our proficiency in joining dataframes.
 
 ```{r}
 patient_data <- full_data |>
@@ -30,7 +32,7 @@ meta_data <- full_data |>
   select(!sample_tags)
 ```
 
-### Cleaning the data
+### Clean Data
 
 ```{r}
 patient_data <- patient_data |>
@@ -127,22 +129,16 @@ patient_data <- patient_data |>
   select(!sample_tags)
 ```
 
-### Joining the data
+### Join Data
 
 ```{r}
 full_data <- meta_data |>
   inner_join(patient_data, by = "sample_name")
 ```
 
-### Writing the data
+### Write Data
 
-<<<<<<< HEAD
-Heatmap: Alleles
-
-
-=======
 ```{r}
 full_data |>
   write_tsv("./../data/02_dat_clean.tsv")
 ```
->>>>>>> 0425b4ef71a88ce0b83a33d65c2b59f523d2daf4
