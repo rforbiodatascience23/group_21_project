@@ -28,10 +28,10 @@ This dataset comprises a detailed record of immunological and demographic attrib
 
 This project aims to analyse the data provided by Mitchell et al. (2022) in a further attempt to uncover potential relations between allele repertoire development during childhood and the susceptibility to obtaining type 1 diabetes (T1D).
 
-The project proceeds to clean, augment and analyse the data with the intention of reducing the dimensionality of the data set by PCA and then identifying and proposing conditions connected to outcome for patients.
+The project proceeds to clean, augment, and analyze the data with the intention of reducing the dimensionality of the dataset through PCA, and then identifying and proposing conditions connected to outcome for patients.
 
 The results are naturally a product of our own logical interpretations of the experiment and data.
 
 # Usage
 
-MISSING
+For usage, run the 00_all.qmd file. This contains all the individual analyses run, and will output the results.
