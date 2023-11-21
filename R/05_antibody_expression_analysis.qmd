@@ -8,8 +8,7 @@ embed-resources: true
 
 ```{r}
 #| include: false
-library(tidyverse)
-library(viridis)
+library("tidyverse")
 ```
 
 ### Load Data
@@ -49,7 +48,6 @@ data_long |>
        fill = "Case/Control") +
   scale_fill_manual(values = c(Case = "#481567",
                                Control = "#20A387")) +
-  
   theme_bw() + 
   theme(legend.position = "bottom")
 
