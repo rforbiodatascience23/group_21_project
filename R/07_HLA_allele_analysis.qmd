@@ -8,43 +8,12 @@ editor: visual
 #| include: false
 library("tidyverse")
 library("patchwork")
+library(viridis)
 ```
 
 ### Heatmap
 
 ```{r, fig.height=10, fig.width=8}
-#| warning: false
-data <- read_tsv("./../data/03_dat_aug.tsv",
-                 show_col_types = FALSE)
-
-HLA_tidy <- data |> 
-  filter(timepoint == 4) |>
-  select(starts_with("HLA"),
-         case_control,
-         id) |>
-  pivot_longer(starts_with("HLA_"), 
-               names_to = "allele",
-               values_to = "subtype") |>
-  mutate(allele = str_remove(allele, "(\\,1) | (\\,2)")) |>
-  mutate(allele_subtype = str_c(allele,
-                                subtype,
-                                sep=":")) |>
-  na.omit(allele_subtype) |>
-  mutate(subtype_n = 1) |>
-  select(case_control,
-         id,
-         allele_subtype,
-         subtype_n) |>
-  group_by(case_control,allele_subtype) |>
-  summarize(allele_n=n(),.groups="drop") |>
-  pivot_wider(names_from=case_control,
-              values_from=allele_n) |>
-  na.omit(Control,Case) |>
-  mutate(ratio = Case/Control)
-
-```
-
-```{r}
 #| warning: false
 data <- read_tsv("./../data/03_dat_aug.tsv")
 
@@ -75,5 +44,57 @@ ggplot(data = TCR_tidy) +
         axis.text.x = element_text(angle = 90, size = 10),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank()) +
-  scale_fill_viridis(option = "E")
+  scale_fill_gradient(low = "#20A387",
+                       high = "#481567") + 
+  labs(title = "Presence of HLA subtypes in case and control patients",
+       fill = "Case or Control")
+
 ```
+
+
+
+```{r, fig.height=10, fig.width=8}
+#| warning: false
+data <- read_tsv("./../data/03_dat_aug.tsv",
+                 show_col_types = FALSE)
+
+HLA_tidy <- data |> 
+  filter(timepoint == 4) |>
+  select(starts_with("HLA"),
+         case_control,
+         id) |>
+  pivot_longer(starts_with("HLA_"), 
+               names_to = "allele",
+               values_to = "subtype") |>
+  mutate(allele = str_remove(allele, "(\\,1) | (\\,2)")) |>
+  mutate(allele_subtype = str_c(allele,
+                                subtype,
+                                sep=":")) |>
+  na.omit(allele_subtype) |>
+  mutate(subtype_n = 1) |>
+  select(case_control,
+         id,
+         allele_subtype,
+         subtype_n) |>
+  group_by(case_control,allele_subtype) |>
+  summarize(allele_n=n(),.groups="drop") |>
+  pivot_wider(names_from=case_control,
+              values_from=allele_n) |>
+  na.omit(Control,Case) |>
+  mutate(ratio = round(Case/Control, digits = 2)) |> 
+  select(allele_subtype, ratio)
+
+ggplot(data = HLA_tidy,
+       mapping = aes(x = reorder(allele_subtype, +ratio),
+                     y = ratio)) + 
+  geom_bar(stat = "identity", color = "#20A387", fill = "#20A387", alpha = 0.9) + 
+  coord_flip() + 
+  labs(title = "Ratio of HLA subtype occurence for case and control patients",
+       x = "Allele subtype",
+       y = "Ratio (Case/Control)") + 
+  theme_bw() + 
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+```
+
