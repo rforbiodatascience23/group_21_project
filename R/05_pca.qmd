@@ -10,28 +10,25 @@ library("broom")
 ```
 
 ```{r}
-# converting case_control to representative numeric valus
 conversion_table <- data.frame(
   case_control = c("Case","Control"),
   num_case_control = c(1, 0))
 
-# loading the dataset and selecting the desired variables
 data <- read_tsv("./../data/04_aug_clean.tsv")|>
   mutate(across(everything(), 
                 ~replace_na(., 0))) |>
-  select(case_control, GAD65, IA_2, IAA, ZnT8) |> # appending the conversion values
+  select(case_control, GAD65, IA_2, IAA, ZnT8) |> 
   left_join(conversion_table, by ="case_control") 
 
 # principal component analysis
 data_pca <- data |>
   select(-case_control)|>
   select(-num_case_control)|>
-  scale() |> # normalizing the data 
   prcomp()
 
 # plotting PC coordinates for individuals
 data_pca |>
-  augment(data) |># add original dataset back in
+  augment(data) |>
   ggplot(aes(.fittedPC1, .fittedPC2, 
              color = case_control)) + 
   geom_point(size = 1.5) +
@@ -39,7 +36,7 @@ data_pca |>
     values = c(Case = "#D55E00", 
                Control = "#0072B2")
   ) +
-  theme_half_open(12) + 
+  theme_minimal_hgrid(12) +
   background_grid() +
     labs(title = "Plot of individuals",
          color = "Case vs Control")
@@ -47,9 +44,10 @@ data_pca |>
 # plotting scree plot for varialbe variation
 data_pca |>
   tidy(matrix = "eigenvalues") |>
-  ggplot(aes(PC, percent)) +
+  ggplot(aes(PC, 
+             percent)) +
   geom_col(fill = "#0072B2", 
-           alpha = 0.8) + # making the bars slightly translusent 
+           alpha = 0.8) + 
   scale_x_continuous(breaks = 1:9) +
   scale_y_continuous(
     labels = scales::percent_format(),
@@ -58,44 +56,43 @@ data_pca |>
             color = "red") +
   theme_minimal_hgrid(12) +
   background_grid() +
-
   labs(title = "Scree Plot",
        y = "percentage contribution")
+## it seemns that ZnT8 contributes the most to both PC1 and PC4, out of all four variables. This might indicate a correlation between this variable and the other variables.
 
-# creating the aesthetics for the rotation matrix arrow
 arrow_style <- arrow(length = unit(0.2, "cm"), 
                      ends = "first")
 
-# appending num_case_control to the pca results
-data_pca <- data_pca |>
-  bind_cols(case_control = data$num_case_control)
-
-# calculating the correlation between the num_case_control and pc's
 num_case_control_coord <- as.data.frame(
-  cor(data$num_case_control, data_pca$x)) |>
-  mutate(Variable = "case_control")
+  cor(data$num_case_control, data_pca$x)) 
 
-# plotting the rotation matrix
+# plotting the rotation matrix, pc1 and pc2
 data_pca |>
   tidy(matrix = "rotation") |>
   pivot_wider(names_from = "PC", 
               names_prefix = "PC", 
               values_from = "value") |>
   ggplot(aes(x = PC2, y = PC1)) +
-  geom_point(alpha = 0) +  # making the points fully transparent
-  geom_segment(aes(xend = 0, yend = 0), arrow = arrow_style, color = "black") +
+  geom_point(alpha = 0) + 
   coord_flip() +
-  geom_text(aes(label = column), hjust = 1.2, nudge_x = -0.02, color = "#0072B2") +
   theme_half_open(12) + 
   background_grid() +
   labs(title = "Rotation Matrix") +
+  geom_segment(aes(xend = 0, yend = 0), 
+   arrow = arrow_style, 
+   color = "#0072B2") +
   geom_segment(
     data = num_case_control_coord,
-    color = "red",
-    xend = 0, yend = 0,
-    arrow = arrow_style) +
+    aes(xend = 0, yend = 0),
+    arrow = arrow_style,
+    color = "red") +
   geom_text_repel(
     data = as.data.frame(num_case_control_coord),
-    aes(label = Variable),
-    color = "red")
+    aes(label = "case_control"),
+    color = "red") +
+  geom_text(aes(label = column), 
+    hjust = 1.5, 
+    nudge_x = 0, 
+    color = "#0072B2") 
+## case_control seems most strongly correlated with ZnT8, whereas ZnT8 and IA_2 seem most strongly correlated with each other, while IAA and GAD65 seem most correlated with each other. Ie. these are most likely to affect the results of the other.
 ```
