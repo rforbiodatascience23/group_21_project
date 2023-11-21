@@ -1,7 +1,9 @@
 ---
-title: "05_analysis_1.qmd"
+title: "06_pca_antibody"
 format: html
 editor: visual
+toc: true
+embed-resources: true
 ---
 
 ```{r}
@@ -26,40 +28,45 @@ data <- read_tsv("./../data/03_dat_aug.tsv",
             by ="case_control") 
 
 data_pca <- data |>
-  select(!case_control)|>
-  select(!num_case_control)|>
+  select(!case_control & !num_case_control)|>
   scale() |>
   prcomp()
 
 
 data_pca |>
   augment(data) |>
-  ggplot(mapping = aes(.fittedPC1, 
-                       .fittedPC2,
+  ggplot(data = _,
+         mapping = aes(x = .fittedPC1, 
+                       y = .fittedPC2,
                        color = case_control)) + 
   geom_point(size = 1.5) +
-  scale_color_manual(values = c(Case = "#D55E00",
-                                Control = "#0072B2")) +
-  theme_minimal() +
+  scale_color_manual(values = c(Case = "#481567",
+                                Control = "#FDE725")) +
+  theme_bw() +
   labs(title = "Plot of individuals",
        color = "Case vs Control")
+
+ggsave(width = 8,
+       height = 5,
+       filename = "06_plot_1.png",
+       path = "./../results/")
 
 
 data_pca |>
   tidy(matrix = "eigenvalues") |>
   ggplot(mapping = aes(x = PC,
                        y = percent)) +
-  geom_col(fill = "#0072B2", 
+  geom_col(fill = "#20A387", 
            alpha = 0.8) + 
   scale_x_continuous(breaks = 1:9) +
   scale_y_continuous(labels = scales::percent_format(),
                      expand = expansion(mult = c(0, 0.01))) +
   geom_line(mapping = aes(x = PC),
-            color = "red") +
+            color = "#481567") +
   
-  theme_minimal() +
-  labs(title = "Scree Plot",
-       y = "percentage contribution")
+  theme_bw() +
+  labs(title = "Variance Explained by Each PC",
+       y = "Percentage Contribution")
 
 arrow_style <- arrow(length = unit(0.2, "cm"), 
                      ends = "first")
@@ -67,6 +74,11 @@ arrow_style <- arrow(length = unit(0.2, "cm"),
 num_case_control_coord <- as.data.frame(
   cor(data$num_case_control, data_pca$x)) |>
   mutate(Variable = "num_case_control")
+
+ggsave(width = 8,
+       height = 5,
+       filename = "06_plot_2.png",
+       path = "./../results/")
 
 
 data_pca |>
@@ -78,22 +90,27 @@ data_pca |>
                        y = PC1)) +
   geom_point(alpha = 0) + 
   coord_flip() +
-  theme_minimal() +
+  theme_bw() +
   labs(title = "Rotation Matrix") +
   geom_segment(mapping = aes(xend = 0,
                              yend = 0),
                arrow = arrow_style,
-               color = "#0072B2") +
+               color = "#481567") +
   geom_segment(data = num_case_control_coord,
                mapping = aes(xend = 0,
                              yend = 0),
                arrow = arrow_style,
-               color = "red") +
-  geom_text_repel(data = as.data.frame(num_case_control_coord),
+               color = "#20A387") +
+  geom_label_repel(data = as.data.frame(num_case_control_coord),
                   mapping = aes(label = "case_control"),
-                  color = "red") +
-  geom_text(mapping = aes(label = column),
-            hjust = 1.5,
-            nudge_x = 0,
-            color = "#0072B2") 
+                  color = "#20A387",
+                  size = 3.5) +
+  geom_label_repel(mapping = aes(label = column),
+                  color = "#481567",
+                  size = 3.5)
+
+ggsave(width = 8,
+       height = 5,
+       filename = "06_plot_3.png",
+       path = "./../results/")
 ```
