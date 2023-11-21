@@ -16,7 +16,7 @@ library(viridis)
 ## Load Data
 
 ```{r}
-data <- read_tsv("./../data/04_aug_clean.tsv", show_col_types = FALSE)
+data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE)
 ```
 
 ## Data Analysis

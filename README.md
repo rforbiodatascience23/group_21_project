@@ -15,16 +15,23 @@ Angela M. Mitchell, Erin E. Baschal,1 Kristen A. McDaniel, Kimber M. Simmons, La
 # Data
 
 ### Data Retrival
-The data link is accessible within the 'data and materials availability' section. To obtain the sample overview file, navigate to 'Open in Analyses', select the 'analysis' option, and proceed to click the 'export' button. Once downloaded, rename the file as 'raw.tsv' and proceed to upload it into the '_raw' folder. 
+The data link is accessible within the 'data and materials availability' section (NOTE: you may have to create an account for accessibility). To obtain the sample overview file, navigate to 'Open in Analyses', select the 'analysis' option, and proceed to click the 'export' button. Once downloaded, rename the file as 'raw.tsv' and proceed to upload it into the '_raw' folder. 
 
 ### Data descripton
-This dataset comprises a detailed record of immunological and demographic attributes across 216 observations and 32 variables. It encompasses data from 54 patients undergoing testing across four distinct visits. The information includes demographic specifics such as gender, ethnicity, race, and age at both diagnosis and visit. Additionally, it covers immunological markers like antibody expression (GAD65, IA_2, IAA, ZnT8) and comprehensive HLA allele information (HLA_A, HLA_B, HLA_C, HLA_DPA1, HLA_DPB1, HLA_DQA1, HLA_DQB1, HLA_DRB1). This dataset serves to elucidate the interplay between demographic factors and immunological profiles across multiple patient visits, offering insights crucial for in-depth analysis and understanding.
-
+This dataset comprises a detailed record of immunological and demographic attributes across 216 observations and 41 variables. It encompasses data from 54 patients undergoing testing across four distinct visits. The information includes demographic specifics such as gender, ethnicity, race, and age at both diagnosis and visit. Additionally, it covers immunological markers like antibody expression (GAD65, IA_2, IAA, ZnT8) and comprehensive HLA allele information (HLA_A, HLA_B, HLA_C, HLA_DPA1, HLA_DPB1, HLA_DQA1, HLA_DQB1, HLA_DRB1). This dataset serves to elucidate the interplay between demographic factors and immunological profiles across multiple patient visits, offering insights crucial for in-depth analysis and understanding.
 
 
 # Goal
+This project aims to analyse the data provided by Mitchell et al. (2022) in a further attempt to uncover potential relations between allele repertoire development during childhood and the susceptibility to obtaining type 1 diabetes (T1D).
 
+The project proceeds to clean, augment and analyse the data with the intention of reducing the dimensionality of the data set by PCA and then identifying and proposing conditions connected to outcome for patients. 
+
+The results are naturally a product of our own logical interpretations of the experiment and data and could argumentatively have been different depending on the handling of the data.
 
 # Usage
+MISSING
+
+
+
 
  
