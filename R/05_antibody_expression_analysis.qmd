@@ -8,8 +8,7 @@ embed-resources: true
 
 ```{r}
 #| include: false
-library(tidyverse)
-library(viridis)
+library("tidyverse")
 ```
 
 ### Load Data
