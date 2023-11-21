@@ -7,7 +7,6 @@ editor: visual
 ```{r}
 library("tidyverse")
 library("broom")
-library("ggrepel")
 ```
 
 ```{r}
@@ -23,6 +22,7 @@ data <- read_tsv("./../data/04_aug_clean.tsv") |>
 # principal component analysis
 data_pca <- data |>
  select(-case_control)|>
+  select(-num_case_control)|>
   scale() |>
   prcomp()
 
@@ -39,7 +39,6 @@ data_pca |>
   theme_minimal() +
     labs(title = "Plot of individuals",
          color = "Case vs Control")
-## Shows greater variability for case subjects, compared to very little variation for control subjects
 
 # plotting scree plot for varialbe variation
 data_pca |>
