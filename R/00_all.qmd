@@ -8,24 +8,13 @@ editor: visual
 library("quarto")
 ```
 
-# 01_load data
-
-{{< include 01_load.qmd >}}
-
-# 02_clean data
-
-{{< include 02_clean.qmd >}}
-
-# 03_augment data
-
-{{< include 03_augment.qmd >}}
-
-# 04_describe data
-
-{{< include 04_describe.qmd >}}
-
 ```{r}
-#quarto_render("00_all.qmd", output_format = "html", as_job = FALSE)
+quarto_render("01_load.qmd")
+quarto_render("02_clean.qmd")
+quarto_render("03_augment.qmd")
+quarto_render("04_describe.qmd")
+quarto_render("05_pca.qmd")
+quarto_render("06_age_of_diagnosis.qmd")
+quarto_render("07_HLA_allele_analysis.qmd")
+quarto_render("08_antibody_expression_analysis.qmd")
 ```
-
-
