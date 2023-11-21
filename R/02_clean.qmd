@@ -107,9 +107,6 @@ read_tsv("./../data/01_dat_load.tsv") |>
          
   unnest_wider(col=starts_with("HLA_"),names_sep=",") |>
   write_tsv("./../data/02_dat_clean.tsv")
-
-
-
 ```
 
 PCA analysis

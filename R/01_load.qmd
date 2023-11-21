@@ -9,6 +9,6 @@ library("tidyverse")
 ```
 
 ```{r}
-readxl::read_excel("./../data/_raw/raw_data.xlsx") |>
+read_tsv("./../data/_raw/raw.tsv") |>
   write_tsv("../data/01_dat_load.tsv")
 ```
