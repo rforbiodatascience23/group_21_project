@@ -17,6 +17,31 @@ library("patchwork")
 data <- read_tsv("./../data/03_dat_aug.tsv",
                  show_col_types = FALSE)
 
+HLA_tidy <- data |> 
+  filter(timepoint == 4) |>
+  select(starts_with("HLA"),
+         case_control,
+         id) |>
+  pivot_longer(starts_with("HLA_"), 
+               names_to = "allele",
+               values_to = "subtype") |>
+  mutate(allele = str_remove(allele, "(\\,1) | (\\,2)")) |>
+  mutate(allele_subtype = str_c(allele,
+                                subtype,
+                                sep=":")) |>
+  na.omit(allele_subtype) |>
+  mutate(subtype_n = 1) |>
+  select(case_control,
+         id,
+         allele_subtype,
+         subtype_n) |>
+  group_by(case_control,allele_subtype) |>
+  summarize(allele_n=n(),.groups="drop") |>
+  pivot_wider(names_from=case_control,
+              values_from=allele_n) |>
+  na.omit(Control,Case) |>
+  mutate(ratio = Case/Control)
+
 ```
 
 ```{r}
