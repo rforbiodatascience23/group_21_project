@@ -47,7 +47,8 @@ data_long |>
        x = "Visit",
        y = "Mean Expression",
        fill = "Case/Control") +
-  scale_fill_viridis(discrete = TRUE) +
+  scale_fill_manual(values = c(Case = "#481567",
+                               Control = "#20A387")) +
   
   theme_bw() + 
   theme(legend.position = "bottom")

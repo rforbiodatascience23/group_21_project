@@ -41,7 +41,7 @@ data_pca |>
                        color = case_control)) + 
   geom_point(size = 1.5) +
   scale_color_manual(values = c(Case = "#481567",
-                                Control = "#FDE725")) +
+                                Control = "#20A387")) +
   theme_bw() +
   labs(title = "Plot of individuals",
        color = "Case vs Control")
