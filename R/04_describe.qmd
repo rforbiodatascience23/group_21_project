@@ -47,7 +47,7 @@ data |>
   filter(!is.na(age))|>
   ggplot(mapping = aes(x = age,
                        fill = case_control)) +
-  geom_bar(alpha = 0.4,
+  geom_bar(alpha = 0.8,
            position = position_dodge(preserve = "single"),
            color = "black") +
   theme_bw() +
@@ -55,7 +55,8 @@ data |>
        x = "Age",
        y = "n",
        fill = "case/control") +
-  scale_fill_viridis(discrete = TRUE) +
+  scale_fill_manual(values = c(Case = "#481567",
+                               Control = "#20A387")) +
   theme(legend.position = "bottom")
 
 ggsave(width = 8,
@@ -69,7 +70,7 @@ data |>
   ggplot(data = _,
          mapping = aes(x = age_diagnosis)) +
   geom_boxplot(color = "#481567",
-               fill = "#FDE725",
+               fill = "#20A387",
                alpha = 0.4,
                size = 0.5) +
   scale_color_viridis(discrete = TRUE) +
