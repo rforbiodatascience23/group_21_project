@@ -136,7 +136,13 @@ full_data <- meta_data |>
 
 ### Write Data
 
+<<<<<<< HEAD
+Heatmap: Alleles
+
+
+=======
 ```{r}
 full_data |>
   write_tsv("./../data/02_dat_clean.tsv")
 ```
+>>>>>>> 0425b4ef71a88ce0b83a33d65c2b59f523d2daf4
