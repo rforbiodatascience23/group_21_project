@@ -105,7 +105,7 @@ ggplot(data = HLA_tidy,
         axis.text.y= element_text(size=7))
 
 ggsave(width = 5,
-       height = 8,
+       height = 10,
        filename = "07_plot_2.png",
        path = "./../results/")
 ```
