@@ -4,9 +4,8 @@ format: html
 editor: visual
 ---
 
-## Load libraries
-
 ```{r}
+#| include: false
 #| message: false
 library("tidyverse")
 library("broom")
