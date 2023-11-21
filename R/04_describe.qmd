@@ -79,4 +79,4 @@ p2 <- data |>
 p1 / p2
 ```
 
-The age distribution of patients predominantly falls within the 0-5 age group. Notably, more than half were diagnosed between ages 10 and 15. The participants underwent testing from early childhood into their twenties. Among the 29 individuals, only 5 received diagnoses after age 15, while 24 were diagnosed before reaching that age. Given the dataset's limited size of 29 observations, the analysis results might diverge from the actual pattern.
+The age distribution of patients predominantly falls within the 0-5 age group. Notably, more than half were diagnosed between ages 10 and 15. The participants underwent testing from early childhood into their twenties. Among the 29 individuals, only 5 received diagnoses after age 15, while 24 were diagnosed before reaching that age. Given the datasets limited size of 29 observations, the analysis results might diverge from the actual pattern.
