@@ -4,14 +4,12 @@ format: html
 editor: visual
 ---
 
-### Load Tidyverse
-
 ```{r}
 #| include: false
 library("tidyverse")
 ```
 
-### Read Data
+### Load Data
 
 ```{r}
 #| message: false
