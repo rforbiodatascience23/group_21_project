@@ -31,7 +31,7 @@ data |>
   ls()
 ```
 
-## Age
+### Age
 
 ```{r}
 data |>
@@ -83,9 +83,9 @@ ggsave(width = 8,
 
 The age distribution of patients predominantly falls within the 0-5 age group. Notably, more than half were diagnosed between ages 10 and 15. The participants underwent testing from early childhood into their twenties. Among the 29 individuals, only 5 received diagnoses after age 15, while 24 were diagnosed before reaching that age. Given the dataset's limited size of 29 observations, the analysis results might diverge from the actual pattern.
 
-## TCR-Beta diversity
+### TCR-Beta diversity
 
-### Total rearrangement
+#### Total rearrangement
 
 ```{r}
 #| message: false
@@ -116,7 +116,7 @@ ggsave(width = 8,
        path = "./../results/")
 ```
 
-### Productive rearrangement
+#### Productive rearrangement
 
 ```{r}
 #| message: false
@@ -149,7 +149,7 @@ ggsave(width = 8,
 
 We see a slight rise in total and productive rearrangements for case patients and a decrease for control patients, when comparing the values against age at visit. So the number of rearrangements seems to be stable in case patients during aging, however there is decreasing rearrangement for the control patients.
 
-### Fraction productive rearrangement
+#### Fraction productive rearrangement
 
 ```{r}
 #| message: false
@@ -181,7 +181,7 @@ ggsave(width = 8,
 
 We see a steep rise in the fraction of productive rearrangement with age (regardless of outcome for patients), which must mean that the differences in values between productive rearrangement and total rearrangement become smaller with age.
 
-### Productive Simpson Clonality
+#### Productive Simpson Clonality
 
 ```{r}
 #| message: false
