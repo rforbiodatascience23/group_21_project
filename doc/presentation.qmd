@@ -9,14 +9,8 @@ format:
 
 # Introduction {background-image="background_picture.png" background-size="750px" background-position=right}
 
-<<<<<<< HEAD
-```{r}
-#![](background_picture.png){width="500"}
-```
-
-=======
-![](background_picture.png){width="500"}
 ------------------------------------------------------------------------
+
 # Data Description
 
 ![](./../results/04_plot_1.png){width="500"}
@@ -31,7 +25,7 @@ format:
 ![](./../results/06_plot_3.png){width="500"}
 ![](./../results/07_plot_1.png){width="500"}
 ![](./../results/08_plot_1.png){width="500"}
->>>>>>> 8c1baee22b0e5a056c946f1590e8451574d11b50
+
 ------------------------------------------------------------------------
 
 ## Materials and methods
@@ -60,6 +54,10 @@ Discuss how data was collected or generated for your study. Include any relevant
 ...
 -   Simpson clonality of TCR
 :::
+
+
+------------------------------------------------------------------------
+
 
 
 ------------------------------------------------------------------------

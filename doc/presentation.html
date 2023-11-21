@@ -339,32 +339,19 @@ Group 21
 <section>
 <section id="introduction" class="title-slide slide level1 center" data-background-image="background_picture.png" data-background-size="750px" data-background-position="right">
 <h1>Introduction</h1>
-<<<<<<< HEAD
-<div class="cell">
-
-</div>
-</section>
-<section id="methods" class="slide level2">
-<h2>Methods</h2>
-<p>Explain the methodology or approach used in your study. You can describe experiments, data collection, or analysis methods.</p>
-=======
 
 </section>
-<section id="section" class="slide level2">
-<h2><img data-src="background_picture.png" width="500"></h2>
+<section class="slide level2">
+
 </section></section>
 <section>
 <section id="data-description" class="title-slide slide level1 center">
 <h1>Data Description</h1>
-
-</section>
-<section id="section-1" class="slide level2">
-<h2><img data-src="./../results/04_plot_1.png" width="500"></h2>
+<p><img data-src="./../results/04_plot_1.png" width="500"> <img data-src="./../results/04_plot_2.png" width="500"> <img data-src="./../results/04_plot_3.png" width="500"> <img data-src="./../results/04_plot_4.png" width="500"> <img data-src="./../results/04_plot_5.png" width="500"> <img data-src="./../results/04_plot_6.png" width="500"> <img data-src="./../results/05_plot_1.png" width="500"> <img data-src="./../results/06_plot_1.png" width="500"> <img data-src="./../results/06_plot_2.png" width="500"> <img data-src="./../results/06_plot_3.png" width="500"> <img data-src="./../results/07_plot_1.png" width="500"> <img data-src="./../results/08_plot_1.png" width="500"></p>
 </section>
 <section id="materials-and-methods" class="slide level2">
 <h2>Materials and methods</h2>
 <p>Materials: What data did you use and where did you get it from? Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results =&gt; Flow chart?</p>
->>>>>>> 8c1baee22b0e5a056c946f1590e8451574d11b50
 </section>
 <section id="data-collection" class="slide level2">
 <h2>Data Collection</h2>
@@ -381,6 +368,9 @@ Group 21
 <li class="fragment">Simpson clonality of TCR</li>
 </ul>
 </div>
+</section>
+<section class="slide level2">
+
 </section>
 <section id="discussion" class="slide level2">
 <h2>Discussion</h2>
@@ -607,44 +597,6 @@ Group 21
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
