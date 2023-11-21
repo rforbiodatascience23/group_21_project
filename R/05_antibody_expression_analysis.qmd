@@ -43,9 +43,9 @@ data_long |>
              scales = "free_y",
              nrow = 2) +
   labs(title = "Antibody expression across visits stratified by case/control",
-       x = "Visit",
+       x = "Timepoint",
        y = "Mean Expression",
-       fill = "Case/Control") +
+       fill = "Case or Control") +
   scale_fill_manual(values = c(Case = "#481567",
                                Control = "#20A387")) +
   theme_bw() + 
