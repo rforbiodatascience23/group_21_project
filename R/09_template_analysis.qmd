@@ -10,6 +10,7 @@ editor: visual
 #| message: false
 library("tidyverse")
 library("viridis")
+library("dplyr")
 ```
 
 ```{r}
@@ -130,24 +131,70 @@ PCA Alleles
 
 ```{r}
 HLA_tidy <- data |> 
-  select(starts_with('HLA'), case_control,id,timepoint) |> 
+  select(starts_with('HLA'), case_control,id,timepoint)  |>
   pivot_longer(starts_with('HLA_'), 
                names_to = "allele",
                values_to = "subtype") |>
+  mutate(allele = str_remove(allele, "(\\,1)|(\\,2)"))|>
+  na.omit(subtype)|>
+  #mutate(subtype=str_replace_all(subtype,"NA",""))|>
+  #group_by(case_control,id,timepoint,allele) |>
+  #summarize(n_=n(),.group="drop")
+  pivot_wider(names_from = allele,values_from = subtype, values_fn=list)
+  #mutate(allele_count = n(), .groups = NULL)
+  #filter(subtype != "NA") |>
+  #pivot_wider(names_from = allele, values_from=allele_count)
+
+```
+
+```{r}
+HLA_tidy <- data |> 
+  filter(timepoint==1)|>
+  select(starts_with('HLA'), case_control,id)  |>
+  pivot_longer(starts_with('HLA_'), 
+               names_to = "allele",
+               values_to = "subtype")|>
   mutate(allele = str_remove(allele, "(\\,1)|(\\,2)")) |>
-  group_by(allele,case_control,id,timepoint) |> 
-  mutate(allele_count = n(), .groups = NULL) |>
-  filter(subtype != "NA") |>
-  pivot_wider(names_from = allele, values_from=allele_count)
+  mutate(allele_subtype=str_c(allele,subtype,sep=":"))|>
+  na.omit(allele_subtype)|>
+  mutate(subtype_n=1)|>
+  select(case_control,id,allele_subtype,subtype_n)|>
+  pivot_wider(names_from=allele_subtype,values_from=subtype_n)|>
+  mutate(across(everything(), ~replace_na(.x, 0)))|>
+  ungroup()
   
+
+pca_fit <- HLA_tidy |> 
+  select(starts_with("HLA")) |> # retain only numeric columns
+  scale() |> # scale data
+  prcomp() # do PCA
+
+
+pca_fit |>
+  augment(HLA_tidy) |> # add original dataset back in
+  ggplot(aes(.fittedPC1, .fittedPC2, color = case_control)) + 
+  geom_point(size = 1.5) +
+  theme_half_open(12) + background_grid()
+
+pca_fit |>
+  tidy(matrix = "eigenvalues") |>
+  ggplot(aes(PC, percent)) +
+  geom_col(fill = "#0072B2", alpha = 0.8) +
+  scale_x_continuous(breaks = 1:47) +
+  scale_y_continuous(
+    labels = scales::percent_format(),
+    expand = expansion(mult = c(0, 0.01))
+  ) +
+  theme_bw() +
+  labs(title = "Variance Explained by Each PC")
 ```
 
 ```{r}
 library("broom")
 library("cowplot")
 
-data <- read_tsv("./../data/04_aug_clean.tsv",na="N/A")
-#biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
+data <- read_tsv("./../data/04_aug_clean.tsv")
+biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
 
 pca_data <- data|>
   select(case_control, |>
@@ -169,7 +216,7 @@ TCR_tidy <- data |>
   filter(subtype != "NA")
 
 pca_data |>
-  augment(pca_data) %>% # add original dataset back in
+  augment(pca_data) |> # add original dataset back in
   ggplot(aes(.fittedPC1, .fittedPC2, color = outcome)) + 
   geom_point(size = 1.5) +
   scale_color_manual(
@@ -177,9 +224,9 @@ pca_data |>
   ) +
   theme_half_open(12) + background_grid()
 
-pca_fit <- data %>% 
-  select(where(is.numeric)) %>% # retain only numeric columns
-  scale() %>% # scale data
+pca_fit <- data |> 
+  select(where(is.numeric)) |> # retain only numeric columns
+  scale() |> # scale data
   prcomp() # do PCA
 
 
