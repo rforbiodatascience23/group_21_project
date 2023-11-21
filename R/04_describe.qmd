@@ -74,8 +74,7 @@ p2 <- data |>
                size = 0.5) +
   scale_color_viridis(option = 'E', discrete = TRUE) +
   theme_minimal() +
-  labs(title = "Age of diagnosis",
-       x = "Age of diagnosis")
+  labs(x = "Age of diagnosis")
 
 p1 / p2
 ```
