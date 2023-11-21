@@ -69,10 +69,10 @@ quarto_render("01_load.qmd")
 quarto_render("02_clean.qmd")
 quarto_render("03_augment.qmd")
 quarto_render("04_describe.qmd")
-quarto_render("05_pca.qmd")
-quarto_render("06_age_of_diagnosis.qmd")
+quarto_render("05_antibody_expression_analysis.qmd")
+quarto_render("06_pca_antibody.qmd")
 quarto_render("07_HLA_allele_analysis.qmd")
-quarto_render("08_antibody_expression_analysis.qmd")
+quarto_render("08_pca_HLA.qmd")
 ```
 
 ---
