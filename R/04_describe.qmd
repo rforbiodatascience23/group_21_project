@@ -51,7 +51,7 @@ data |>
 ## Age
 
 ```{r}
-p1 <- data |>
+data |>
   drop_na(gender,
           age,
           case_control) |>
@@ -76,7 +76,13 @@ p1 <- data |>
     theme_minimal() +
     theme(legend.position = "bottom")
 
-p2 <- data |>
+ggsave(width = 8,
+       height = 3,
+       filename = "04_plot_1.png",
+       path = "./../results/")
+
+
+data |>
   drop_na(age_diagnosis) |>
   ggplot(data = _,
          mapping = aes(x = age_diagnosis)) +
@@ -88,7 +94,10 @@ p2 <- data |>
   theme_minimal() +
   labs(x = "Age of diagnosis")
 
-p1 / p2
+ggsave(width = 8,
+       height = 3,
+       filename = "04_plot_2.png",
+       path = "./../results/")
 
 ```
 
@@ -120,6 +129,11 @@ data |>
               color = "black") +
   facet_grid(vars(case_control)) +
   theme_bw()
+
+ggsave(width = 8,
+       height = 6,
+       filename = "04_plot_3.png",
+       path = "./../results/")
 ```
 
 ### Productive rearrangement
@@ -146,6 +160,11 @@ data |>
               color = "black") +
   facet_grid(vars(case_control)) +
   theme_bw()
+
+ggsave(width = 8,
+       height = 6,
+       filename = "04_plot_4.png",
+       path = "./../results/")
 ```
 
 We see a slight rise in total and productive rearrangements for case patients and a decrease for control patients, when comparing the values against age at visit. So the number of rearrangements seems to be stable in case patients during aging, however there is decreasing rearrangement for the control patients.
@@ -173,6 +192,11 @@ data |>
               color = "black") +
   facet_grid(vars(case_control)) +
   theme_bw()
+
+ggsave(width = 8,
+       height = 6,
+       filename = "04_plot_5.png",
+       path = "./../results/")
 ```
 
 We see a steep rise in the fraction of productive rearrangement with age (regardless of outcome for patients), which must mean that the differences in values between productive rearrangement and total rearrangement become smaller with age.
@@ -197,6 +221,10 @@ data |>
   facet_grid(vars(case_control)) +
   theme_bw()
 
+ggsave(width = 8,
+       height = 6,
+       filename = "04_plot_6.png",
+       path = "./../results/")
 ```
 
 Both case and control show a direct proportionality between productive simpson clonality and age, which shows the decrease of polyclonality with age.
