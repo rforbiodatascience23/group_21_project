@@ -19,22 +19,22 @@ data <- read_tsv("./../data/04_aug_clean.tsv")
 
 data |>
   group_by(case_control,age_visit,timepoint)|>
-  summarize(total_temp_mu=mean(total_rearrangements)) |>
+  summarize(total_temp_mu=log(mean(total_rearrangements))) |>
   ggplot(data=_,
          mapping=aes(x=age_visit,y=total_temp_mu))+
   geom_point(aes(color=timepoint))+
-  labs(title="mean of total rearrangements pr. timepoint")+
+  labs(title="mean of total rearrangements vs. age at visit")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
   facet_grid(~case_control)
 
 data |>
   group_by(case_control,age_visit,timepoint)|>
-  summarize(prod_temp_mu=mean(productive_rearrangements)) |>
+  summarize(prod_temp_mu=log(mean(productive_rearrangements))) |>
   ggplot(data=_,
          mapping=aes(x=age_visit,y=prod_temp_mu))+
   geom_point(aes(color=timepoint))+
-  labs(title="mean of productive rearrangements pr. timepoint")+
+  labs(title="mean of productive rearrangements vs. age at visit")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
   facet_grid(~case_control)
@@ -46,13 +46,13 @@ data |>
   ggplot(data=_,
          mapping=aes(x=age_visit,y=frac_prod))+
   geom_point(aes(color=timepoint))+
-  labs(title="fraction of productive rearrangements pr. timepoint")+
+  labs(title="fraction of productive rearrangements vs. age at visit")+
   scale_color_viridis()+
   geom_smooth(method="lm",color="black")+
   facet_grid(~case_control)
 ```
 
-We see a slight rise in total and productive rearrangements for case patients and a slight decrease for control patients, when comparing the values against age at visit.
+We see a slight rise in total and productive rearrangements for case patients and a decrease for control patients, when comparing the values against age at visit. So the number of rearrangements seems to be stable in case patients during aging, however there is decreasing rearrangement for the control patients.
 
 We see a steep rise in the fraction of productive rearrangement with age, which must mean that the differences in values between productive rearrangement and total rearrangement become smaller with age.
 
@@ -61,7 +61,7 @@ We see a steep rise in the fraction of productive rearrangement with age, which 
 
 data |> 
   ggplot(data=_,
-         mapping=aes(x=age_visit,y=productive_simpson_clonality))+
+         mapping=aes(x=age_visit,y=log(productive_simpson_clonality)))+
   geom_point(aes(color=timepoint))+
   labs(title="mean of total rearrangements pr. timepoint")+
   scale_color_viridis()+
@@ -79,3 +79,172 @@ data|>
 ```
 
 Both case and control show a direct proportionality between productive simpson clonality and age, which shows the decrease of polyclonality in the individuals.
+
+```{r}
+
+TCR_tidy <- data |> 
+  select(timepoint, age_visit,
+         starts_with('HLA'), GAD65, case_control,gender,age) |>
+  arrange(desc(desc(timepoint))) |> 
+  pivot_longer(starts_with('HLA_'), 
+               names_to = "allele",
+               values_to = "subtype") |>
+  mutate(allele = str_remove(allele, "(\\,1)|(\\,2)")) |>
+  group_by(allele, subtype) |> 
+  mutate(allele_count = n(), .groups = NULL) |>
+  filter(subtype != "NA")
+
+
+ggplot(data = TCR_tidy) +
+  geom_tile(mapping = aes(x = allele,
+                          y = subtype,
+                          fill = allele_count)
+            ) + 
+  theme(axis.text.y = element_text(size = 4),
+        axis.text.x = element_text(angle = 90)) +
+  scale_fill_gradient(low = "#3333FF",
+                    high = "#FF3300")+
+  facet_grid(~gender)
+```
+
+```{r}
+data |>
+  ggplot() +
+  geom_histogram(aes(x = gender),stat="count",
+               size = 0.5, fill = "darkred",
+               bins = 15, color = "black") +
+  labs(title = "Age of diagnosis, type 1 diabetes",
+       subtitle = "Histogram",
+       x = "Age of diagnosis")+
+  facet_grid(~case_control)
+
+data |>
+  ggplot(data=_,
+         mapping=aes(x=age_visit,y=IAA))+
+  geom_point(aes(color=case_control))+
+  facet_grid(~case_control)+
+  scale_color_viridis(discrete=TRUE)
+
+```
+
+PCA Alleles
+
+```{r}
+HLA_tidy <- data |> 
+  select(starts_with('HLA'), case_control,id,timepoint) |> 
+  pivot_longer(starts_with('HLA_'), 
+               names_to = "allele",
+               values_to = "subtype") |>
+  mutate(allele = str_remove(allele, "(\\,1)|(\\,2)")) |>
+  group_by(allele,case_control,id,timepoint) |> 
+  mutate(allele_count = n(), .groups = NULL) |>
+  filter(subtype != "NA") |>
+  pivot_wider(names_from = allele, values_from=allele_count)
+  
+```
+
+```{r}
+library("broom")
+library("cowplot")
+
+data <- read_tsv("./../data/04_aug_clean.tsv",na="N/A")
+#biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
+
+pca_data <- data|>
+  select(case_control, |>
+  select(where(is.numeric))|>
+  scale()|>
+  prcomp()
+
+  
+TCR_tidy <- data |> 
+  select(timepoint, age_visit,
+         starts_with('HLA'), GAD65, case_control) |>
+  arrange(desc(desc(timepoint))) |> 
+  pivot_longer(starts_with('HLA_'), 
+               names_to = "allele",
+               values_to = "subtype") |>
+  mutate(allele = str_remove(allele, "(\\,1)|(\\,2)")) |>
+  group_by(allele, subtype) |> 
+  mutate(allele_count = n(), .groups = NULL) |>
+  filter(subtype != "NA")
+
+pca_data |>
+  augment(pca_data) %>% # add original dataset back in
+  ggplot(aes(.fittedPC1, .fittedPC2, color = outcome)) + 
+  geom_point(size = 1.5) +
+  scale_color_manual(
+    values = c(malignant = "#D55E00", benign = "#0072B2")
+  ) +
+  theme_half_open(12) + background_grid()
+
+pca_fit <- data %>% 
+  select(where(is.numeric)) %>% # retain only numeric columns
+  scale() %>% # scale data
+  prcomp() # do PCA
+
+
+
+data <- read_tsv("./../data/04_aug_clean.tsv")|>
+  mutate(across(everything(), 
+                ~replace_na(., 0))) 
+
+data_pca <- read_tsv("./../data/04_aug_clean.tsv")|>
+  mutate(across(everything(), 
+                ~replace_na(., 0))) |>
+  select(case_control, starts_with("HLA")) |>
+  select(where(is.numeric)) |> # retain only numeric columns
+  scale() |> # normalizing the data 
+  prcomp()
+
+
+# plotting PC coordinates for individuals
+data_pca |>
+  augment(data) |># add original dataset back in
+  ggplot(aes(.fittedPC1, .fittedPC2, 
+             color = case_control)) + 
+  geom_point(size = 1.5) +
+  scale_color_viridis(discrete=TRUE)+
+  theme_half_open(12) + 
+  background_grid() +
+    labs(title = "Plot of individuals",
+         color = "Case vs Control")
+
+# plotting scree plot for varialbe variation
+data_pca |>
+  tidy(matrix = "eigenvalues") |>
+  ggplot(aes(PC, percent)) +
+  geom_col(fill = "#0072B2", 
+           alpha = 0.8) + # making the bars slightly translusent 
+  scale_x_continuous(breaks = 1:9) +
+  scale_y_continuous(
+    labels = scales::percent_format(),
+    expand = expansion(mult = c(0, 0.01))) +
+  geom_line(aes(PC),
+            color = "red") +
+  theme_minimal_hgrid(12) +
+  background_grid() +
+
+  labs(title = "Scree Plot",
+       y = "percentage contribution")
+
+# plotting the rotation matrix
+arrow_style <- arrow(length = unit(0.2, "cm"), 
+                     ends = "first")
+
+data_pca |>
+  tidy(matrix = "rotation") |>
+  pivot_wider(names_from = "PC", 
+              names_prefix = "PC", 
+              values_from = "value") |>
+  ggplot(aes(x = PC2, y = PC1)) +
+  geom_point(alpha = 0) +  # making the points fully transparent
+  geom_segment(aes(xend = 0, yend = 0), 
+               arrow = arrow_style, 
+               color = "black") +
+  coord_flip() +
+  geom_text(aes(label = column), hjust = 1.2, nudge_x = -0.02, color = "#0072B2") +
+  theme_half_open(12) + 
+  background_grid() +
+  labs(title = "Rotation Matrix")
+```
