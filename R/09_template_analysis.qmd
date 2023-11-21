@@ -131,12 +131,10 @@ Both case and control show a direct proportionality between productive simpson c
 
 ```{r}
 HLA_tidy <- data |> 
-<<<<<<< HEAD
   filter(timepoint == 4)|>
   select(starts_with('HLA'),
          case_control,
          id)  |>
-=======
   select(starts_with('HLA'), case_control,id,timepoint) |> 
   pivot_longer(starts_with('HLA_'), 
                names_to = "allele",
@@ -157,7 +155,7 @@ data <- read_tsv("./../data/04_aug_clean.tsv",na="N/A")
 #biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
 
 pca_data <- data|>
-  select(case_control, |>
+  select(case_control) |>
   select(where(is.numeric))|>
   scale()|>
   prcomp()
@@ -167,12 +165,10 @@ TCR_tidy <- data |>
   select(timepoint, age_visit,
          starts_with('HLA'), GAD65, case_control) |>
   arrange(desc(desc(timepoint))) |> 
->>>>>>> 760781579db27f00e1288d3855b65cd8f0dea6a8
   pivot_longer(starts_with('HLA_'), 
                names_to = "allele",
                values_to = "subtype") |>
   mutate(allele = str_remove(allele, "(\\,1)|(\\,2)")) |>
-<<<<<<< HEAD
   mutate(allele_subtype = str_c(allele,
                                 subtype,
                                 sep=":"))|>
@@ -205,90 +201,9 @@ pca_fit |>
   labs(title = "Variance Explained by Each PC")+
   theme_bw()+
   theme(axis.text.x = element_text(angle=90))
-=======
   group_by(allele, subtype) |> 
   mutate(allele_count = n(), .groups = NULL) |>
   filter(subtype != "NA")
-
-pca_data |>
-  augment(pca_data) %>% # add original dataset back in
-  ggplot(aes(.fittedPC1, .fittedPC2, color = outcome)) + 
-  geom_point(size = 1.5) +
-  scale_color_manual(
-    values = c(malignant = "#D55E00", benign = "#0072B2")
-  ) +
-  theme_half_open(12) + background_grid()
-
-pca_fit <- data %>% 
-  select(where(is.numeric)) %>% # retain only numeric columns
-  scale() %>% # scale data
-  prcomp() # do PCA
-
-
-
-data <- read_tsv("./../data/04_aug_clean.tsv")|>
-  mutate(across(everything(), 
-                ~replace_na(., 0))) 
-
-data_pca <- read_tsv("./../data/04_aug_clean.tsv")|>
-  mutate(across(everything(), 
-                ~replace_na(., 0))) |>
-  select(case_control, starts_with("HLA")) |>
-  select(where(is.numeric)) |> # retain only numeric columns
-  scale() |> # normalizing the data 
-  prcomp()
-
-
-# plotting PC coordinates for individuals
-data_pca |>
-  augment(data) |># add original dataset back in
-  ggplot(aes(.fittedPC1, .fittedPC2, 
-             color = case_control)) + 
-  geom_point(size = 1.5) +
-  scale_color_viridis(discrete=TRUE)+
-  theme_half_open(12) + 
-  background_grid() +
-    labs(title = "Plot of individuals",
-         color = "Case vs Control")
-
-# plotting scree plot for varialbe variation
-data_pca |>
-  tidy(matrix = "eigenvalues") |>
-  ggplot(aes(PC, percent)) +
-  geom_col(fill = "#0072B2", 
-           alpha = 0.8) + # making the bars slightly translusent 
-  scale_x_continuous(breaks = 1:9) +
-  scale_y_continuous(
-    labels = scales::percent_format(),
-    expand = expansion(mult = c(0, 0.01))) +
-  geom_line(aes(PC),
-            color = "red") +
-  theme_minimal_hgrid(12) +
-  background_grid() +
-
-  labs(title = "Scree Plot",
-       y = "percentage contribution")
-
-# plotting the rotation matrix
-arrow_style <- arrow(length = unit(0.2, "cm"), 
-                     ends = "first")
-
-data_pca |>
-  tidy(matrix = "rotation") |>
-  pivot_wider(names_from = "PC", 
-              names_prefix = "PC", 
-              values_from = "value") |>
-  ggplot(aes(x = PC2, y = PC1)) +
-  geom_point(alpha = 0) +  # making the points fully transparent
-  geom_segment(aes(xend = 0, yend = 0), 
-               arrow = arrow_style, 
-               color = "black") +
-  coord_flip() +
-  geom_text(aes(label = column), hjust = 1.2, nudge_x = -0.02, color = "#0072B2") +
-  theme_half_open(12) + 
-  background_grid() +
-  labs(title = "Rotation Matrix")
->>>>>>> 760781579db27f00e1288d3855b65cd8f0dea6a8
 ```
 
 None of the variables describe the variance in data, therefore no indication of allele subtype can conclude difference between case or control.
