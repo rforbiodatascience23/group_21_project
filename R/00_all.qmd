@@ -24,7 +24,7 @@ library("quarto")
 \
 \
 
-# 03_augment 
+# 03_augment
 
 {{< include 03_augment.qmd >}}
 
@@ -73,3 +73,10 @@ quarto_render("06_age_of_diagnosis.qmd")
 quarto_render("07_HLA_allele_analysis.qmd")
 quarto_render("08_antibody_expression_analysis.qmd")
 ```
+
+---
+title: "00_all.qmd"
+format: html
+editor: visual
+toc: true
+---
