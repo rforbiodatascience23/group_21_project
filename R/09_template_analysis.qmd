@@ -150,7 +150,7 @@ data <- read_tsv("./../data/03_dat_aug.tsv",na="N/A")
 #biopsy <- read_csv("https://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")
 
 pca_data <- data|>
-  select(case_control, |>
+  select(case_control) |>
   select(where(is.numeric))|>
   scale()|>
   prcomp()
