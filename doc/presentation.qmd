@@ -7,9 +7,11 @@ format:
     theme: moon
 ---
 
-# Introduction {background-image="background_picture.png" background-size="750px" background-position=left}
+# Introduction {background-image="background_picture.png" background-size="750px" background-position=right}
 
-![](background_picture.png){width="500"}
+```{r}
+#![](background_picture.png){width="500"}
+```
 
 ------------------------------------------------------------------------
 
@@ -29,11 +31,16 @@ Discuss how data was collected or generated for your study. Include any relevant
 
 ::: incremental
 -   age at diagnosis
+...
 -   pca analysis
+...
 -   antibody expression
+...
 -   HLA allele
+...
 -   Simpson clonality of TCR
 :::
+
 
 ------------------------------------------------------------------------
 
