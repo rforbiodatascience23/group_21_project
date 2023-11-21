@@ -55,11 +55,6 @@ Discuss how data was collected or generated for your study. Include any relevant
 -   Simpson clonality of TCR
 :::
 
-
-------------------------------------------------------------------------
-
-
-
 ------------------------------------------------------------------------
 
 ## Discussion
