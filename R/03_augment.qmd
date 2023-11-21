@@ -1,7 +1,9 @@
 ---
-title: "04_augment.qmd"
+title: "03_augment"
 format: html
 editor: visual
+toc: true
+embed-resources: true
 ---
 
 ```{r}

@@ -1,7 +1,9 @@
 ---
-title: "06_pca_antibody.qmd"
+title: "06_pca_antibody"
 format: html
 editor: visual
+toc: true
+embed-resources: true
 ---
 
 ```{r}

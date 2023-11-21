@@ -1,9 +1,9 @@
 ---
-project: 
-  output-dir: /results
 title: "05_antibody_expression_analysis"
 format: html
 editor: visual
+toc: true
+embed-resources: true
 ---
 
 ```{r}
