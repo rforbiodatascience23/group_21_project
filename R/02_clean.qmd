@@ -12,12 +12,28 @@ editor: visual
 library("tidyverse")
 ```
 
-### Clean Data
+### Reading the data
 
 ```{r}
 #| message: false
 #| warning: false
-read_tsv("./../data/01_dat_load.tsv") |>
+full_data <- read_tsv("./../data/01_dat_load.tsv")
+```
+
+### Splitting the data
+
+```{r}
+patient_data <- full_data |>
+  select(sample_name, sample_tags)
+
+meta_data <- full_data |>
+  select(!sample_tags)
+```
+
+### Cleaning the data
+
+```{r}
+patient_data <- patient_data |>
   mutate(case_control = case_when(str_detect(sample_tags,"Case") ~ "Case",
                                   str_detect(sample_tags, "Control") ~ "Control",
                                   TRUE ~ NA),
@@ -55,7 +71,8 @@ read_tsv("./../data/01_dat_load.tsv") |>
          age_diagnosis = as.double(str_extract(sample_tags,"\\d*\\.\\d+(?=\\sYears\\sat\\sdiagnosis)")),
          
          
-         age_visit = as.double(str_extract(sample_tags,"\\d+(?=\\sYears\\sat\\svisit)")),
+         age_visit = as.double(str_extract(sample_tags,
+                                           "\\d+(?=\\sYears\\sat\\svisit)")),
          
          GAD65 = as.double(str_extract(sample_tags,"(?<=GAD65\\s)\\d+")),
          
@@ -105,16 +122,25 @@ read_tsv("./../data/01_dat_load.tsv") |>
               pattern = "(?<=HLA\\-{1}A\\*{1})\\d{4}")
          )  |>
          
-  unnest_wider(col=starts_with("HLA_"),names_sep=",") |>
-  write_tsv("./../data/02_dat_clean.tsv")
+  unnest_wider(col=starts_with("HLA_"),names_sep=",")
 ```
 
-PCA analysis
+### Joining the data
 
-Barplot: Expression across the four visits stratified by case/control
+```{r}
+full_data <- meta_data |>
+  inner_join(patient_data, by = "sample_name")
+```
 
-Boxplot: Diagnostics age
+### Writing the data
 
+<<<<<<< HEAD
 Heatmap: Alleles
 
 
+=======
+```{r}
+full_data |>
+  write_tsv("./../data/02_dat_clean.tsv")
+```
+>>>>>>> 0425b4ef71a88ce0b83a33d65c2b59f523d2daf4
