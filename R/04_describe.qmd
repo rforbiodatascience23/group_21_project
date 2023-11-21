@@ -6,9 +6,8 @@ toc: true
 embed-resources: true
 ---
 
-### Load Libraries
-
 ```{r}
+#| include: false
 library("tidyverse")
 library("table1")
 library("viridis")
