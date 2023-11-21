@@ -14,16 +14,16 @@ conversion_table <- data.frame(
   case_control = c("Case","Control"),
   num_case_control = c(1, 0))
 
-data <- read_tsv("./../data/03_dat_aug.tsv")|>
-  mutate(across(everything(), 
-                ~replace(_, is.na(_), 0))) |>
-  select(case_control, GAD65, IA_2, IAA, ZnT8) |> 
+data <- read_tsv("./../data/04_aug_clean.tsv") |>
+  select(case_control, GAD65, IA_2, IAA, ZnT8) |>
+  mutate_all(~replace_na(.,0)) |>
   left_join(conversion_table, by ="case_control") 
 
 # principal component analysis
 data_pca <- data |>
-  select(-case_control)|>
+ select(-case_control)|>
   select(-num_case_control)|>
+  scale() |>
   prcomp()
 
 # plotting PC coordinates for individuals
@@ -36,8 +36,7 @@ data_pca |>
     values = c(Case = "#D55E00", 
                Control = "#0072B2")
   ) +
-  theme_minimal_hgrid(12) +
-  background_grid() +
+  theme_minimal() +
     labs(title = "Plot of individuals",
          color = "Case vs Control")
 
@@ -54,8 +53,7 @@ data_pca |>
     expand = expansion(mult = c(0, 0.01))) +
   geom_line(aes(PC),
             color = "red") +
-  theme_minimal_hgrid(12) +
-  background_grid() +
+  theme_minimal() +
   labs(title = "Scree Plot",
        y = "percentage contribution")
 ## it seemns that ZnT8 contributes the most to both PC1 and PC4, out of all four variables. This might indicate a correlation between this variable and the other variables.
@@ -64,7 +62,8 @@ arrow_style <- arrow(length = unit(0.2, "cm"),
                      ends = "first")
 
 num_case_control_coord <- as.data.frame(
-  cor(data$num_case_control, data_pca$x)) 
+  cor(data$num_case_control, data_pca$x)) |>
+  mutate(Variable = "num_case_control")
 
 # plotting the rotation matrix, pc1 and pc2
 data_pca |>
@@ -75,8 +74,7 @@ data_pca |>
   ggplot(aes(x = PC2, y = PC1)) +
   geom_point(alpha = 0) + 
   coord_flip() +
-  theme_half_open(12) + 
-  background_grid() +
+  theme_minimal() +
   labs(title = "Rotation Matrix") +
   geom_segment(aes(xend = 0, yend = 0), 
    arrow = arrow_style, 

@@ -81,4 +81,3 @@ data |>
 ```
 
 We see that most of the patients belongs to the age group 0-5.
-
