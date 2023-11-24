@@ -27,11 +27,12 @@ This dataset comprises a detailed record of immunological and demographic attrib
 ## Project Structure Overview
 
 This project is organized into four main folders:
+* **data**: Holds project data files, including a **_raw** folder for raw data.
+* **R**: Contains R scripts for data processing, analysis, and a master script (00_all.qmd).
 
-**data**: Holds project data files, including a **_raw** folder for raw data.
-**R**: Contains R scripts for data processing, analysis, and a master script (00_all.qmd).
-**results**: Contains rendered HTML documents and key plots.
-**doc**: Stores project documentation and the presentation in both source and rendered HTML formats.
+* **results**: Contains rendered HTML documents and key plots.
+
+* **doc**: Stores project documentation and the presentation in both source and rendered HTML formats.
 
 This layout separates data, scripts, results, and documentation, aiding in easy navigation and understanding.
 
