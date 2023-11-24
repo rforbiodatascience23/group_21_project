@@ -16,13 +16,24 @@ Angela M. Mitchell, Erin E. Baschal,1 Kristen A. McDaniel, Kimber M. Simmons, La
 
 # Data
 
-### Data Retrieval
+## Data Retrieval
 
 Access to the data link is available in the Methods section, specifically within the 'Data and Materials Availability' subsection (NOTE: you may have to create an account for accessibility). To obtain the sample overview file, navigate to 'Open in Analyses', select the 'analysis' option, and proceed to click the 'export' button. Once downloaded, rename the file as 'raw.tsv' and proceed to upload it into the '\_raw' folder.
 
-### Data description
+## Data description
 
 This dataset comprises a detailed record of immunological and demographic attributes across 216 observations and 41 variables. It encompasses data from 54 patients undergoing testing across four distinct visits. The information includes demographic specifics such as gender, ethnicity, race, and age at both diagnosis and visit. Additionally, it covers immunological markers like antibody expression (GAD65, IA_2, IAA, ZnT8) and comprehensive HLA allele information (HLA_A, HLA_B, HLA_C, HLA_DPA1, HLA_DPB1, HLA_DQA1, HLA_DQB1, HLA_DRB1). This dataset serves to elucidate the interplay between demographic factors and immunological profiles across multiple patient visits, offering insights crucial for in-depth analysis and understanding.
+
+## Project Structure Overview
+
+This project is organized into four main folders:
+
+**data**: Holds project data files, including a **_raw** folder for raw data.
+**R**: Contains R scripts for data processing, analysis, and a master script (00_all.qmd).
+**results**: Contains rendered HTML documents and key plots.
+**doc**: Stores project documentation and the presentation in both source and rendered HTML formats.
+
+This layout separates data, scripts, results, and documentation, aiding in easy navigation and understanding.
 
 # Goal
 
