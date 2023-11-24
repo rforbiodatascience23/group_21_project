@@ -23,9 +23,9 @@ data <- read_tsv("./../data/03_dat_aug.tsv",
 ```{r}
 #| warning: false
 data_long <- data |>
-  pivot_longer(cols = c(GAD65, ZnT8, IA_2, IAA),
-               names_to = "antibody", 
-               values_to = "expression") |>
+  #pivot_longer(cols = c(GAD65, ZnT8, IA_2, IAA),
+  #             names_to = "antibody", 
+  #             values_to = "expression") |>
   group_by(antibody, timepoint, case_control) |>
   summarise(mean_expression = mean(expression,
                                    na.rm = TRUE),

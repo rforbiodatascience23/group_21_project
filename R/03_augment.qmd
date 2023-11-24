@@ -21,3 +21,21 @@ read_tsv("./../data/02_dat_clean.tsv",
   arrange(case_control, id, timepoint) |> 
   write_tsv("./../data/03_dat_aug.tsv")
 ```
+
+### Augment code 2.0
+
+```{r}
+read_tsv("./../data/02_dat_clean.tsv",
+         show_col_types = FALSE) |>
+  filter(!str_detect(string = sample_name,
+                     pattern = "Denver")) |> 
+  arrange(case_control, id, timepoint) |> 
+  pivot_longer(cols = c(GAD65, ZnT8, IA_2, IAA),
+               names_to = "antibody", 
+               values_to = "expression") |> 
+  pivot_longer(starts_with('HLA_'), 
+               names_to = "allele",
+               values_to = "subtype") |> 
+  mutate(allele = str_remove(allele, "(\\,1) | (\\,2)")) |> 
+  write_tsv("./../data/03_dat_aug.tsv")
+```
