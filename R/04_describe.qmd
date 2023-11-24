@@ -6,9 +6,8 @@ toc: true
 embed-resources: true
 ---
 
-### Load Libraries
-
 ```{r}
+#| include: false
 library("tidyverse")
 library("table1")
 library("viridis")
@@ -71,7 +70,7 @@ data |>
          mapping = aes(x = age_diagnosis)) +
   geom_boxplot(color = "#481567",
                fill = "#20A387",
-               alpha = 0.4,
+               alpha = 0.8,
                size = 0.5) +
   scale_color_viridis(discrete = TRUE) +
   theme_bw() +
