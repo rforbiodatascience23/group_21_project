@@ -34,4 +34,4 @@ The results are naturally a product of our own logical interpretations of the ex
 
 For usage, run the 00_all.qmd file. This contains all the individual analyses run, and will output the results.
 
-[Link to project presentation](doc/presentation.html)
+[Link to Project Presentation](https://teaching.healthtech.dtu.dk/22100/rstudio1/files/projects/group_21_project/doc/presentation.html#)
