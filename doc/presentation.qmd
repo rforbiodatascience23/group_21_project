@@ -110,7 +110,7 @@ Discuss the implications of your findings. Interpret the results and relate them
 Summarize the main points discussed in the presentation. Emphasize the significance of your work and any future directions.
 
 ::: incremental
--   Something ...
+-   We have observed an over-representation among some HLA sub-types in patients with type 1 diabetes.
 -   Something else ...
 -   THANK YOU for listening
 :::
