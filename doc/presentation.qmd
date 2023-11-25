@@ -26,7 +26,7 @@ The structure of the experiment consists of two groups of patients, case and con
 ::: fragment
 ### Methods:
 
-[[1. Base R]{.fragment .strike}]{.fragment .fade-in-then-semi-out}\
+[1. Base R]{.fragment .strike}\
 [1. Tidyverse R]{.fragment .fade-in-then-semi-out}\
 [2. PCA analysis]{.fragment .fade-in-then-semi-out}\
 [3. MCA analysis]{.fragment .fade-in-then-semi-out}
@@ -88,11 +88,17 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 Discuss the implications of your findings. Interpret the results and relate them to your objectives.
 
 ::: incremental
+[Implications of findings]{.underline}
+
 -   Patterns seem to exist between the different mean antibody expressions. This suggests the need for PC analysis.
 -   From the PC analysis, two components seem to explain majority of variance in data. These components are used to express the rotation matrix.
 -   From the PCA again, the rotation matrix shows the variance between the variables. Two clusters form between the four variables, each more strong associated with each of the two components.
 -   The HLA analysis suggests alleles of interest, as it indicates dominant subtypes in case subjects, compared to control.
 -   MCA...
+
+[Limitations]{.underline}
+
+-   Missing values for control subjects
 :::
 
 ------------------------------------------------------------------------
