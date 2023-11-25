@@ -9,11 +9,6 @@ format:
 
 # Introduction {background-image="background_picture.png" background-size="750px" background-position=right}
 
-------------------------------------------------------------------------
-
-# Data Description
-
-![](./../results/04_plot_1.png){width="500"}
 ![](./../results/04_plot_2.png){width="500"}
 ![](./../results/04_plot_3.png){width="500"}
 ![](./../results/04_plot_4.png){width="500"}
@@ -28,38 +23,49 @@ format:
 
 ------------------------------------------------------------------------
 
-## Materials and methods
+## Data Description
 
 Materials: What data did you use and where did you get it from?
 Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results => Flow chart?
-
-------------------------------------------------------------------------
-
-## Data Collection
-
 Discuss how data was collected or generated for your study. Include any relevant details or procedures.
 
 ------------------------------------------------------------------------
 
-## Results
+## Data Wrangling
 
-::: incremental
--   age at diagnosis
-...
--   pca analysis
-...
--   antibody expression
-...
--   HLA allele
-...
--   Simpson clonality of TCR
-:::
+------------------------------------------------------------------------
+
+## Antibody Expression
+
+![](./../results/05_plot_1.png){width="500"}
+
+------------------------------------------------------------------------
+
+## Antibody Expression, PCA
+
+![](./../results/06_plot_3.png){width="500"}
+
+------------------------------------------------------------------------
+
+## HLA Expression
+
+![](./../results/07_plot_1.png){width="500"}
+
+------------------------------------------------------------------------
+
+## HLA Expression, PCA
+
+![](./../results/08_plot_1.png){width="500"}
 
 ------------------------------------------------------------------------
 
 ## Discussion
 
 Discuss the implications of your findings. Interpret the results and relate them to your objectives.
+
+::: incremental
+-   ZnT8
+:::
 
 ------------------------------------------------------------------------
 

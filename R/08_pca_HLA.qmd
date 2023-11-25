@@ -39,20 +39,13 @@ HLA_tidy <- data |>
   mutate(allele_subtype = str_c(allele,
                                 subtype,
                                 sep = ":")) |> 
-  na.omit(allele_subtype) |> #replaced na.omit with drop_na(), all Control case would be removed
+  na.omit(allele_subtype) |>
   mutate(subtype_n = 1) |> 
-  select(case_control,
-         id,
-         allele_subtype,
-         subtype_n) |> 
   pivot_wider(names_from = allele_subtype,
-              values_from = subtype_n) |>  #Added values_fn to supress warning. values_fn = list 
+              values_from = subtype_n) |> 
   mutate(across(everything(),
                 ~replace_na(.x, 0))) |> 
   ungroup()
-#HLA_tidy <- 
-#  replace(HLA_tidy, is.na(HLA_tidy), 0) |> 
-#  ungroup()
 
 pca_fit <- HLA_tidy |> 
   select(starts_with("HLA")) |>

@@ -35,7 +35,7 @@ read_tsv("./../data/02_dat_clean.tsv",
                values_to = "expression") |> 
   pivot_longer(starts_with('HLA_'), 
                names_to = "allele",
-               values_to = "subtype") |> 
-  mutate(allele = str_remove(allele, "(\\,1) | (\\,2)")) |> 
+               values_to = "subtype") |>
+  mutate(allele = str_remove_all(allele, "(\\,\\d)")) |>
   write_tsv("./../data/03_dat_aug.tsv")
 ```
