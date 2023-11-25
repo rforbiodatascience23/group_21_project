@@ -23,7 +23,7 @@ Materials: What data did you use and where did you get it from? Methods: Which m
 
 ::: columns
 ::: {.column width="40%"}
-Original data
+Original data (01_dat_load.tsv)
 
 ```{r}
 #|class-output: hscroll
@@ -34,7 +34,7 @@ read_tsv("./../data/01_dat_load.tsv",
 :::
 
 ::: {.column width="60%"}
-Augmented data
+Augmented data (03_dat_aug.tsv)
 
 ```{r}
 #|class-output: hscroll
