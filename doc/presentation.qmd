@@ -17,23 +17,23 @@ css: style.css
 
 Materials: What data did you use and where did you get it from? Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results =\> Flow chart? Discuss how data was collected or generated for your study. Include any relevant details or procedures.
 
-------------------------------------------------------------------------
-
-## Data Wrangling {.scrollable}
-
-
 Original data (01_dat_load.tsv)
 
 ```{r}
-#|class-output: hscroll
+#| class-output: hscroll
 library("tidyverse")
 read_tsv("./../data/01_dat_load.tsv",
          show_col_types = FALSE)
 ```
-\
+
+
+------------------------------------------------------------------------
+
+## Data Wrangling {.scrollable}
+
 Augmented data (03_dat_aug.tsv)
 ```{r}
-#|class-output: hscroll
+#| class-output: hscroll
 library("tidyverse")
 read_tsv("./../data/03_dat_aug.tsv",
          show_col_types = FALSE)
