@@ -8,13 +8,6 @@ format:
     embed-resources: true
 ---
 
-```{css, echo=FALSE}
-.block_size {
-height: 200px;
-width: 200px;
-}
-```
-
 # Introduction
 
 ------------------------------------------------------------------------
@@ -24,13 +17,10 @@ width: 200px;
 Original data (01_dat_load.tsv)
 
 ```{r}
-#| class-source: block_size
-#| classes: block_size
+#| class-output: hscroll
 library("tidyverse")
 data <- read_tsv("./../data/01_dat_load.tsv",
          show_col_types = FALSE)
-
-
 ```
 
 ------------------------------------------------------------------------
@@ -88,6 +78,9 @@ Discuss the implications of your findings. Interpret the results and relate them
 Summarize the main points discussed in the presentation. Emphasize the significance of your work and any future directions.
 
 ::: incremental
--   Something ...
--   Something else ... THANK YOU for listening!
+-   Something 
+...
+-   Something else
+... 
+-   THANK YOU for listening
 :::
