@@ -10,8 +10,10 @@ format:
 
 ## Introduction
 
-This project is based on the article Mitchell et al. (2022) and proceeds to investigate any correlation between allele repertoire development during childhood and their susceptibility to obtain type 1 diabetes.\
-The structure of the experiment consists of two groups of patients, case and control, that over a span of time returns four times for observations.
+[Based on the article Mitchell et al. (2022)]{.fragment .fade-in-then-semi-out}\
+[allele repertoire development during childhood and type 1 diabetes]{.fragment .fade-in-then-semi-out}\
+[Two groups of patients, case and control]{.fragment .fade-in-then-semi-out}\
+[returns four times for observations]{.fragment .fade-in-then-semi-out}
 
 ::: columns
 ::: {.column width="50%"}
