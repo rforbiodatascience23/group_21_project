@@ -9,40 +9,41 @@ format:
 css: style.css
 ---
 
-# Introduction {background-image="background_picture.png" background-size="750px" background-position=right}
+# Introduction {background-image="background_picture.png" background-size="750px" background-position="right"}
 
 ------------------------------------------------------------------------
 
 ## Data Description
 
-Materials: What data did you use and where did you get it from?
-Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results => Flow chart?
-Discuss how data was collected or generated for your study. Include any relevant details or procedures.
+Materials: What data did you use and where did you get it from? Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results =\> Flow chart? Discuss how data was collected or generated for your study. Include any relevant details or procedures.
 
 ------------------------------------------------------------------------
 
 ## Data Wrangling {.scrollable}
 
-:::: {.columns}
+::: columns
+::: {.column width="50%"}
+Original data
 
-::: {.column width ="40%"}
-Left column
 ```{r}
-#| class-output: hscroll
-
 library("tidyverse")
-
-read_tsv("./../data/_raw/raw.tsv",
-         show_col_types = FALSE) |> 
-  head()
+read_tsv("./../data/01_dat_load.tsv",
+         show_col_types = FALSE) |>
+  head(10)
 ```
 :::
 
-::: {.column width="60%"}
-Right column
-:::
+::: {.column width="50%"}
+Augmented data
 
-::::
+```{r}
+library("tidyverse")
+read_tsv("./../data/03_dat_aug.tsv",
+         show_col_types = FALSE) |>
+  head(10)
+```
+:::
+:::
 
 ------------------------------------------------------------------------
 
@@ -54,9 +55,7 @@ Right column
 
 ## Antibody Expression, PCA
 
-![](./../results/06_plot_3.png){.absolute right=300 bottom=10 width="850" height="500"}
-![](./../results/06_plot_2.png){.absolute left=600 top=10 width="500" height="300"}
-
+![](./../results/06_plot_3.png){.absolute right="300" bottom="10" width="850" height="500"} ![](./../results/06_plot_2.png){.absolute left="600" top="10" width="500" height="300"}
 
 ------------------------------------------------------------------------
 
@@ -77,8 +76,7 @@ Right column
 Discuss the implications of your findings. Interpret the results and relate them to your objectives.
 
 ::: incremental
--   ZnT8 for control patients
-...
+-   ZnT8 for control patients ...
 -   Missing values for control patients
 :::
 
@@ -87,4 +85,3 @@ Discuss the implications of your findings. Interpret the results and relate them
 ## Conclusion
 
 Summarize the main points discussed in the presentation. Emphasize the significance of your work and any future directions.
-
