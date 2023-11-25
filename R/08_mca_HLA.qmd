@@ -10,10 +10,7 @@ embed-resources: true
 #| include: false
 #| message: false
 library("tidyverse")
-library("broom")
-library("cowplot")
 library("FactoMineR")
-library("factoextra")
 ```
 
 ## Load Data
