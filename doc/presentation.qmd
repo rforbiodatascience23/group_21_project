@@ -13,7 +13,7 @@ css: style.css
 
 ------------------------------------------------------------------------
 
-## Data Description
+## Data Description {.scrollable}
 
 Materials: What data did you use and where did you get it from? Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results =\> Flow chart? Discuss how data was collected or generated for your study. Include any relevant details or procedures.
 
@@ -22,8 +22,10 @@ Original data (01_dat_load.tsv)
 ```{r}
 #| class-output: hscroll
 library("tidyverse")
-read_tsv("./../data/01_dat_load.tsv",
-         show_col_types = FALSE)
+read_tsv("./../data/01_dat_load.tsv") |>
+  select(sample_name, sample_tags) |>
+  head(10)
+
 ```
 
 
@@ -35,8 +37,9 @@ Augmented data (03_dat_aug.tsv)
 ```{r}
 #| class-output: hscroll
 library("tidyverse")
-read_tsv("./../data/03_dat_aug.tsv",
-         show_col_types = FALSE)
+library("knitr")
+read_tsv("./../data/03_dat_aug.tsv") |>
+  head(10)
 ```
 
 
