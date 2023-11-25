@@ -21,28 +21,6 @@ Materials: What data did you use and where did you get it from? Methods: Which m
 
 ## Data Wrangling
 
-::: columns
-::: {.column width="40%"}
-```{r}
-#| class-output: hscroll
-
-library("tidyverse")
-
-read_tsv("./../data/_raw/raw.tsv",
-         show_col_types = FALSE) |>
-  select(sample_name, sample_tags) |> 
-  head()
-```
-:::
-
-::: {.column width="60%"}
-::: {.column width="60%"}
-```{}
-```
-:::
-:::
-:::
-
 ## Antibody Expression
 
 ![](./../results/05_plot_1.png){width="800" height="500"}
