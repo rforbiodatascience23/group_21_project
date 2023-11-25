@@ -20,8 +20,6 @@ conversion_table <- data.frame(
   case_control = c("Case","Control"),
   num_case_control = c(1, 0))
 
-library(tidyverse)
-
 data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE) |>
   ### Added section
   pivot_wider(names_from = "antibody",
@@ -29,21 +27,13 @@ data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE) |>
   ###
   select(case_control, GAD65, IA_2, IAA, ZnT8) |>
   mutate(across(starts_with("GAD65"), 
-                ~ ifelse(is.na(.), 
-                         mean(., na.rm = TRUE), 
-                         . - mean(., na.rm = TRUE))),
+                ~ ifelse(is.na(.), 0.001, .)), 
          across(starts_with("IA_2"), 
-                ~ ifelse(is.na(.), 
-                         mean(., na.rm = TRUE), 
-                         . - mean(., na.rm = TRUE))),
+                ~ ifelse(is.na(.), 0.001, .)), 
          across(starts_with("IAA"), 
-                ~ ifelse(is.na(.), 
-                         mean(., na.rm = TRUE), 
-                         . - mean(., na.rm = TRUE))),
+                ~ ifelse(is.na(.), 0.001, .)), 
          across(starts_with("ZnT8"), 
-                ~ ifelse(is.na(.), 
-                         mean(., na.rm = TRUE), 
-                         . - mean(., na.rm = TRUE)))) |>
+                ~ ifelse(is.na(.), 0.001, .))) |> 
   left_join(conversion_table, 
             by = "case_control")
 
@@ -128,7 +118,7 @@ data_pca |>
                   color = "#481567",
                   size = 3.5)
 
-ggsave(width = 8,
+xggsave(width = 8,
        height = 5,
        filename = "06_plot_3.png",
        path = "./../results/")
