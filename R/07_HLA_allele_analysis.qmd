@@ -72,7 +72,7 @@ HLA_tidy <- data |>
   #pivot_longer(starts_with("HLA_"), 
   #             names_to = "allele",
   #             values_to = "subtype") |>
-  #mutate(allele = str_remove(allele, "(\\,1) | (\\,2)")) |>
+  mutate(allele = str_remove(allele, "(\\,1) | (\\,2)")) |>
   mutate(allele_subtype = str_c(allele,
                                 subtype,
                                 sep = ":")) |> 
