@@ -12,16 +12,24 @@ format:
 
 ------------------------------------------------------------------------
 
-## Data Description
+## Data Description {.scrollable}
 
 Original data (01_dat_load.tsv)
 
 ```{r}
 #| class-output: hscroll
 library("tidyverse")
+<<<<<<< HEAD
 data <- read_tsv("./../data/01_dat_load.tsv",
          show_col_types = FALSE)
+=======
+read_tsv("./../data/01_dat_load.tsv") |>
+  select(sample_name, sample_tags) |>
+  head(10)
+
+>>>>>>> a0c18c6a192d6362f731892e8e40aff793d9a18c
 ```
+
 
 ------------------------------------------------------------------------
 
@@ -31,8 +39,8 @@ Augmented data (03_dat_aug.tsv)
 ```{r}
 #| class-output: hscroll
 library("tidyverse")
-read_tsv("./../data/03_dat_aug.tsv",
-         show_col_types = FALSE)
+read_tsv("./../data/03_dat_aug.tsv") |>
+  head(10)
 ```
 
 
