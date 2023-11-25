@@ -49,7 +49,7 @@ read_tsv("./../data/03_dat_aug.tsv",
 
 ## Antibody Expression
 
-![](./../results/05_plot_1.png){width="500"}
+![](./../results/05_plot_1.png){width="800" height="500"}
 
 ------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ read_tsv("./../data/03_dat_aug.tsv",
 
 ## HLA Expression
 
-![](./../results/07_plot_1.png){width="900"}
+![](./../results/07_plot_1.png){width="900" height="425"}
 
 ------------------------------------------------------------------------
 
@@ -76,7 +76,8 @@ read_tsv("./../data/03_dat_aug.tsv",
 Discuss the implications of your findings. Interpret the results and relate them to your objectives.
 
 ::: incremental
-\<\<\<\<\<\<\< HEAD - ZnT8 for control patients ... - Missing values for control patients - Missing data for control makes it difficult to determine significant differences between antibody expression for case and control - Results from PCA seems to suggest reducing dimensionality of data by clustering antibodies - No dimensionality reduction suggested from PCA on HLA
+-   ZnT8 for control patients ...
+-   Missing values for control patients
 :::
 
 ------------------------------------------------------------------------
@@ -84,3 +85,8 @@ Discuss the implications of your findings. Interpret the results and relate them
 ## Conclusion
 
 Summarize the main points discussed in the presentation. Emphasize the significance of your work and any future directions.
+
+::: incremental
+-   Something ...
+-   Something else ... THANK YOU for listening!
+:::
