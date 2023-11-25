@@ -6,26 +6,32 @@ format:
   revealjs: 
     theme: moon
     embed-resources: true
-css: style.css
 ---
 
-# Introduction {background-image="background_picture.png" background-size="750px" background-position="right"}
+```{css, echo=FALSE}
+.block_size {
+height: 200px;
+width: 200px;
+}
+```
+
+# Introduction
 
 ------------------------------------------------------------------------
 
 ## Data Description
 
-Materials: What data did you use and where did you get it from? Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results =\> Flow chart? Discuss how data was collected or generated for your study. Include any relevant details or procedures.
-
 Original data (01_dat_load.tsv)
 
 ```{r}
-#| class-output: hscroll
+#| class-source: block_size
+#| classes: block_size
 library("tidyverse")
-read_tsv("./../data/01_dat_load.tsv",
+data <- read_tsv("./../data/01_dat_load.tsv",
          show_col_types = FALSE)
-```
 
+
+```
 
 ------------------------------------------------------------------------
 
