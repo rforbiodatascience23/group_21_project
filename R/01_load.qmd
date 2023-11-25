@@ -15,6 +15,6 @@ library("tidyverse")
 
 ```{r}
 read_tsv("./../data/_raw/raw.tsv",
-         show_col_types = FALSE) |> 
+         show_col_types = FALSE) |>
   write_tsv("../data/01_dat_load.tsv")
 ```
