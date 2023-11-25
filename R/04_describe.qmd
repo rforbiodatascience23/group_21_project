@@ -52,8 +52,8 @@ data |>
   theme_bw() +
   labs(title = "Age group stratified by case/control",
        x = "Age",
-       y = "n",
-       fill = "case/control") +
+       y = "Count",
+       fill = "Case/Control") +
   scale_fill_manual(values = c(Case = "#481567",
                                Control = "#20A387")) +
   theme(legend.position = "bottom")
@@ -72,8 +72,9 @@ data |>
                fill = "#20A387",
                alpha = 0.8,
                size = 0.5) +
-  scale_color_viridis(discrete = TRUE) +
   theme_bw() +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank()) +
   labs(x = "Age of diagnosis")
 
 ggsave(width = 8,
@@ -83,7 +84,7 @@ ggsave(width = 8,
 
 ```
 
-The age distribution of patients predominantly falls within the 0-5 age group. Notably, more than half were diagnosed between ages 10 and 15. The participants underwent testing from early childhood into their twenties. Among the 29 individuals, only 5 received diagnoses after age 15, while 24 were diagnosed before reaching that age. Given the dataset's limited size of 29 observations, the analysis results might diverge from the actual pattern.
+The age distribution of patients predominantly falls within the 0-5 age group. Notably, more than half were diagnosed between ages 10 and 15. The participants underwent testing from early childhood into their twenties. Among the 29 individuals, only 5 received diagnoses after age 15, while 24 were diagnosed before reaching that age. Given the data-set is limited size of 29 observations, the analysis results might diverge from the actual pattern.
 
 ### TCR-Beta diversity
 
