@@ -21,8 +21,7 @@ Materials: What data did you use and where did you get it from? Methods: Which m
 
 ## Data Wrangling {.scrollable}
 
-::: {.columns}
-::: {.column width="40%"}
+
 Original data (01_dat_load.tsv)
 
 ```{r}
@@ -31,19 +30,15 @@ library("tidyverse")
 read_tsv("./../data/01_dat_load.tsv",
          show_col_types = FALSE)
 ```
-:::
-
-::: {.column width="60%"}
+\
 Augmented data (03_dat_aug.tsv)
-
 ```{r}
 #|class-output: hscroll
 library("tidyverse")
 read_tsv("./../data/03_dat_aug.tsv",
          show_col_types = FALSE)
 ```
-:::
-:::
+
 
 ------------------------------------------------------------------------
 
