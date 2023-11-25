@@ -20,7 +20,6 @@ Original data (01_dat_load.tsv)
 library("tidyverse")
 read_tsv("./../data/01_dat_load.tsv") |>
   head(10)
-
 ```
 
 
@@ -78,6 +77,9 @@ Discuss the implications of your findings. Interpret the results and relate them
 Summarize the main points discussed in the presentation. Emphasize the significance of your work and any future directions.
 
 ::: incremental
--   Something ...
--   Something else ... THANK YOU for listening!
+-   Something 
+...
+-   Something else
+... 
+-   THANK YOU for listening
 :::
