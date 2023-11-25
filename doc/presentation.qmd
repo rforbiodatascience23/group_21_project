@@ -9,60 +9,55 @@ format:
 css: style.css
 ---
 
-# Introduction {background-image="background_picture.png" background-size="750px" background-position=right}
+# Introduction {background-image="background_picture.png" background-size="750px" background-position="right"}
 
 ------------------------------------------------------------------------
 
 ## Data Description
 
-Materials: What data did you use and where did you get it from?
-Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results => Flow chart?
-Discuss how data was collected or generated for your study. Include any relevant details or procedures.
+Materials: What data did you use and where did you get it from? Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results =\> Flow chart? Discuss how data was collected or generated for your study. Include any relevant details or procedures.
 
 ------------------------------------------------------------------------
 
-## Data Wrangling {.scrollable}
+## Data Wrangling
 
-:::: {.columns}
-
-::: {.column width ="40%"}
-Left column
+::: columns
+::: {.column width="40%"}
 ```{r}
 #| class-output: hscroll
 
 library("tidyverse")
 
 read_tsv("./../data/_raw/raw.tsv",
-         show_col_types = FALSE) |> 
+         show_col_types = FALSE) |>
+  select(sample_name, sample_tags) |> 
   head()
 ```
 :::
 
 ::: {.column width="60%"}
-Right column
+::: {.column width="60%"}
+```{}
+```
 :::
-
-::::
-
-------------------------------------------------------------------------
+:::
+:::
 
 ## Antibody Expression
 
-![](./../results/05_plot_1.png){width="500"}
+![](./../results/05_plot_1.png){width="800" height="500"}
 
 ------------------------------------------------------------------------
 
 ## Antibody Expression, PCA
 
-![](./../results/06_plot_3.png){.absolute right=300 bottom=10 width="850" height="500"}
-![](./../results/06_plot_2.png){.absolute left=600 top=10 width="500" height="300"}
-
+![](./../results/06_plot_3.png){.absolute right="300" bottom="10" width="850" height="500"} ![](./../results/06_plot_2.png){.absolute left="600" top="10" width="500" height="300"}
 
 ------------------------------------------------------------------------
 
 ## HLA Expression
 
-![](./../results/07_plot_1.png){width="900"}
+![](./../results/07_plot_1.png){width="900" height="425"}
 
 ------------------------------------------------------------------------
 
@@ -77,8 +72,7 @@ Right column
 Discuss the implications of your findings. Interpret the results and relate them to your objectives.
 
 ::: incremental
--   ZnT8 for control patients
-...
+-   ZnT8 for control patients ...
 -   Missing values for control patients
 :::
 
@@ -88,3 +82,7 @@ Discuss the implications of your findings. Interpret the results and relate them
 
 Summarize the main points discussed in the presentation. Emphasize the significance of your work and any future directions.
 
+::: incremental
+-   Something ...
+-   Something else ... THANK YOU for listening!
+:::
