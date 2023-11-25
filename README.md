@@ -1,5 +1,9 @@
 # Group 21 project
 
+# Project Contributors
+
+Anna Othilia Føns Schrøder (s223163), Bunia Ingrid Adsersen (215085), Emma Qingjie Andersen (s215090), Joanna Sela Rasmussen (215092), & Thobias Alexander Christiansen (s215105).
+
 # Exploration of TCR Repertoire Development during Childhood
 
 Investigating how T-cell receptor (TCR) repertoires develop during childhood is a fascinating area of research that sheds light on the evolution of the immune system. In healthy children, this research uncovers how T-cells adapt over time. Understanding this progression aids in comprehending how the immune system learns to identify threats while preserving tolerance towards the body's cells.
