@@ -1,4 +1,7 @@
 ---
+<<<<<<< HEAD
+title: "Render all files"
+=======
 title: "99_render_all"
 format: html
 editor: visual
