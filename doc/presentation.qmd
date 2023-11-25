@@ -121,10 +121,6 @@ Summarize the main points discussed in the presentation. Emphasize the significa
 <<<<<<< HEAD
 -   Clear differences exist between case and control subjects, both in terms of antibody expression and in terms of allele subtypes.
 -   Suggests that both antibody expression and allele subtype are involved in the development of diabetes in children.
-=======
--   We have observed an over-representation among some HLA sub-types in patients with type 1 diabetes.
--   Something else ...
->>>>>>> 11d732d23eafc522b1ae615f01ab301644714028
 :::
 
 [[THANK YOU for listening]{.fragment}]{.fragment .highlight-green}
