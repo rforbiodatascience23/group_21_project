@@ -83,7 +83,7 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 
 ## HLA Expression
 
-![](./../results/07_plot_1.png){width="900" height="425"}
+![](./../results/07_plot_1.png){width="1000" height="500"}
 
 ------------------------------------------------------------------------
 
