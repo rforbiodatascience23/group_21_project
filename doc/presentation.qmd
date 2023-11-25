@@ -5,6 +5,7 @@ author: "Group 21"
 format:
   revealjs: 
     theme: moon
+    embed-resources: true
 css: style.css
 ---
 
