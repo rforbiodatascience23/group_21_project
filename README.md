@@ -2,7 +2,7 @@
 
 # Project Contributors
 
-buniaia (s215085), emmaqingjieandersen (s215090), JoannaRasmussen (215092), ThobiasAChristiansen (s215105), & utte123 (s223163),
+buniaia (s215085), emmaqingjieandersen (s215090), JoannaRasmussen (s215092), ThobiasAChristiansen (s215105), & utte123 (s223163),
 
 # Exploration of TCR Repertoire Development during Childhood
 
