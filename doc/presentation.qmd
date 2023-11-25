@@ -95,8 +95,6 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 
 ## Discussion
 
-Discuss the implications of your findings. Interpret the results and relate them to your objectives.
-
 ::: incremental
 -   Patterns between antibody expressions. Suggests need for PCA.
 -   Two components explain majority of variance in data.
