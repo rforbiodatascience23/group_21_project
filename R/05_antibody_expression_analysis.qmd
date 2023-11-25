@@ -42,7 +42,7 @@ data_long |>
   facet_wrap(vars(antibody),
              scales = "free_y",
              nrow = 2) +
-  labs(title = "Antibody expression across visits stratified by case/control",
+  labs(title = "Antibody expression across visits stratified by case_control",
        x = "Timepoint",
        y = "Mean Expression",
        fill = "Case or Control") +
