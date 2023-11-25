@@ -38,7 +38,6 @@ Intro to the project
 ## Data Description {.scrollable}
 
 Original data (01_dat_load.tsv)
-
 ```{r}
 library("tidyverse")
 read_tsv("./../data/01_dat_load.tsv") |>
