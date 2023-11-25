@@ -21,7 +21,7 @@ Materials: What data did you use and where did you get it from? Methods: Which m
 
 ## Data Wrangling {.scrollable}
 
-::: columns
+::: {.columns}
 ::: {.column width="40%"}
 Original data (01_dat_load.tsv)
 
