@@ -118,4 +118,4 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 -   Based on our results, `HLA-DQB1*0202`, `HLA-B*4402`, `HLA-A*2402`, and `HLA-B*0702` [*could have*]{.underline} a direct influence on type 1 diabetes.
 :::
 
-[[THANK YOU for listening]{.fragment}}]{.fragment .highlight-green}
+[[THANK YOU for listening]{.fragment}]{.fragment .highlight-green}
