@@ -23,7 +23,7 @@ data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE)
 
 ### Data Description
 
-This dataset comprises a comprehensive registry detailing immunological and demographic characteristics, encompassing 216 observations across 41 variables. It captures data from 54 (29 case and 25 control) patients across four distinct visits, including demographic details like gender, ethnicity, race, and age at diagnosis and visit. It encompasses key immunological markers such as GAD65, IA_2, IAA, ZnT8 antibodies, along with extensive HLA allele information (HLA_A, HLA_B, HLA_C, HLA_DPA1, HLA_DPB1, HLA_DQA1, HLA_DQB1, HLA_DRB1). Additionally, it contains metrics (e.g., total_templates, total_rearrangements, productive_templates) pertaining to the T-cell receptor β region, crucial for diversifying T-cell receptors and recognizing antigens. This dataset elucidates the intricate relationship between demographic factors and immunological profiles across multiple patient visits, providing invaluable insights for in-depth analysis and comprehension. Refer to the complete list of variables provided below.
+This dataset comprises a comprehensive registry detailing immunological and demographic characteristics, encompassing 216 observations across 41 variables. It captures data from 54 (29 cases and 25 control) patients across four distinct visits, including demographic details like gender, ethnicity, race, and age at diagnosis and visit. It encompasses key immunological markers such as GAD65, IA_2, IAA, ZnT8 antibodies, along with extensive HLA allele information (HLA_A, HLA_B, HLA_C, HLA_DPA1, HLA_DPB1, HLA_DQA1, HLA_DQB1, HLA_DRB1). Additionally, it contains metrics (e.g., total_templates, total_rearrangements, productive_templates) about the T-cell receptor β region, crucial for diversifying T-cell receptors and recognizing antigens. This dataset elucidates the intricate relationship between demographic factors and immunological profiles across multiple patient visits, providing invaluable insights for in-depth analysis and comprehension. Refer to the complete list of variables provided below.
 
 ### Variables
 
@@ -50,19 +50,19 @@ data |>
            position = position_dodge(preserve = "single"),
            color = "black") +
   theme_bw() +
-  labs(title = "Age group stratified by case/control",
+  labs(title = "Age group stratified by case/control per timepoint",
        x = "Age",
        y = "Count",
        fill = "Case/Control") +
   scale_fill_manual(values = c(Case = "#481567",
                                Control = "#20A387")) +
+  facet_wrap(~timepoint) +
   theme(legend.position = "bottom")
 
 ggsave(width = 8,
        height = 3,
        filename = "04_plot_1.png",
        path = "./../results/")
-
 
 data |>
   drop_na(age_diagnosis) |>
