@@ -2,7 +2,7 @@
 
 # Project Contributors
 
-Anna Othilia Føns Schrøder (s223163), Bunia Ingrid Adsersen (215085), Emma Qingjie Andersen (s215090), Joanna Sela Rasmussen (215092), & Thobias Alexander Christiansen (s215105).
+buniaia (s215085), emmaqingjieandersen (s215090), JoannaRasmussen (215092), ThobiasAChristiansen (s215105), & utte123 (s223163),
 
 # Exploration of TCR Repertoire Development during Childhood
 
