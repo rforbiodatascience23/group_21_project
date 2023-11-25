@@ -140,10 +140,10 @@ ggplot(data = HLA_tidy,
   labs(title = "Presence of HLA subtypes in case and control patients",
        x = "Allele",
        y = "Subtype",
-       fill = "Case or Control")
+       fill = "Case/Control")
 
 ggsave(width = 8,
        height = 5,
        filename = "07_plot_1.png",
-       path = "./../results/")
+       path = "./../results/")a
 ```

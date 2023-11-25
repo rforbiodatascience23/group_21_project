@@ -21,29 +21,6 @@ Materials: What data did you use and where did you get it from? Methods: Which m
 
 ## Data Wrangling {.scrollable}
 
-::: columns
-::: {.column width="50%"}
-Original data
-
-```{r}
-library("tidyverse")
-read_tsv("./../data/01_dat_load.tsv",
-         show_col_types = FALSE) |>
-  head(10)
-```
-:::
-
-::: {.column width="50%"}
-Augmented data
-
-```{r}
-library("tidyverse")
-read_tsv("./../data/03_dat_aug.tsv",
-         show_col_types = FALSE) |>
-  head(10)
-```
-:::
-:::
 
 ------------------------------------------------------------------------
 
@@ -76,8 +53,12 @@ read_tsv("./../data/03_dat_aug.tsv",
 Discuss the implications of your findings. Interpret the results and relate them to your objectives.
 
 ::: incremental
+<<<<<<< HEAD
 -   ZnT8 for control patients ...
 -   Missing values for control patients
+-   Missing data for control makes it difficult to determine significant differences between antibody expression for case and control
+-   Results from PCA seems to suggest reducing dimensionality of data by clustering antibodies
+-   No dimensionality reduction suggested from PCA on HLA
 :::
 
 ------------------------------------------------------------------------
