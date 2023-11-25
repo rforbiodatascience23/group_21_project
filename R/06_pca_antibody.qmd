@@ -20,22 +20,37 @@ conversion_table <- data.frame(
   case_control = c("Case","Control"),
   num_case_control = c(1, 0))
 
-data <- read_tsv("./../data/03_dat_aug.tsv",
-                 show_col_types = FALSE) |>
+library(tidyverse)
+
+data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE) |>
   ### Added section
   pivot_wider(names_from = "antibody",
-              values_from = "expression") |> 
+              values_from = "expression") |>
   ###
   select(case_control, GAD65, IA_2, IAA, ZnT8) |>
-  mutate_all(~ replace_na(.,0)) |>
-  left_join(conversion_table,
-            by ="case_control") 
+  mutate(across(starts_with("GAD65"), 
+                ~ ifelse(is.na(.), 
+                         mean(., na.rm = TRUE), 
+                         . - mean(., na.rm = TRUE))),
+         across(starts_with("IA_2"), 
+                ~ ifelse(is.na(.), 
+                         mean(., na.rm = TRUE), 
+                         . - mean(., na.rm = TRUE))),
+         across(starts_with("IAA"), 
+                ~ ifelse(is.na(.), 
+                         mean(., na.rm = TRUE), 
+                         . - mean(., na.rm = TRUE))),
+         across(starts_with("ZnT8"), 
+                ~ ifelse(is.na(.), 
+                         mean(., na.rm = TRUE), 
+                         . - mean(., na.rm = TRUE)))) |>
+  left_join(conversion_table, 
+            by = "case_control")
 
 data_pca <- data |>
   select(!case_control & !num_case_control)|>
   scale() |>
   prcomp()
-
 
 data_pca |>
   augment(data) |>
