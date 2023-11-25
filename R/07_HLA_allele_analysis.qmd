@@ -6,59 +6,6 @@ toc: true
 embed-resources: true
 ---
 
-```{r}
-#| include: false
-library("tidyverse")
-library("patchwork")
-```
-
-### Analysis
-
-```{r, fig.height=10, fig.width=8}
-#| warning: false
-#| message: false
-data <- read_tsv("./../data/03_dat_aug.tsv")
-
-TCR_tidy <- data |> 
-  #select(timepoint, age_visit,
-  #       starts_with('HLA'), case_control) |>
-  arrange(desc(desc(timepoint))) |> 
-  #pivot_longer(starts_with('HLA_'), 
-  #             names_to = "allele",
-  #             values_to = "subtype") |>
-  #mutate(allele = str_remove(allele, "(\\,1)|(\\,2)")) |>
-  group_by(allele, subtype) |> 
-  mutate(allele_count = n(), .groups = NULL) |>
-  filter(allele_count >= 8) |>
-  filter(timepoint == 4) |>
-  filter(subtype != "NA") |>
-  mutate(case_control = case_when(case_control == "Case" ~ 1,
-                                  case_control == "Control" ~ 0))
-
-
-ggplot(data = TCR_tidy,
-       mapping = aes(x = allele,
-                     y = subtype)) +
-  geom_tile(aes(fill = case_control),
-            color="#481567") + 
-  theme_bw()+
-  theme(axis.text.y = element_text(size = 10),
-        axis.text.x = element_text(angle = 90, size = 10),
-        panel.grid.major.y = element_blank())+
-        #panel.grid.minor = element_blank()) +
-  scale_fill_gradient(low = "#20A387",
-                       high = "#481567") + 
-  labs(title = "Presence of HLA subtypes in case and control patients",
-       x = "Allele",
-       y = "Subtype",
-       fill = "Case or Control")
-
-ggsave(width = 5,
-       height = 8,
-       filename = "07_plot_1.png",
-       path = "./../results/")
-```
-
 ```{r, fig.height=10, fig.width=8}
 #| warning: false
 data <- read_tsv("./../data/03_dat_aug.tsv",
@@ -72,7 +19,7 @@ HLA_tidy <- data |>
   #pivot_longer(starts_with("HLA_"), 
   #             names_to = "allele",
   #             values_to = "subtype") |>
-  mutate(allele = str_remove(allele, "(\\,1) | (\\,2)")) |>
+  mutate(allele = str_remove(allele, "(\\,1)|(\\,2)")) |>
   mutate(allele_subtype = str_c(allele,
                                 subtype,
                                 sep = ":")) |> 
@@ -81,7 +28,9 @@ HLA_tidy <- data |>
   select(case_control,
          id,
          allele_subtype,
-         subtype_n) |> 
+         subtype_n,
+         allele,
+         subtype) |> 
   group_by(case_control, allele_subtype) |>
   summarize(allele_n = n(), .groups = "drop") |> 
   pivot_wider(names_from = case_control,
@@ -108,5 +57,40 @@ ggplot(data = HLA_tidy,
 ggsave(width = 5,
        height = 10,
        filename = "07_plot_2.png",
+       path = "./../results/")
+```
+
+```{r, fig.height=6, fig.width=12}
+#| warning: false
+#| message: false
+data <- read_tsv("./../data/03_dat_aug.tsv")
+
+HLA_tidy <-
+  HLA_tidy |>
+  ungroup() |>
+  mutate(allele = str_extract(allele_subtype, "HLA[^\\:]+"),
+         subtype = str_extract(allele_subtype, "\\d{4}"))
+
+
+ggplot(data = HLA_tidy,
+       mapping = aes(x = subtype,
+                     y = allele)) +
+  geom_tile(aes(fill = ratio),
+            color="#481567") + 
+  theme_bw()+
+  theme(axis.text.y = element_text(size = 10),
+        axis.text.x = element_text(angle = 90, size = 10),
+        panel.grid.major.y = element_blank())+
+        #panel.grid.minor = element_blank()) +
+  scale_fill_gradient(low = "#20A387",
+                      high = "#481567") + 
+  labs(title = "Ratio of HLA subtypes in case and control patients",
+       x = "Allele",
+       y = "Subtype",
+       fill = "Case/Control")
+
+ggsave(width = 8,
+       height = 5,
+       filename = "07_plot_1.png",
        path = "./../results/")
 ```
