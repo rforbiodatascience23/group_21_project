@@ -72,9 +72,9 @@ Right column
 Discuss the implications of your findings. Interpret the results and relate them to your objectives.
 
 ::: incremental
--   Missing data for control makes it difficult to determine significant differences between case and control
+-   Missing data for control makes it difficult to determine significant differences between antibody expression for case and control
 -   Results from PCA seems to suggest reducing dimensionality of data by clustering antibodies
--   No conclusive dimensionality reduction shown from PCA on HLA
+-   No dimensionality reduction suggested from PCA on HLA
 :::
 
 ------------------------------------------------------------------------
