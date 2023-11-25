@@ -113,7 +113,7 @@ ggsave(width = 5,
        path = "./../results/")
 ```
 
-```{r, fig.height=12, fig.width=6}
+```{r, fig.height=6, fig.width=12}
 #| warning: false
 #| message: false
 data <- read_tsv("./../data/03_dat_aug.tsv")
@@ -126,8 +126,8 @@ HLA_tidy <-
 
 
 ggplot(data = HLA_tidy,
-       mapping = aes(x = allele,
-                     y = subtype)) +
+       mapping = aes(x = subtype,
+                     y = allele)) +
   geom_tile(aes(fill = ratio),
             color="#481567") + 
   theme_bw()+
@@ -142,8 +142,8 @@ ggplot(data = HLA_tidy,
        y = "Subtype",
        fill = "Case or Control")
 
-ggsave(width = 5,
-       height = 8,
+ggsave(width = 8,
+       height = 5,
        filename = "07_plot_1.png",
        path = "./../results/")
 ```
