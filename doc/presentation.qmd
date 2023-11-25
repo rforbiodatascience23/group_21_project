@@ -11,9 +11,9 @@ format:
 ## Introduction
 
 [Based on the article Mitchell et al. (2022)]{.fragment .fade-in-then-semi-out}\
-[allele repertoire development during childhood and type 1 diabetes]{.fragment .fade-in-then-semi-out}\
+[Allele repertoire development during childhood and type 1 diabetes]{.fragment .fade-in-then-semi-out}\
 [Two groups of patients, case and control]{.fragment .fade-in-then-semi-out}\
-[returns four times for observations]{.fragment .fade-in-then-semi-out}
+[Returns four times for observations]{.fragment .fade-in-then-semi-out}
 
 ::: columns
 ::: {.column width="50%"}
@@ -41,7 +41,11 @@ format:
 Original data (01_dat_load.tsv)
 
 ```{r}
+#| class-output: hscroll
 library("tidyverse")
+read_tsv("./../data/01_dat_load.tsv") |>
+  dim()
+
 read_tsv("./../data/01_dat_load.tsv") |>
   select(sample_name, sample_tags)
   head(10)
@@ -54,7 +58,11 @@ read_tsv("./../data/01_dat_load.tsv") |>
 Augmented data (03_dat_aug.tsv)
 
 ```{r}
+#| class-output: hscroll
 library("tidyverse")
+read_tsv("./../data/03_dat_aug.tsv") |>
+  dim()
+
 read_tsv("./../data/03_dat_aug.tsv") |>
   head(10)
 ```
