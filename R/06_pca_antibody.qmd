@@ -22,7 +22,7 @@ conversion_table <- data.frame(
 
 data <- read_tsv("./../data/03_dat_aug.tsv",
                  show_col_types = FALSE) |>
-  ### Added section¨
+  ### Added section
   pivot_wider(names_from = "antibody",
               values_from = "expression") |> 
   ###
