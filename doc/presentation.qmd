@@ -20,7 +20,28 @@ Discuss how data was collected or generated for your study. Include any relevant
 
 ------------------------------------------------------------------------
 
-## Data Wrangling
+## Data Wrangling {.scrollable}
+
+:::: {.columns}
+
+::: {.column width ="40%"}
+Left column
+```{r}
+#| class-output: hscroll
+
+library("tidyverse")
+
+read_tsv("./../data/_raw/raw.tsv",
+         show_col_types = FALSE) |> 
+  head()
+```
+:::
+
+::: {.column width="60%"}
+Right column
+:::
+
+::::
 
 ------------------------------------------------------------------------
 
@@ -40,7 +61,7 @@ Discuss how data was collected or generated for your study. Include any relevant
 
 ## HLA Expression
 
-![](./../results/07_plot_1.png){width="500" rotate=90}
+![](./../results/07_plot_1.png){width="900"}
 
 ------------------------------------------------------------------------
 
