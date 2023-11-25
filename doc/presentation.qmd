@@ -28,7 +28,7 @@ format:
 ::: fragment
 ### Methods:
 
-[[1. Base R]{.fragment .strike}]{.fragment .fade-in-then-semi-out}\
+[1. Base R]{.fragment .strike}\
 [1. Tidyverse R]{.fragment .fade-in-then-semi-out}\
 [2. PCA analysis]{.fragment .fade-in-then-semi-out}\
 [3. MCA analysis]{.fragment .fade-in-then-semi-out}
@@ -100,7 +100,7 @@ Discuss the implications of your findings. Interpret the results and relate them
 ::: incremental
 [Implications of findings]{.underline}
 
--   Patterns exist between the different mean antibody expressions. Suggests need for PCA. .
+-   Patterns exist between the different mean antibody expressions. Suggests need for PCA.
 -   Two components explain majority of variance in data. Components are used to express the rotation matrix.
 -   The rotation matrix shows the variance between the variables. Two clusters form between the four variables, each more strong associated with each of the two component.
 -   The HLA analysis suggests alleles of interest, by indicating dominant subtypes in case subjects, compared to control.
@@ -122,4 +122,4 @@ Summarize the main points discussed in the presentation. Emphasize the significa
 -   Suggests that both antibody expression and allele subtype are involved in the development of diabetes in children.
 :::
 
-[[THANK YOU for listening]{.fragment}]{.fragment .highlight-green}
+[THANK YOU for listening]{.fragment}
