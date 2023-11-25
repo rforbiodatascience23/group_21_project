@@ -5,21 +5,11 @@ author: "Group 21"
 format:
   revealjs: 
     theme: moon
+    embed-resources: true
+css: style.css
 ---
 
 # Introduction {background-image="background_picture.png" background-size="750px" background-position=right}
-
-![](./../results/04_plot_2.png){width="500"}
-![](./../results/04_plot_3.png){width="500"}
-![](./../results/04_plot_4.png){width="500"}
-![](./../results/04_plot_5.png){width="500"}
-![](./../results/04_plot_6.png){width="500"}
-![](./../results/05_plot_1.png){width="500"}
-![](./../results/06_plot_1.png){width="500"}
-![](./../results/06_plot_2.png){width="500"}
-![](./../results/06_plot_3.png){width="500"}
-![](./../results/07_plot_1.png){width="500"}
-![](./../results/08_plot_1.png){width="500"}
 
 ------------------------------------------------------------------------
 
@@ -43,19 +33,21 @@ Discuss how data was collected or generated for your study. Include any relevant
 
 ## Antibody Expression, PCA
 
-![](./../results/06_plot_3.png){width="500"}
+![](./../results/06_plot_3.png){.absolute right=300 bottom=10 width="850" height="500"}
+![](./../results/06_plot_2.png){.absolute left=600 top=10 width="500" height="300"}
+
 
 ------------------------------------------------------------------------
 
 ## HLA Expression
 
-![](./../results/07_plot_1.png){width="500"}
+![](./../results/07_plot_1.png){width="500" rotate=90}
 
 ------------------------------------------------------------------------
 
 ## HLA Expression, PCA
 
-![](./../results/08_plot_1.png){width="500"}
+![](./../results/08_plot_1.png){.absolute width="850" height="500"}
 
 ------------------------------------------------------------------------
 
@@ -64,7 +56,9 @@ Discuss how data was collected or generated for your study. Include any relevant
 Discuss the implications of your findings. Interpret the results and relate them to your objectives.
 
 ::: incremental
--   ZnT8
+-   ZnT8 for control patients
+...
+-   Missing values for control patients
 :::
 
 ------------------------------------------------------------------------
@@ -73,6 +67,3 @@ Discuss the implications of your findings. Interpret the results and relate them
 
 Summarize the main points discussed in the presentation. Emphasize the significance of your work and any future directions.
 
-------------------------------------------------------------------------
-
-## Thank You For Listening
