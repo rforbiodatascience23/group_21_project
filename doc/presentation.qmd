@@ -106,6 +106,7 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 [Limitations]{.underline}
 
 -   Missing values for control subjects
+-   Relatively small data set
 :::
 
 ------------------------------------------------------------------------
