@@ -120,5 +120,6 @@ Summarize the main points discussed in the presentation. Emphasize the significa
 ::: incremental
 -   Something ...
 -   Something else ...
--   THANK YOU for listening
 :::
+
+[[THANK YOU for listening]{.fragment}]{.fragment .highlight-green}
