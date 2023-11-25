@@ -9,24 +9,21 @@ format:
 css: style.css
 ---
 
-# Introduction {background-image="background_picture.png" background-size="750px" background-position=right}
+# Introduction {background-image="background_picture.png" background-size="750px" background-position="right"}
 
 ------------------------------------------------------------------------
 
 ## Data Description
 
-Materials: What data did you use and where did you get it from?
-Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results => Flow chart?
-Discuss how data was collected or generated for your study. Include any relevant details or procedures.
+Materials: What data did you use and where did you get it from? Methods: Which modelling did you use? Think of the methods section as a recipe for how to go from raw to results =\> Flow chart? Discuss how data was collected or generated for your study. Include any relevant details or procedures.
 
 ------------------------------------------------------------------------
 
 ## Data Wrangling {.scrollable}
 
-:::: {.columns}
+::: columns
+::: {.column width ="40%"} Left column
 
-::: {.column width ="40%"}
-Left column
 ```{r}
 #| class-output: hscroll
 
@@ -54,9 +51,7 @@ Right column
 
 ## Antibody Expression, PCA
 
-![](./../results/06_plot_3.png){.absolute right=300 bottom=10 width="850" height="500"}
-![](./../results/06_plot_2.png){.absolute left=600 top=10 width="500" height="300"}
-
+![](./../results/06_plot_3.png){.absolute right="300" bottom="10" width="850" height="500"} ![](./../results/06_plot_2.png){.absolute left="600" top="10" width="500" height="300"}
 
 ------------------------------------------------------------------------
 
@@ -77,9 +72,9 @@ Right column
 Discuss the implications of your findings. Interpret the results and relate them to your objectives.
 
 ::: incremental
--   ZnT8 for control patients
-...
--   Missing values for control patients
+-   Missing data for control makes it difficult to determine significant differences between case and control
+-   Results from PCA seems to suggest reducing dimensionality of data by clustering antibodies
+-   No conclusive dimensionality reduction shown from PCA on HLA
 :::
 
 ------------------------------------------------------------------------
@@ -87,4 +82,3 @@ Discuss the implications of your findings. Interpret the results and relate them
 ## Conclusion
 
 Summarize the main points discussed in the presentation. Emphasize the significance of your work and any future directions.
-
