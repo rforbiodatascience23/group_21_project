@@ -118,7 +118,7 @@ data_pca |>
                   color = "#481567",
                   size = 3.5)
 
-xggsave(width = 8,
+ggsave(width = 8,
        height = 5,
        filename = "06_plot_3.png",
        path = "./../results/")
