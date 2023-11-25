@@ -91,4 +91,4 @@ ggsave(width = 8,
        path = "./../results/")
 ```
 
-None of the variables explain the variance in data enough, therefore there is no indication of a specific allele subtype which is able to conclude difference between case or control.
+None of the variables explain the variance in data enough, therefore there is no indication of specific allele subtypes that are able to conclude difference between case or control.
