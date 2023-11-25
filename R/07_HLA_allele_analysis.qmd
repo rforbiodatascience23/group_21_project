@@ -6,59 +6,6 @@ toc: true
 embed-resources: true
 ---
 
-```{r}
-#| include: false
-library("tidyverse")
-library("patchwork")
-```
-
-### Analysis
-
-```{r, fig.height=12, fig.width=6}
-#| warning: false
-#| message: false
-data <- read_tsv("./../data/03_dat_aug.tsv")
-
-TCR_tidy <- data |> 
-  #select(timepoint, age_visit,
-  #       starts_with('HLA'), case_control) |>
-  arrange(timepoint) |> 
-  #pivot_longer(starts_with('HLA_'), 
-  #             names_to = "allele",
-  #             values_to = "subtype") |>
-  mutate(allele = str_remove(allele, "(\\,1)|(\\,2)")) |>
-  group_by(allele, subtype) |> 
-  mutate(allele_count = n(), .groups = NULL) |>
-  filter(allele_count >= 1) |>
-  filter(timepoint == 4) |>
-  filter(subtype != "NA") |>
-  mutate(case_control = case_when(case_control == "Case" ~ 1,
-                                  case_control == "Control" ~ 0))
-
-
-ggplot(data = TCR_tidy,
-       mapping = aes(x = allele,
-                     y = subtype)) +
-  geom_tile(aes(fill = case_control),
-            color="#481567") + 
-  theme_bw()+
-  theme(axis.text.y = element_text(size = 10),
-        axis.text.x = element_text(angle = 90, size = 10),
-        panel.grid.major.y = element_blank())+
-        #panel.grid.minor = element_blank()) +
-  scale_fill_gradient(low = "#20A387",
-                       high = "#481567") + 
-  labs(title = "Presence of HLA subtypes in case and control patients",
-       x = "Allele",
-       y = "Subtype",
-       fill = "Case or Control")
-
-ggsave(width = 5,
-       height = 8,
-       filename = "07_plot_1.png",
-       path = "./../results/")
-```
-
 ```{r, fig.height=10, fig.width=8}
 #| warning: false
 data <- read_tsv("./../data/03_dat_aug.tsv",
