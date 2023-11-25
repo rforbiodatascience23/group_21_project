@@ -1,15 +1,48 @@
 ---
+<<<<<<< HEAD
 title: "Render all files"
+=======
+title: "99_render_all"
+>>>>>>> b4f2d4812c1baee66bc9defd55ee4a4efce44de5
 format: html
 editor: visual
 ---
 
+<<<<<<< HEAD
+=======
+Rendering files
+
+>>>>>>> b4f2d4812c1baee66bc9defd55ee4a4efce44de5
 ```{r}
 library("quarto")
 quarto_render("00_all.qmd")
 ```
 
+<<<<<<< HEAD
 ```{bash}
 ls ./../results/*.html | xargs -I{} rm {}
 ls ./*.html | xargs -I{} mv {} ./../results/
+=======
+Moving the files:
+
+```{r}
+file.rename(from = "./00_all.qmd",
+            to = "./../00_all.qmd")
+file.rename(from = "./01_load.qmd",
+            to = "./../01_load.qmd")
+file.rename(from = "./02_clean.qmd",
+            to = "./../02_clean.qmd")
+file.rename(from = "./03_augment.qmd",
+            to = "./../03_augment.qmd")
+file.rename(from = "./04_describe.qmd",
+            to = "./../04_describe.qmd")
+file.rename(from = "./05_antibody_expression_analysis.qmd",
+            to = "./../05_antibody_expression_analysis.qmd")
+file.rename(from = "./06_pca_antibody.qmd",
+            to = "./../06_pca_antibody.qmd")
+file.rename(from = "./07_HLA_allele_analysis.qmd",
+            to = "./../07_HLA_allele_analysis.qmd")
+file.rename(from = "./08_pca_HLA.qmd",
+            to = "./../08_pca_HLA.qmd")
+>>>>>>> b4f2d4812c1baee66bc9defd55ee4a4efce44de5
 ```
