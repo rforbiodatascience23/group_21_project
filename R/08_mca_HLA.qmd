@@ -10,10 +10,8 @@ embed-resources: true
 #| include: false
 #| message: false
 library("tidyverse")
-library("broom")
-library("cowplot")
 library("FactoMineR")
-library("factoextra")
+library("ggrepel")
 ```
 
 ## Load Data
@@ -29,6 +27,7 @@ data <- read_tsv("./../data/03_dat_aug.tsv",
 ### MCA HLA subtypes
 
 ```{r}
+
 HLA_tidy <- data |> 
   filter(timepoint == 1) |>
   select(case_control,
@@ -39,56 +38,144 @@ HLA_tidy <- data |>
                                 subtype,
                                 sep = ":")) |>
   na.omit(allele_subtype) |>
-  group_by(case_control,id, allele_subtype) |>
-  summarize(subtype_n=n(), .groups = "drop") |>
-  mutate(subtype_n=str_replace(subtype_n,"4","present")) |>
+  group_by(case_control,
+           id,
+           allele_subtype) |>
+  summarize(subtype_n = n(),
+            .groups = "drop") |>
+  mutate(subtype_n = str_replace(subtype_n,"4", "yes")) |>
   pivot_wider(names_from = allele_subtype,
               values_from = subtype_n) |>
   mutate(across(everything(),
-                ~replace_na(.x, "not"))) |>
-  mutate(across(starts_with("HLA"), as.factor))
+                ~replace_na(.x, "no"))) |>
+  mutate(across(starts_with("HLA"), as.factor)) |>
+  mutate(patient = str_c(case_control, id, sep = ":"))
 
 
 
-relevant_var <- as_vector(HLA_tidy |>
-  pivot_longer(cols=starts_with("HLA"),
-               names_to = "subtype",
-               values_to = "presence") |>
-  select(subtype,presence) |>
-  filter(presence=="present") |>
-  group_by(subtype) |>
-  summarize(freq=n()/54) |>
-  ungroup() |>
-  filter(freq>=0.1) |>
-  select(subtype))
-
+relevant_var <- unname(as_vector( HLA_tidy |>
+                                    pivot_longer(cols = starts_with("HLA"),
+                                                 names_to = "subtype",
+                                                 values_to = "presence") |>
+                                    select(subtype, 
+                                           presence) |>
+                                    filter(presence == "yes") |>
+                                    group_by(subtype) |>
+                                    summarize(freq = n()/54) |>
+                                    ungroup() |>
+                                    filter(freq >= 0.30) |>
+                                    select(subtype) ))
 
 
 
 HLA.active <- HLA_tidy |>
-  select(all_of=relevant_var)
-
+  select(all_of( relevant_var ))
 
 mca_fit <- MCA(HLA.active, graph = FALSE)
 
 
-data.frame(get_eigenvalue(mca_fit)) |>
-  mutate(MC=str_c("MC",seq(1,39))) |>
-  ggplot(aes(x = reorder(MC, -variance.percent), y = variance.percent)) +
-  geom_col(fill = "#481567", alpha = 0.8) +
-  labs(title = "Variance Explained by Each MC",
-       x = "MC",
-       y = "Percentage of Variance explained") +
-  theme_bw() +
+data.frame(mca_fit$eig) |>
+  mutate(Dim = str_c("Dim",seq(1,13))) |>
+  ggplot(aes(x = reorder(Dim, -percentage.of.variance),
+             y = percentage.of.variance)) +
+  geom_col(fill = "#481567",
+           alpha = 0.8) +
+  geom_text(aes(label = round(percentage.of.variance,1)),
+            size=3,
+            vjust=-0.3) +
   theme(axis.text.x = element_text(angle = 90),
         panel.grid.minor = element_blank()) +
-  geom_text(aes(label=round(variance.percent,1)), size=1.6, vjust=-0.7)
-
+  theme_bw() +
+  labs(title = "Variance Explained by Each Dimension",
+       x = "Dimension",
+       y = "Percentage of Variance explained")
 
 ggsave(width = 8,
        height = 5,
        filename = "08_plot_1.png",
        path = "./../results/")
+
+
+
+
+hla_names <- rownames(data.frame( mca_fit$var ))
+
+data.frame(mca_fit$var)|>
+  mutate(HLA = hla_names,
+         representation = cos2.Dim.1 + cos2.Dim.2) |>
+  ggplot(data = _,
+         mapping=aes(x = coord.Dim.1,
+                     y = coord.Dim.2,
+                     label = HLA)) +
+  geom_vline(xintercept = 0,
+             linetype = "dashed",
+             linewidth = 0.2) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             linewidth = 0.2) +
+  geom_point(aes(color = representation)) +
+  geom_label_repel(aes(color = representation),
+                   force_pull = 0,
+                   size = 2,
+                   nudge_y = 0.4,
+                   direction = "y") +
+  scale_color_gradient2(low="#20A387",
+                        mid="#f68f46ff",
+                        high="#481567",
+                        midpoint=0.4) +
+  theme_bw() +
+  labs(title = "Dimension 2 vs. Dimension 1",
+       subtitle = "Allele subtype Categories stratified by dimensional representation of category",
+       x = "Dim 1",
+       y = "Dim 2",
+       color = "Cos2")
+
+ggsave(width = 8,
+       height = 5,
+       filename = "08_plot_2.png",
+       path = "./../results/")
+
+
+data.frame(mca_fit$ind) |>
+  mutate(case_control = HLA_tidy$case_control,
+         patient = HLA_tidy$patient) |>
+  ggplot(data = _,
+       mapping = aes(x = coord.Dim.1,
+                     y = coord.Dim.2,
+                     label = patient)) +
+  geom_vline(xintercept = 0,
+             linetype = "dashed",
+             linewidth = 0.2) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             linewidth = 0.2) +
+  geom_label_repel(aes(color = case_control),
+                   size = 2,
+                   max.overlaps = 15) +
+  scale_color_manual(values = c(Case = "#481567",
+                                Control = "#20A387")) +
+  theme_bw() +
+  labs(title = "Dimension 2 vs. Dimension 1",
+       subtitle = "Patients stratified by outcome",
+       x = "Dim 1",
+       y = "Dim 2",
+       color = "Case/Control")
+
+ggsave(width = 8,
+       height = 5,
+       filename = "08_plot_3.png",
+       path = "./../results/")
+
+
+
+
+data.frame(mca_fit$var)|>
+  mutate(HLA = hla_names,
+         representation = cos2.Dim.1 + cos2.Dim.2 + cos2.Dim.3 + cos2.Dim.4) |>
+  select(representation)|>
+  arrange(desc(representation))
 ```
 
-None of the variables explain the variance in data enough, therefore there is no indication of specific allele subtypes that are able to conclude difference between case or control.
+None of the dimensions explain enough of the variance themselves. The allele subtype category representation of dimension 1 and 2 show promise of investigative allele subtypes, however since the variance explained by the dimensions is low, no conclusion can be drawn. The patient representation gives less evidence of sufficient variance explained by dimension 1 and 2.
+
+A four dimensional explanation of variance could be investigated, as the first 4 dimensions explain a little over 70% of the variance. Representation of allele subtype categories in the first 4 dimensions suggest a strong representation of HLA_DRB1:0201 and HLA_A:0201.
