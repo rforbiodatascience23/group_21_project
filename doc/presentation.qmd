@@ -28,7 +28,7 @@ format:
 ::: fragment
 ### Methods:
 
-[[1. Base R]{.fragment .strike}]{.fragment .fade-in-then-semi-out}\
+[1. Base R]{.fragment .strike}\
 [1. Tidyverse R]{.fragment .fade-in-then-semi-out}\
 [2. PCA analysis]{.fragment .fade-in-then-semi-out}\
 [3. MCA analysis]{.fragment .fade-in-then-semi-out}
@@ -82,8 +82,7 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 
 ## Antibody Expression, PCA {.scrollable}
 
-![](./../results/06_plot_3.png){width="1150" height="550"} 
-![](./../results/06_plot_2.png){width="1150" height="550"}
+![](./../results/06_plot_3.png){width="1150" height="550"} ![](./../results/06_plot_2.png){width="1150" height="550"}
 
 ------------------------------------------------------------------------
 
@@ -123,7 +122,7 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 ::: incremental
 -   Clear differences exist between case and control subjects, both in terms of antibody expression and in terms of allele subtypes.
 -   Suggests that both antibody expression and allele subtype are involved in the development of diabetes in children.
--   Based on our results, `HLA-DQB1*0202`, `HLA-B*4402`, `HLA-A*2402`, and `HLA-B*0702` [*could have*]{.underline} a direct influence on type 1 diabetes.
+-   Based on our results, `HLA-DQB1*0202`, `HLA-B*4402`, `HLA-A*2402`, and `HLA-B*0702` show greater association with case than control. Further research would be required to determine their direct effect on type 1 diabetes.
 :::
 
-[[THANK YOU for listening]{.fragment}]{.fragment .highlight-green}
+[THANK YOU for listening]{.fragment}
