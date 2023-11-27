@@ -61,7 +61,6 @@ ggsave(width = 8,
        filename = "06_plot_1.png",
        path = "./../results/")
 
-
 data_pca |>
   tidy(matrix = "eigenvalues") |>
   ggplot(mapping = aes(x = PC,
@@ -73,25 +72,20 @@ data_pca |>
                      expand = expansion(mult = c(0, 0.01))) +
   geom_line(mapping = aes(x = PC),
             color = "#481567") +
-  
   theme_bw() +
   labs(title = "Variance Explained by Each PC",
        y = "Percentage Contribution")
-
 
 ggsave(width = 8,
        height = 5,
        filename = "06_plot_2.png",
        path = "./../results/")
 
-
-
 arrow_style <- arrow(length = unit(0.2, "cm"), 
                      ends = "first")
 
-num_case_control_coord <- as.data.frame(
-  cor(data$num_case_control, data_pca$x)) |>
-  mutate(Variable = "num_case_control")
+num_case_control_coord <- cor(data$num_case_control, data_pca$x) |>
+  as_tibble()
 
 data_pca |>
   tidy(matrix = "rotation") |>
