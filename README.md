@@ -32,7 +32,7 @@ This dataset comprises a detailed record of immunological and demographic attrib
 
 This project, is spread across four main folders:
 
--   **data**: Holds project data files, including a **_raw**folder for raw data.
+-   **data**: Holds project data files, including a **_raw** folder for raw data.
 
 -   **R**: Contains R scripts for data processing, analysis, and a master script (00_all.qmd).
 
