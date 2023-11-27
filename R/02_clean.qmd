@@ -141,7 +141,6 @@ patient_data <- patient_data |>
          
   unnest_wider(col = starts_with("HLA_"),
                names_sep = ",") |> 
-  
   select(!sample_tags)
 
 ```
