@@ -90,7 +90,9 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 
 ## HLA Expression, MCA
 
-![](./../results/08_plot_1.png){.absolute width="850" height="500"}
+![](./../results/08_plot_1.png){.absolute right="550" top="100" width="650" height="400"}
+
+![](./../results/08_plot_2.png){.absolute left="550" top="250" width="650" height="400"}
 
 ------------------------------------------------------------------------
 
