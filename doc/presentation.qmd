@@ -51,9 +51,9 @@ read_tsv("./../data/01_dat_load.tsv") |>
   head(10)
 ```
 
-![](./../results/04_plot_1.png){width="1150" height="550"}
+![](./../results/04_plot_1.png){width="1000" height="411"}
 
-![](./../results/04_plot_2.png){width="1150" height="550"}
+![](./../results/04_plot_2.png){width="1000" height="411"}
 
 ------------------------------------------------------------------------
 
@@ -76,27 +76,27 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 
 ## Antibody Expression
 
-![](./../results/05_plot_1.png){width="1150" height="550"}
+![](./../results/05_plot_1.png){width="1000" height="700"}
 
 ------------------------------------------------------------------------
 
 ## Antibody Expression, PCA {.scrollable}
 
-![](./../results/06_plot_3.png){width="1150" height="550"} ![](./../results/06_plot_2.png){width="1150" height="550"}
+![](./../results/06_plot_3.png){width="1000" height="600"} ![](./../results/06_plot_2.png){width="1000" height="600"}
 
 ------------------------------------------------------------------------
 
 ## HLA Expression
 
-![](./../results/07_plot_1.png){width="1150" height="550"}
+![](./../results/07_plot_1.png){width="1000" height="580"}
 
 ------------------------------------------------------------------------
 
 ## HLA Expression, MCA {.scrollable}
 
-![](./../results/08_plot_1.png){width="1150" height="550"}
+![](./../results/08_plot_1.png){width="1000" height="600"}
 
-![](./../results/08_plot_2.png){width="1150" height="550"}
+![](./../results/08_plot_2.png){width="1000" height="600"}
 
 ------------------------------------------------------------------------
 
