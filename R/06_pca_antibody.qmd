@@ -21,11 +21,10 @@ conversion_table <- tibble(
   num_case_control = c(1, 0)
 )
 
-data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE) |>
-  ### Added section
+data <- read_tsv("./../data/03_dat_aug.tsv",
+                 show_col_types = FALSE) |>
   pivot_wider(names_from = "antibody",
               values_from = "expression") |>
-  ###
   select(case_control, GAD65, IA_2, IAA, ZnT8) |>
   mutate(across(starts_with("GAD65"), 
                 ~ if_else(is.na(.), 0.001, .)), 

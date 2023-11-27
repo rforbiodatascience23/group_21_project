@@ -18,7 +18,8 @@ library("patchwork")
 
 ```{r}
 #|message: false
-data <- read_tsv("./../data/03_dat_aug.tsv", show_col_types = FALSE)
+data <- read_tsv("./../data/03_dat_aug.tsv",
+                 show_col_types = FALSE)
 ```
 
 ### Data Description
@@ -36,9 +37,7 @@ data |>
 
 ```{r}
 data |>
-  drop_na(gender,
-          age,
-          case_control) |>
+  drop_na(gender, age, case_control) |>
   mutate(age = cut(age,
                    breaks = seq(from = 0,
                                 to = 20,
@@ -95,14 +94,12 @@ The age distribution of patients predominantly falls within the 0-5 age group. N
 #| message: false
 
 data |>
-  group_by(case_control,
-           age_visit,
-           timepoint) |>
+  group_by(case_control, age_visit, timepoint) |>
   summarize(total_temp_mu = log(mean(total_rearrangements))) |>
   ggplot(data = _,
          mapping = aes(x = age_visit,
-                     y = total_temp_mu)) +
-  geom_point(aes(color = timepoint)) +
+                       y = total_temp_mu)) +
+  geom_point(mapping = aes(color = timepoint)) +
   labs(title = "Mean of Total Rearrangements vs. Age at visit",
        subtitle = "Faceted by outcome and stratified by timepoint",
        x = "Age",
@@ -126,14 +123,12 @@ ggsave(width = 8,
 #| message: false
 
 data |>
-  group_by(case_control,
-           age_visit,
-           timepoint) |>
+  group_by(case_control, age_visit, timepoint) |>
   summarize(prod_temp_mu = log(mean(productive_rearrangements))) |>
   ggplot(data = _,
          mapping = aes(x = age_visit,
                        y = prod_temp_mu)) +
-  geom_point(aes(color = timepoint)) +
+  geom_point(mapping = aes(color = timepoint)) +
   labs(title = "Mean of Productive Rearrangements vs. Age at visit",
        subtitle = "Faceted by outcome and stratified by timepoint",
        x = "Age",
@@ -165,7 +160,7 @@ data |>
   ggplot(data = _,
          mapping = aes(x = age_visit,
                        y = frac_prod)) +
-  geom_point(aes(color = timepoint)) +
+  geom_point(mapping = aes(color = timepoint)) +
   labs(title = "Fraction of Productive Rearrangements vs. Age at visit",
        subtitle = "Faceted by outcome and stratified by timepoint",
        x = "Age",
@@ -194,7 +189,7 @@ data |>
   ggplot(data = _,
          mapping = aes(x = age_visit,
                        y = log(productive_simpson_clonality))) +
-  geom_point(aes(color = timepoint)) +
+  geom_point(mapping = aes(color = timepoint)) +
   labs(title = "Productive Simpson Clonality vs. Age",
        subtitle = "Faceted by outcome and stratified by timepoint",
        x = "Age",
