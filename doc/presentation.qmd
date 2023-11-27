@@ -64,6 +64,7 @@ read_tsv("./../data/03_dat_aug.tsv") |>
   dim()
 
 read_tsv("./../data/03_dat_aug.tsv") |>
+  select(sample_name,case_control,id,age_diagnosis,antibody,expression,allele,subtype)|>
   head(10)
 ```
 
