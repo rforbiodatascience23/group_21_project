@@ -36,14 +36,16 @@ data |>
 ### Age
 
 ```{r}
-data |>
+data |> 
   drop_na(gender, age, case_control) |>
+  select(gender, age, case_control, id, timepoint) |> 
+  distinct() |> 
   mutate(age = case_when(age < 5 ~ factor("(0,5]"),
                          age < 10 ~ factor("(5,10]"),
                          age < 15 ~ factor("(10,15]"),
                          age < 20 ~ factor("(15,20]"),
-                         age < 25 ~ factor("(20,25]"))) |>
-  filter(!is.na(age))|>
+                         age < 25 ~ factor("(20,25]"))) |> 
+  filter(!is.na(age)) |> 
   ggplot(mapping = aes(x = age,
                        fill = case_control)) +
   geom_bar(alpha = 0.8,
