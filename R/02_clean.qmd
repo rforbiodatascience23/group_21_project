@@ -77,7 +77,7 @@ patient_data <- patient_data |>
                                 pattern = "Asian") ~ "Asian",
                      TRUE ~ as.character(sample_tags)),
     
-    age = round(ifelse(
+    age = round(if_else(
                       is.na(as.double(str_extract(string = sample_tags,
                                                   pattern = "\\d+(?=\\s+(Years)\\,)"))),
                       (1/12)*as.double(str_extract(string = sample_tags,
