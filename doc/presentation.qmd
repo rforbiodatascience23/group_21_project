@@ -121,8 +121,10 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 
 ::: incremental
 -   Clear differences exist between case and control subjects, both in terms of antibody expression and in terms of allele subtypes.
--   Suggests that both antibody expression and allele subtype are involved in the development of diabetes in children.
--   Based on our results, `HLA-DQB1*0202`, `HLA-B*4402`, `HLA-A*2402`, and `HLA-B*0702` show greater association with case than control. Further research would be required to determine their direct effect on type 1 diabetes.
-:::
 
-[THANK YOU for listening]{.fragment}
+-   Suggests that both antibody expression and allele subtype are involved in the development of diabetes in children.
+
+-   Based on our results, `HLA-DQB1*0202`, `HLA-B*4402`, `HLA-A*2402`, and `HLA-B*0702` show greater association with case than control. Further research would be required to determine their direct effect on type 1 diabetes.
+
+    [THANK YOU for listening]{.fragment}
+:::
