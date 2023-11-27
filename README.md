@@ -2,7 +2,7 @@
 
 # Project Contributors
 
-buniaia (s215085), emmaqingjieandersen (s215090), JoannaRasmussen (s215092), ThobiasAChristiansen (s215105), & utte123 (s223163),
+buniaia (s215085), emmaqingjie (s215090), JoannaRasmussen (s215092), ThobiasAChristiansen (s215105), & utte123 (s223163),
 
 # Exploration of TCR Repertoire Development during Childhood
 
@@ -30,7 +30,11 @@ This dataset comprises a detailed record of immunological and demographic attrib
 
 ## Project Structure Overview
 
-This project, is spread across four main folders: \* **data**: Holds project data files, including a \*\*\_raw\*\* folder for raw data. \* **R**: Contains R scripts for data processing, analysis, and a master script (00_all.qmd).
+This project, is spread across four main folders:
+
+-   **data**: Holds project data files, including a **_raw** folder for raw data.
+
+-   **R**: Contains R scripts for data processing, analysis, and a master script (00_all.qmd).
 
 -   **results**: Contains rendered HTML documents and key plots.
 
