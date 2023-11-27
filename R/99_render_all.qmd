@@ -14,22 +14,22 @@ quarto_render("00_all.qmd")
 Moving the files:
 
 ```{r}
-file.rename(from = "./00_all.qmd",
-            to = "./../00_all.qmd")
-file.rename(from = "./01_load.qmd",
-            to = "./../01_load.qmd")
-file.rename(from = "./02_clean.qmd",
-            to = "./../02_clean.qmd")
-file.rename(from = "./03_augment.qmd",
-            to = "./../03_augment.qmd")
-file.rename(from = "./04_describe.qmd",
-            to = "./../04_describe.qmd")
-file.rename(from = "./05_antibody_expression_analysis.qmd",
-            to = "./../05_antibody_expression_analysis.qmd")
-file.rename(from = "./06_pca_antibody.qmd",
-            to = "./../06_pca_antibody.qmd")
-file.rename(from = "./07_HLA_allele_analysis.qmd",
-            to = "./../07_HLA_allele_analysis.qmd")
-file.rename(from = "./08_pca_HLA.qmd",
-            to = "./../08_pca_HLA.qmd")
+file.rename(from = "./00_all.html",
+            to = "./../results/00_all.html")
+file.rename(from = "./01_load.html",
+            to = "./../results/01_load.html")
+file.rename(from = "./02_clean.html",
+            to = "./../results/02_clean.html")
+file.rename(from = "./03_augment.html",
+            to = "./../results/03_augment.html")
+file.rename(from = "./04_describe.html",
+            to = "./../results/04_describe.html")
+file.rename(from = "./05_antibody_expression_analysis.html",
+            to = "./../results/05_antibody_expression_analysis.html")
+file.rename(from = "./06_pca_antibody.html",
+            to = "./../results/06_pca_antibody.html")
+file.rename(from = "./07_HLA_allele_analysis.html",
+            to = "./../results/07_HLA_allele_analysis.html")
+file.rename(from = "./08_mca_HLA.html",
+            to = "./../results/08_mca_HLA.html")
 ```

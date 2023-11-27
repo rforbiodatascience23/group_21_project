@@ -2697,7 +2697,7 @@ vertical-align: -.125em;
 <span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>                                <span class="at">pattern =</span> <span class="st">&quot;Asian&quot;</span>) <span class="sc">~</span> <span class="st">&quot;Asian&quot;</span>,</span>
 <span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>                     <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(sample_tags)),</span>
 <span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">round</span>(<span class="fu">ifelse</span>(</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">round</span>(<span class="fu">if_else</span>(</span>
 <span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">is.na</span>(<span class="fu">as.double</span>(<span class="fu">str_extract</span>(<span class="at">string =</span> sample_tags,</span>
 <span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>                                                  <span class="at">pattern =</span> <span class="st">&quot;</span><span class="sc">\\</span><span class="st">d+(?=</span><span class="sc">\\</span><span class="st">s+(Years)</span><span class="sc">\\</span><span class="st">,)&quot;</span>))),</span>
 <span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>                      (<span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>)<span class="sc">*</span><span class="fu">as.double</span>(<span class="fu">str_extract</span>(<span class="at">string =</span> sample_tags,</span>
@@ -2761,8 +2761,7 @@ vertical-align: -.125em;
 <span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>         </span>
 <span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_wider</span>(<span class="at">col =</span> <span class="fu">starts_with</span>(<span class="st">&quot;HLA_&quot;</span>),</span>
 <span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_sep =</span> <span class="st">&quot;,&quot;</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>sample_tags)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>sample_tags)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="join-data" class="level3">
