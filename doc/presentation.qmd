@@ -126,5 +126,5 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 
 -   Based on our results, `HLA-DQB1*0202`, `HLA-B*4402`, `HLA-A*2402`, and `HLA-B*0702` show greater association with case than control. Further research would be required to determine their direct effect on type 1 diabetes.
 
-    [THANK YOU for listening]{.fragment}
+-   [THANK YOU for listening]{.fragment .highlight-green}
 :::
