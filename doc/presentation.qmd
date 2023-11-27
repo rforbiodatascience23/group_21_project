@@ -87,7 +87,7 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 
 ------------------------------------------------------------------------
 
-## HLA Expression, PCA
+## HLA Expression, MCA
 
 ![](./../results/08_plot_1.png){.absolute width="850" height="500"}
 
@@ -100,7 +100,7 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 -   Two components explain majority of variance in data.
 -   Two clusters form between variables.
 -   Dominant allele subtypes in case subjects.
--   MCA...
+-   Insufficient 2D variance explanation.
 
 [Limitations]{.underline}
 
@@ -118,4 +118,4 @@ read_tsv("./../data/03_dat_aug.tsv") |>
 -   Based on our results, `HLA-DQB1*0202`, `HLA-B*4402`, `HLA-A*2402`, and `HLA-B*0702` [*could have*]{.underline} a direct influence on type 1 diabetes.
 :::
 
-[[THANK YOU for listening]{.fragment}]{.fragment .highlight-green}
+[THANK YOU for listening]{.fragment}
