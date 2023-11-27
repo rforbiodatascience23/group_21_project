@@ -215,6 +215,4 @@ ggsave(width = 8,
        path = "./../results/")
 ```
 
-None of the dimensions explain enough of the variance themselves. The allele subtype category representation of dimension 1 and 2 show promise of investigative allele subtypes, however since the variance explained by the dimensions is low, no conclusion can be drawn. The patient representation gives less evidence of sufficient variance explained by dimension 1 and 2.
-
-A four dimensional explanation of variance could be investigated, as the first 4 dimensions explain a little over 70% of the variance. Representation of allele subtype categories in the first 4 dimensions suggest a strong representation of HLA_DRB1:0201 and HLA_A:0201.
+None of the dimensions explain enough of the variance themselves. The allele subtype category representation of dimension 1 and 2 show promise of investigative allele subtypes, however since the variance explained by the dimensions is low, no conclusion can be drawn. The patient representation gives less evidence of sufficient variance explained by dimension 1 and 2. A four dimensional explanation of variance could be investigated, as the first 4 dimensions explain a little over 70% of the variance.
