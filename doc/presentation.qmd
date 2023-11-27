@@ -51,6 +51,10 @@ read_tsv("./../data/01_dat_load.tsv") |>
   head(10)
 ```
 
+![](./../results/04_plot_1.png){width="800" height="500"}
+
+![](./../results/04_plot_2.png){width="800" height="500"}
+
 ------------------------------------------------------------------------
 
 ## Data Wrangling {.scrollable}

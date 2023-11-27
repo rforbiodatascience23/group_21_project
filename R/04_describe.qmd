@@ -75,7 +75,8 @@ data |>
   theme_bw() +
   theme(axis.text.y = element_blank(),
         axis.ticks.y = element_blank()) +
-  labs(x = "Age of diagnosis")
+  labs(title = "Age at diagnosis",
+       x = '')
 
 ggsave(width = 8,
        height = 3,
