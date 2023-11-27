@@ -86,8 +86,8 @@ ggplot(data = HLA_tidy,
   scale_fill_gradient(low = "#20A387",
                       high = "#481567") + 
   labs(title = "Ratio of HLA subtypes in case and control patients",
-       x = "Allele",
-       y = "Subtype",
+       x = "Subtype",
+       y = "Allele",
        fill = "Case/Control")
 
 ggsave(width = 8,
@@ -95,3 +95,5 @@ ggsave(width = 8,
        filename = "07_plot_1.png",
        path = "./../results/")
 ```
+
+\
