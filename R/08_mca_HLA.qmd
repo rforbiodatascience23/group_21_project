@@ -12,6 +12,7 @@ embed-resources: true
 library("tidyverse")
 library("FactoMineR")
 library("ggrepel")
+library("purrr")
 ```
 
 ## Load Data
@@ -25,6 +26,8 @@ data <- read_tsv("./../data/03_dat_aug.tsv",
 ## Analysis
 
 ### MCA HLA subtypes
+
+#### Percentage of variance explained
 
 ```{r}
 HLA_tidy <- data |> 
@@ -72,14 +75,21 @@ mca_fit <- MCA(HLA.active,
                graph = FALSE)
 
 
-data.frame(mca_fit$eig) |>
-  mutate(Dim = str_c("Dim",
-                     seq(1,13))) |>
-  ggplot(aes(x = reorder(Dim, -percentage.of.variance),
-             y = percentage.of.variance)) +
+
+as_tibble_row(mca_fit) |>
+  select(eig) |>
+  unnest(eig) |>
+  reduce("*") |>
+  as_tibble() |>
+  rename("eigenvalue" = 1,
+         "var_percent" = 2,
+         "cum_var_percent" = 3) |>
+  mutate(Dim = str_c("Dim", seq(1,13)))|>
+  ggplot(aes(x = reorder(Dim, - var_percent),
+             y = var_percent)) +
   geom_col(fill = "#481567",
            alpha = 0.8) +
-  geom_text(aes(label = round(percentage.of.variance,1)),
+  geom_text(aes(label = round(var_percent,1)),
             size = 3,
             vjust = -0.3) +
   theme(axis.text.x = element_text(angle = 90),
@@ -94,17 +104,44 @@ ggsave(width = 8,
        filename = "08_plot_1.png",
        path = "./../results/")
 
+```
+
+#### Allele subtype category (present or not) representation
+
+```{r}
+coordinates <- as_tibble_row(mca_fit) |>
+  select(var) |>
+  unnest_wider(var) |>
+  select(coord)|>
+  unnest(coord) |>
+  reduce("*") |>
+  as_tibble() |>
+  select(1,2) |>
+  rename("coord_Dim1" = 1,
+         "coord_Dim2" = 2) |>
+  mutate(id=seq(1,26))
+  
+cos2values <- as_tibble_row(mca_fit) |>
+  select(var) |>
+  unnest_wider(var) |>
+  select(cos2)|>
+  unnest(cos2) |>
+  reduce("*") |>
+  as_tibble() |>
+  select(1, 2) |>
+  rename("cos2_Dim1" = 1,
+         "cos2_Dim2" = 2) |>
+  mutate(id = seq(1,26))
 
 
-
-hla_names <- rownames(data.frame( mca_fit$var ))
-
-data.frame(mca_fit$var)|>
-  mutate(HLA = hla_names,
-         representation = cos2.Dim.1 + cos2.Dim.2) |>
+full_join(coordinates,
+          cos2values,
+          by = join_by(id == id)) |>
+  mutate(HLA = rownames(data.frame( mca_fit$var )),
+         representation = cos2_Dim1 + cos2_Dim2) |>
   ggplot(data = _,
-         mapping=aes(x = coord.Dim.1,
-                     y = coord.Dim.2,
+         mapping=aes(x = coord_Dim1,
+                     y = coord_Dim2,
                      label = HLA)) +
   geom_vline(xintercept = 0,
              linetype = "dashed",
@@ -133,14 +170,26 @@ ggsave(width = 8,
        height = 5,
        filename = "08_plot_2.png",
        path = "./../results/")
+```
 
+#### Individuals in 2D.
 
-data.frame(mca_fit$ind) |>
-  mutate(case_control = HLA_tidy$case_control,
-         patient = HLA_tidy$patient) |>
+```{r}
+as_tibble_row(mca_fit) |>
+  select(ind) |>
+  unnest_wider(ind) |>
+  select(coord)|>
+  unnest(coord) |>
+  reduce("*") |>
+  as_tibble() |>
+  select(1, 2) |>
+  rename("coord_Dim1" = 1,
+         "coord_Dim2" = 2) |>
+  mutate(case_control = HLA_tidy |> pull(case_control),
+         patient = HLA_tidy |> pull(patient)) |>
   ggplot(data = _,
-       mapping = aes(x = coord.Dim.1,
-                     y = coord.Dim.2,
+       mapping = aes(x = coord_Dim1,
+                     y = coord_Dim2,
                      label = patient)) +
   geom_vline(xintercept = 0,
              linetype = "dashed",
@@ -164,15 +213,6 @@ ggsave(width = 8,
        height = 5,
        filename = "08_plot_3.png",
        path = "./../results/")
-
-
-
-
-data.frame(mca_fit$var)|>
-  mutate(HLA = hla_names,
-         representation = cos2.Dim.1 + cos2.Dim.2 + cos2.Dim.3 + cos2.Dim.4) |>
-  select(representation)|>
-  arrange(desc(representation))
 ```
 
 None of the dimensions explain enough of the variance themselves. The allele subtype category representation of dimension 1 and 2 show promise of investigative allele subtypes, however since the variance explained by the dimensions is low, no conclusion can be drawn. The patient representation gives less evidence of sufficient variance explained by dimension 1 and 2.
