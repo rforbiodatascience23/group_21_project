@@ -29,8 +29,8 @@ This dataset comprises a comprehensive registry detailing immunological and demo
 ### Variables
 
 ```{r}
-data |>  
-  ls()
+data |>
+  tbl_vars()
 ```
 
 ### Age
