@@ -38,10 +38,11 @@ data |>
 ```{r}
 data |>
   drop_na(gender, age, case_control) |>
-  mutate(age = cut(age,
-                   breaks = seq(from = 0,
-                                to = 20,
-                                by = 5))) |>
+  mutate(age = case_when(age < 5 ~ factor("(0,5]"),
+                         age < 10 ~ factor("(5,10]"),
+                         age < 15 ~ factor("(10,15]"),
+                         age < 20 ~ factor("(15,20]"),
+                         age < 25 ~ factor("(20,25]"))) |>
   filter(!is.na(age))|>
   ggplot(mapping = aes(x = age,
                        fill = case_control)) +
