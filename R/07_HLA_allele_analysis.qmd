@@ -6,6 +6,11 @@ toc: true
 embed-resources: true
 ---
 
+```{r}
+#| include: false
+library("tidyverse")
+```
+
 ```{r, fig.height=10, fig.width=8}
 #| warning: false
 data <- read_tsv("./../data/03_dat_aug.tsv",
@@ -75,7 +80,8 @@ ggplot(data = HLA_tidy,
   theme_bw()+
   theme(axis.text.y = element_text(size = 10),
         axis.text.x = element_text(angle = 90,
-                                   size = 10),
+                                   size = 10,
+                                   vjust=0.5),
         panel.grid.major.y = element_blank())+
   scale_fill_gradient(low = "#20A387",
                       high = "#481567") + 
